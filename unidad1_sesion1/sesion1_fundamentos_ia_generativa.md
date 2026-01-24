@@ -316,7 +316,7 @@ Observa el siguiente diagrama y responde:
 
 ```
                 ┌─────────────────────────────────────────┐
-                │           ENTRENAMIENTO GAN            │
+                │           ENTRENAMIENTO GAN             │
                 └─────────────────────────────────────────┘
 
     ┌──────────┐         ┌──────────────┐
