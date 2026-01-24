@@ -50,7 +50,7 @@ La **Inteligencia Artificial Generativa** representa un cambio de paradigma en M
 
 Imagina un **detective**:
 - **Discriminativo**: "Este documento es falso porque tiene estas características..."
-- **Generativo**: "Así es como luciría un documento auténtico" (y puede crear uno)
+- **Generativo**: "Así es como se vería un documento auténtico" (y puede crear uno)
 
 ### Ejemplo Concreto
 
