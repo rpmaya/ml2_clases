@@ -1,33 +1,23 @@
-# Unidad 1 - Sesion 1: Fundamentos de IA Generativa
-## Aprendizaje Automatico II
-
----
-
-## Informacion de la Sesion
-
-| | |
-|---|---|
-| **Duracion** | 4 horas |
-| **Modalidad** | Teoria + Practica integrada |
-| **Materiales** | Laptop con navegador, cuenta gratuita en plataformas de IA |
+# Unidad 1 - Sesión 1: Fundamentos de IA Generativa
+## Aprendizaje Automático II
 
 ---
 
 ## Objetivos de Aprendizaje
 
-Al finalizar esta sesion, seras capaz de:
+Al finalizar esta sesión, serás capaz de:
 
 - [ ] Comprender las diferencias entre modelos generativos y discriminativos
-- [ ] Explicar el funcionamiento basico de GANs, VAEs y Modelos de Difusion
-- [ ] Experimentar con herramientas reales de generacion de imagenes
+- [ ] Explicar el funcionamiento básico de GANs, VAEs y Modelos de Difusión
+- [ ] Experimentar con herramientas reales de generación de imágenes
 - [ ] Distinguir entre modelos autorregresivos y no autorregresivos
-- [ ] Seleccionar la tecnica apropiada segun el caso de uso
+- [ ] Seleccionar la técnica apropiada según el caso de uso
 
 ---
 
-## Preparacion Previa
+## Preparación Previa
 
-Antes de comenzar, asegurate de tener acceso a:
+Antes de comenzar, asegúrate de tener acceso a:
 
 | Herramienta | URL | Requiere Cuenta |
 |-------------|-----|-----------------|
@@ -38,30 +28,30 @@ Antes de comenzar, asegurate de tener acceso a:
 
 ---
 
-# BLOQUE 1: Introduccion a la IA Generativa
-## Duracion: 45 minutos (30 teoria + 15 practica)
+# BLOQUE 1: Introducción a la IA Generativa
+## Duración: 45 minutos (30 teoría + 15 práctica)
 
 ---
 
-## 1.1 ¿Que es la IA Generativa?
+## 1.1 ¿Qué es la IA Generativa?
 
-La **Inteligencia Artificial Generativa** representa un cambio de paradigma en Machine Learning. Mientras los modelos tradicionales se centran en clasificar o predecir, la IA generativa tiene un objetivo mas ambicioso: **crear contenido nuevo**.
+La **Inteligencia Artificial Generativa** representa un cambio de paradigma en Machine Learning. Mientras los modelos tradicionales se centran en clasificar o predecir, la IA generativa tiene un objetivo más ambicioso: **crear contenido nuevo**.
 
 ### Modelos Discriminativos vs Generativos
 
 | Aspecto | Discriminativos | Generativos |
 |---------|-----------------|-------------|
-| **Objetivo matematico** | P(Y\|X) | P(X) o P(X,Y) |
-| **Pregunta que responde** | "¿A que clase pertenece?" | "¿Como se genero este dato?" |
-| **Puede generar datos nuevos?** | No | Si |
-| **Ejemplos clasicos** | Regresion logistica, SVM | Naive Bayes, GMM |
-| **Ejemplos Deep Learning** | CNN clasificacion | GANs, VAEs, Diffusion |
+| **Objetivo matemático** | P(Y\|X) | P(X) o P(X,Y) |
+| **Pregunta que responde** | "¿A qué clase pertenece?" | "¿Cómo se generó este dato?" |
+| **¿Puede generar datos nuevos?** | No | Sí |
+| **Ejemplos clásicos** | Regresión logística, SVM | Naive Bayes, GMM |
+| **Ejemplos Deep Learning** | CNN clasificación | GANs, VAEs, Diffusion |
 
-### Analogia Practica
+### Analogía Práctica
 
 Imagina un **detective**:
-- **Discriminativo**: "Este documento es falso porque tiene estas caracteristicas..."
-- **Generativo**: "Asi es como luciria un documento autentico" (y puede crear uno)
+- **Discriminativo**: "Este documento es falso porque tiene estas características..."
+- **Generativo**: "Así es como luciría un documento auténtico" (y puede crear uno)
 
 ### Ejemplo Concreto
 
@@ -71,82 +61,82 @@ Un **clasificador de spam** (discriminativo):
 
 Un **modelo generativo** entrenado con correos:
 - Puede detectar patrones de spam
-- Puede generar ejemplos sinteticos para entrenamiento
-- Puede redactar respuestas automaticas
+- Puede generar ejemplos sintéticos para entrenamiento
+- Puede redactar respuestas automáticas
 - Puede completar borradores incompletos
 
 ---
 
-## 1.2 Contexto Historico
+## 1.2 Contexto Histórico
 
-### Evolucion de los Modelos Generativos
+### Evolución de los Modelos Generativos
 
 ```
 1960s-80s          1980s-90s          2014            2017            2020+
     |                  |                |               |               |
-   HMM               GMM              GANs         Transformers      Difusion
+   HMM               GMM              GANs         Transformers      Difusión
 (Markov)          (Gaussian)       (Goodfellow)    (Attention)    (DALL-E, SD)
     |                  |                |               |               |
-  Audio            Clusters          Imagenes         Texto          Multimodal
+  Audio            Clusters          Imágenes         Texto          Multimodal
 ```
 
 ### Hitos Clave
 
 | Año | Evento | Impacto |
 |-----|--------|---------|
-| 2014 | GANs (Goodfellow) | Primera generacion de imagenes realistas |
+| 2014 | GANs (Goodfellow) | Primera generación de imágenes realistas |
 | 2017 | Transformers | Arquitectura base de LLMs |
 | 2020 | GPT-3 | Capacidades emergentes en texto |
-| 2022 | DALL-E 2, Stable Diffusion | Democratizacion de text-to-image |
-| 2022 | ChatGPT | Adopcion masiva global |
+| 2022 | DALL-E 2, Stable Diffusion | Democratización de text-to-image |
+| 2022 | ChatGPT | Adopción masiva global |
 | 2024-25 | GPT-4, Claude, Gemini | Competencia multimodal |
 
 ---
 
 ## 1.3 Impacto en la Industria del Software
 
-### Transformacion del Desarrollo
+### Transformación del Desarrollo
 
 | Fase | Herramientas IA | Impacto |
 |------|-----------------|---------|
-| Requisitos | Generacion de historias de usuario | Acelera documentacion |
-| Implementacion | GitHub Copilot, Cursor | +30-55% productividad |
-| Testing | Generacion de casos de prueba | Mayor cobertura |
-| Mantenimiento | Documentacion de legacy | Reduce deuda tecnica |
+| Requisitos | Generación de historias de usuario | Acelera documentación |
+| Implementación | GitHub Copilot, Cursor | +30-55% productividad |
+| Testing | Generación de casos de prueba | Mayor cobertura |
+| Mantenimiento | Documentación de legacy | Reduce deuda técnica |
 
-### Consideraciones Eticas
+### Consideraciones Éticas
 
 | Aspecto | Pregunta Clave |
 |---------|----------------|
-| Propiedad intelectual | ¿Quien es autor del codigo generado? |
+| Propiedad intelectual | ¿Quién es autor del código generado? |
 | Sesgos | ¿Los modelos heredan sesgos de sus datos? |
-| Alucinaciones | ¿Como manejar informacion falsa generada con confianza? |
-| Impacto laboral | ¿Transformacion o desplazamiento? |
+| Alucinaciones | ¿Cómo manejar información falsa generada con confianza? |
+| Impacto laboral | ¿Transformación o desplazamiento? |
 
 ---
 
-## PRACTICA 1.1: Primera Exploracion de IA Generativa
-### Duracion: 15 minutos | Individual
+## PRÁCTICA 1.1: Primera Exploración de IA Generativa
+### Duración: 15 minutos | Individual
 
 ### Objetivo
-Desarrollar intuicion sobre las capacidades de modelos generativos antes de estudiar su teoria.
+Desarrollar intuición sobre las capacidades de modelos generativos antes de estudiar su teoría.
 
-### Parte A: Generacion de Rostros con GANs (5 min)
+### Parte A: Generación de Rostros con GANs (5 min)
 
 1. Visita [thispersondoesnotexist.com](https://thispersondoesnotexist.com)
-2. Recarga la pagina 5-10 veces
+2. Recarga la página 5-10 veces
 3. Observa y anota:
 
 | Pregunta | Tus Observaciones |
 |----------|-------------------|
 | ¿Los rostros parecen reales? | |
-| ¿Detectas algun artefacto o error? | |
-| ¿Que partes fallan mas? (orejas, dientes, fondos, manos) | |
+| ¿Detectas algún artefacto o error? | |
+| ¿Qué partes fallan más? (orejas, dientes, fondos, manos) | |
 
-### Parte B: Generacion con Difusion (10 min)
+### Parte B: Generación con Difusión (10 min)
 
 1. Accede a [Stable Diffusion Demo](https://huggingface.co/spaces/stabilityai/stable-diffusion)
-2. Genera imagenes con estos prompts:
+2. Genera imágenes con estos prompts:
 
 ```
 Prompt 1: "A cat sitting on a laptop, photorealistic"
@@ -156,21 +146,21 @@ Prompt 3: "A medieval knight riding a horse, oil painting"
 
 3. Completa la tabla:
 
-| Prompt | Tiempo generacion | Calidad (1-10) | Sigue instrucciones? |
+| Prompt | Tiempo generación | Calidad (1-10) | ¿Sigue instrucciones? |
 |--------|-------------------|----------------|----------------------|
 | Gato en laptop | | | |
 | Ciudad futurista | | | |
 | Caballero medieval | | | |
 
-### Reflexion (compartir en clase)
-- ¿Que modelo te parecio mas impresionante?
+### Reflexión (compartir en clase)
+- ¿Qué modelo te pareció más impresionante?
 - ¿Notaste diferencias de velocidad?
-- ¿Que limitaciones observaste?
+- ¿Qué limitaciones observaste?
 
 ---
 
 # BLOQUE 2: GANs - Generative Adversarial Networks
-## Duracion: 50 minutos (35 teoria + 15 practica)
+## Duración: 50 minutos (35 teoría + 15 práctica)
 
 ---
 
@@ -180,7 +170,7 @@ Las GANs fueron propuestas por **Ian Goodfellow en 2014**. La leyenda dice que t
 
 El concepto es elegante: **dos redes neuronales compitiendo en un juego**.
 
-### Analogia del Falsificador y el Detective
+### Analogía del Falsificador y el Detective
 
 ```
 FALSIFICADOR (Generador)         vs         DETECTIVE (Discriminador)
@@ -203,11 +193,11 @@ Mejora cuando lo atrapan                    Mejora cuando lo engañan
 
 **Generador (G)**:
 - **Entrada**: Vector de ruido aleatorio z ~ N(0, I)
-- **Salida**: Imagen sintetica
+- **Salida**: Imagen sintética
 - **Objetivo**: Engañar al discriminador
 
 **Discriminador (D)**:
-- **Entrada**: Imagenes (reales o generadas)
+- **Entrada**: Imágenes (reales o generadas)
 - **Salida**: Probabilidad de ser real (0 a 1)
 - **Objetivo**: Distinguir reales de falsas
 
@@ -237,7 +227,7 @@ Mejora cuando lo atrapan                    Mejora cuando lo engañan
 ### Ciclo de Entrenamiento
 
 ```python
-# Pseudocodigo simplificado
+# Pseudocódigo simplificado
 for epoca in range(num_epocas):
 
     # FASE 1: Entrenar Discriminador
@@ -253,33 +243,33 @@ for epoca in range(num_epocas):
     imagenes_falsas = Generador(z)
 
     loss_G = entrenar_generador(imagenes_falsas)
-    # G aprende: hacer que D diga 1 para sus imagenes
+    # G aprende: hacer que D diga 1 para sus imágenes
 ```
 
-### Funcion Objetivo
+### Función Objetivo
 
 ```
 min_G max_D V(D,G) = E[log D(x)] + E[log(1 - D(G(z)))]
 ```
 
-**Intuicion**:
+**Intuición**:
 - D quiere **maximizar**: dar 1 a reales, 0 a falsas
-- G quiere **minimizar**: que D de 1 a sus falsas
+- G quiere **minimizar**: que D dé 1 a sus falsas
 
 ### Convergencia Ideal
 
 Cuando el entrenamiento funciona bien:
-- El Generador produce imagenes indistinguibles de las reales
-- El Discriminador tiene precision del 50% (no puede hacer mejor que adivinar)
+- El Generador produce imágenes indistinguibles de las reales
+- El Discriminador tiene precisión del 50% (no puede hacer mejor que adivinar)
 
 ---
 
 ## 2.4 Problemas Comunes
 
-| Problema | Que Ocurre | Consecuencia |
+| Problema | Qué Ocurre | Consecuencia |
 |----------|------------|--------------|
 | **Mode Collapse** | G produce solo unas pocas variantes | Poca diversidad |
-| **Vanishing Gradients** | D es muy bueno muy rapido | G no recibe señal para mejorar |
+| **Vanishing Gradients** | D es muy bueno muy rápido | G no recibe señal para mejorar |
 | **Inestabilidad** | Oscilaciones en el entrenamiento | No converge |
 
 ### Mode Collapse Explicado
@@ -288,16 +278,16 @@ Cuando el entrenamiento funciona bien:
 Lo esperado:                    Mode Collapse:
 
 Genera: gatos, perros,          Genera: solo gatos negros
-        pajaros, peces...       (encontro un "truco" que engaña a D)
+        pájaros, peces...       (encontró un "truco" que engaña a D)
 ```
 
 ---
 
 ## 2.5 Variantes de GANs
 
-| Variante | Innovacion | Aplicacion |
+| Variante | Innovación | Aplicación |
 |----------|------------|------------|
-| **DCGAN** | Convoluciones profundas | Estabilizo el entrenamiento |
+| **DCGAN** | Convoluciones profundas | Estabilizó el entrenamiento |
 | **StyleGAN** | Control de estilo por capas | Rostros hiperrealistas |
 | **CycleGAN** | Sin necesidad de pares | Caballo ↔ Cebra |
 | **Pix2Pix** | Con pares de entrenamiento | Boceto → Imagen |
@@ -306,23 +296,23 @@ Genera: gatos, perros,          Genera: solo gatos negros
 
 ## 2.6 Aplicaciones Reales
 
-| Aplicacion | Descripcion | Ejemplo Real |
+| Aplicación | Descripción | Ejemplo Real |
 |------------|-------------|--------------|
 | Rostros | Personas que no existen | thispersondoesnotexist.com |
 | Transferencia de estilo | Foto → Pintura | Prisma, DeepArt |
-| Super-resolucion | Aumentar calidad | ESRGAN en videojuegos |
+| Super-resolución | Aumentar calidad | ESRGAN en videojuegos |
 | Inpainting | Rellenar huecos | Adobe Firefly |
-| Datos sinteticos | Entrenamiento con privacidad | Imagenes medicas |
+| Datos sintéticos | Entrenamiento con privacidad | Imágenes médicas |
 
 ---
 
-## PRACTICA 2.1: Analisis de Arquitectura GAN
-### Duracion: 15 minutos | Parejas
+## PRÁCTICA 2.1: Análisis de Arquitectura GAN
+### Duración: 15 minutos | Parejas
 
 ### Objetivo
-Comprender la dinamica adversarial analizando el flujo de informacion.
+Comprender la dinámica adversarial analizando el flujo de información.
 
-### Parte A: Analisis del Diagrama (5 min)
+### Parte A: Análisis del Diagrama (5 min)
 
 Observa el siguiente diagrama y responde:
 
@@ -357,19 +347,19 @@ Observa el siguiente diagrama y responde:
 
 **Preguntas**:
 
-1. ¿Cual es el input del Generador? ¿Por que ruido aleatorio?
+1. ¿Cuál es el input del Generador? ¿Por qué ruido aleatorio?
 
    _Tu respuesta:_
 
-2. ¿Por que el Discriminador recibe AMBOS tipos de imagenes?
+2. ¿Por qué el Discriminador recibe AMBOS tipos de imágenes?
 
    _Tu respuesta:_
 
-3. Si el Discriminador se vuelve perfecto muy rapido, ¿que le pasa al Generador?
+3. Si el Discriminador se vuelve perfecto muy rápido, ¿qué le pasa al Generador?
 
    _Tu respuesta:_
 
-### Parte B: Visualizacion Interactiva (10 min)
+### Parte B: Visualización Interactiva (10 min)
 
 1. Visita [GAN Lab](https://poloclub.github.io/ganlab/)
 2. Observa el entrenamiento en tiempo real
@@ -377,15 +367,15 @@ Observa el siguiente diagrama y responde:
 
 **Completa**:
 
-| Observacion | Lo que vi |
+| Observación | Lo que vi |
 |-------------|-----------|
-| ¿Como evolucionan los puntos generados? | |
-| ¿Hubo algun momento de mode collapse? | |
-| ¿Cuantas iteraciones hasta convergencia? | |
+| ¿Cómo evolucionan los puntos generados? | |
+| ¿Hubo algún momento de mode collapse? | |
+| ¿Cuántas iteraciones hasta convergencia? | |
 
-### Discusion en Clase
-- ¿Que estrategias podrian evitar que D sea "demasiado bueno"?
-- ¿Por que es dificil encontrar el equilibrio?
+### Discusión en Clase
+- ¿Qué estrategias podrían evitar que D sea "demasiado bueno"?
+- ¿Por qué es difícil encontrar el equilibrio?
 
 ---
 
@@ -394,29 +384,29 @@ Observa el siguiente diagrama y responde:
 ---
 
 # BLOQUE 3: VAEs - Variational Autoencoders
-## Duracion: 45 minutos (30 teoria + 15 practica)
+## Duración: 45 minutos (30 teoría + 15 práctica)
 
 ---
 
-## 3.1 Del Autoencoder Clasico al VAE
+## 3.1 Del Autoencoder Clásico al VAE
 
-### Autoencoder Clasico
+### Autoencoder Clásico
 
 ```
-Input x ──> [Encoder] ──> z (codigo) ──> [Decoder] ──> x' (reconstruccion)
+Input x ──> [Encoder] ──> z (código) ──> [Decoder] ──> x' (reconstrucción)
 ```
 
 - **Encoder**: Comprime la entrada
-- **Decoder**: Reconstruye desde la compresion
+- **Decoder**: Reconstruye desde la compresión
 - **Objetivo**: Minimizar diferencia entre x y x'
 
 **Problema**: El espacio z no tiene estructura. Si muestreamos puntos aleatorios, el decoder produce basura.
 
 ---
 
-## 3.2 La Innovacion del VAE
+## 3.2 La Innovación del VAE
 
-En lugar de mapear a un **punto fijo**, el encoder produce **parametros de una distribucion**:
+En lugar de mapear a un **punto fijo**, el encoder produce **parámetros de una distribución**:
 
 ```
 Input x ──> [Encoder] ──> μ, σ ──> z ~ N(μ, σ²) ──> [Decoder] ──> x'
@@ -425,7 +415,7 @@ Input x ──> [Encoder] ──> μ, σ ──> z ~ N(μ, σ²) ──> [Decode
 ### Diferencia Visual
 
 ```
-AUTOENCODER CLASICO:              VAE:
+AUTOENCODER CLÁSICO:              VAE:
 
      Input                         Input
        |                             |
@@ -433,7 +423,7 @@ AUTOENCODER CLASICO:              VAE:
    [Encoder]                    [Encoder]
        |                             |
        v                             v
-    Punto z                     μ y σ (distribucion)
+    Punto z                     μ y σ (distribución)
        |                             |
        |                             v
        |                      Muestrear z ~ N(μ,σ)
@@ -447,24 +437,24 @@ AUTOENCODER CLASICO:              VAE:
 
 ---
 
-## 3.3 Funcion de Perdida
+## 3.3 Función de Pérdida
 
 ```
-L = Reconstruccion + Regularizacion KL
+L = Reconstrucción + Regularización KL
 
 L = ||x - x'||² + KL(q(z|x) || N(0,1))
 ```
 
 ### Dos Componentes
 
-| Termino | Que Hace | Intuicion |
+| Término | Qué Hace | Intuición |
 |---------|----------|-----------|
-| **Reconstruccion** | Mide diferencia input/output | "Que se parezca" |
+| **Reconstrucción** | Mide diferencia input/output | "Que se parezca" |
 | **KL Divergence** | Fuerza q(z\|x) hacia N(0,1) | "Espacio organizado" |
 
-### ¿Por que KL hacia N(0,1)?
+### ¿Por qué KL hacia N(0,1)?
 
-Si todas las distribuciones se parecen a una normal estandar:
+Si todas las distribuciones se parecen a una normal estándar:
 - Podemos **muestrear de N(0,1)** para generar
 - El espacio latente es **continuo y navegable**
 - Puntos cercanos producen outputs similares
@@ -473,13 +463,13 @@ Si todas las distribuciones se parecen a una normal estandar:
 
 ## 3.4 Propiedades del Espacio Latente
 
-| Propiedad | Descripcion | Utilidad |
+| Propiedad | Descripción | Utilidad |
 |-----------|-------------|----------|
-| **Continuidad** | Puntos cercanos → datos similares | Interpolacion suave |
-| **Completitud** | Todo punto produce dato realista | Generacion por muestreo |
-| **Estructura semantica** | Dimensiones interpretables | Control de atributos |
+| **Continuidad** | Puntos cercanos → datos similares | Interpolación suave |
+| **Completitud** | Todo punto produce dato realista | Generación por muestreo |
+| **Estructura semántica** | Dimensiones interpretables | Control de atributos |
 
-### Interpolacion en el Espacio Latente
+### Interpolación en el Espacio Latente
 
 ```python
 # Si tenemos dos puntos en el espacio latente
@@ -490,7 +480,7 @@ z2 = encoder(imagen_perro)
 for t in [0, 0.25, 0.5, 0.75, 1.0]:
     z_intermedio = z1 * (1-t) + z2 * t
     imagen_intermedia = decoder(z_intermedio)
-    # Vemos transicion suave gato → perro
+    # Vemos transición suave gato → perro
 ```
 
 ---
@@ -499,45 +489,45 @@ for t in [0, 0.25, 0.5, 0.75, 1.0]:
 
 | Aspecto | GANs | VAEs |
 |---------|------|------|
-| **Calidad de imagen** | Superior, nitidas | Mas borrosas |
-| **Estabilidad** | Dificil de entrenar | Estable |
+| **Calidad de imagen** | Superior, nítidas | Más borrosas |
+| **Estabilidad** | Difícil de entrenar | Estable |
 | **Espacio latente** | No estructurado | Estructurado, navegable |
 | **Diversidad** | Propenso a mode collapse | Mejor cobertura |
-| **Velocidad generacion** | Muy rapida | Muy rapida |
+| **Velocidad generación** | Muy rápida | Muy rápida |
 
-### ¿Por que VAEs dan imagenes borrosas?
+### ¿Por qué VAEs dan imágenes borrosas?
 
-La funcion de perdida MSE "promedia" sobre posibles outputs, suavizando detalles de alta frecuencia.
+La función de pérdida MSE "promedia" sobre posibles outputs, suavizando detalles de alta frecuencia.
 
 ---
 
-## PRACTICA 3.1: Explorando el Espacio Latente de VAEs
-### Duracion: 15 minutos | Individual
+## PRÁCTICA 3.1: Explorando el Espacio Latente de VAEs
+### Duración: 15 minutos | Individual
 
 ### Objetivo
 Visualizar y entender las propiedades del espacio latente estructurado.
 
-### Parte A: Exploracion Visual (10 min)
+### Parte A: Exploración Visual (10 min)
 
 1. Accede al [MNIST VAE Demo](https://transcranial.github.io/keras-js/#/mnist-vae)
 2. Explora el espacio latente 2D moviendo el cursor
 
 **Observa y responde**:
 
-| Pregunta | Tu Observacion |
+| Pregunta | Tu Observación |
 |----------|----------------|
-| ¿Los digitos similares estan cerca? (ej: 3 y 8) | |
-| ¿Hay zonas "vacias" sin significado? | |
-| ¿Que pasa en las fronteras entre clusters? | |
+| ¿Los dígitos similares están cerca? (ej: 3 y 8) | |
+| ¿Hay zonas "vacías" sin significado? | |
+| ¿Qué pasa en las fronteras entre clusters? | |
 | ¿Puedes encontrar un "4" que parece "9"? | |
 
-### Parte B: Interpolacion Mental (5 min)
+### Parte B: Interpolación Mental (5 min)
 
 Imagina dos puntos en el espacio latente:
 - Punto A: genera un "3"
 - Punto B: genera un "8"
 
-**Dibuja o describe**: ¿Que digitos esperarias ver en 5 puntos intermedios entre A y B?
+**Dibuja o describe**: ¿Qué dígitos esperarías ver en 5 puntos intermedios entre A y B?
 
 ```
 Punto A (3) ──> ??? ──> ??? ──> ??? ──> ??? ──> ??? ──> Punto B (8)
@@ -545,20 +535,20 @@ Punto A (3) ──> ??? ──> ??? ──> ??? ──> ??? ──> ??? ──> 
 
 **Verifica** moviendo el cursor en la demo.
 
-### Reflexion
-- ¿Por que la interpolacion produce digitos coherentes y no ruido?
-- ¿Como podria usarse esto en aplicaciones reales? (pista: edicion de imagenes, animacion)
+### Reflexión
+- ¿Por qué la interpolación produce dígitos coherentes y no ruido?
+- ¿Cómo podría usarse esto en aplicaciones reales? (pista: edición de imágenes, animación)
 
 ---
 
-# BLOQUE 4: Modelos de Difusion
-## Duracion: 45 minutos (35 teoria + 10 reflexion)
+# BLOQUE 4: Modelos de Difusión
+## Duración: 45 minutos (35 teoría + 10 reflexión)
 
 ---
 
 ## 4.1 La Idea Contraintuitiva
 
-La intuicion es sorprendente: **aprender a revertir la destruccion gradual de informacion**.
+La intuición es sorprendente: **aprender a revertir la destrucción gradual de información**.
 
 ### El Proceso
 
@@ -583,10 +573,10 @@ Ruido Puro ──[-ruido]──> ... ──[-ruido]──> Imagen Clara
 
 ### Objetivo Simple
 
-La red aprende a **predecir el ruido** que se añadio:
+La red aprende a **predecir el ruido** que se añadió:
 
 ```python
-# Pseudocodigo de entrenamiento
+# Pseudocódigo de entrenamiento
 for imagen in dataset:
     t = random_step()           # Paso aleatorio (1 a 1000)
     ruido = sample_noise()       # Ruido gaussiano
@@ -602,7 +592,7 @@ for imagen in dataset:
 
 ---
 
-## 4.3 Generacion
+## 4.3 Generación
 
 ```python
 # Partir de ruido puro
@@ -616,36 +606,36 @@ for t in range(T, 0, -1):
 return x  # Imagen generada
 ```
 
-**Nota**: Por eso es lento - necesita muchos pasos (tipicamente 20-1000).
+**Nota**: Por eso es lento - necesita muchos pasos (típicamente 20-1000).
 
 ---
 
 ## 4.4 Ventajas sobre GANs
 
-| Aspecto | GANs | Difusion |
+| Aspecto | GANs | Difusión |
 |---------|------|----------|
-| **Estabilidad** | Dificil, inestable | Muy estable |
+| **Estabilidad** | Difícil, inestable | Muy estable |
 | **Diversidad** | Mode collapse posible | Excelente cobertura |
 | **Calidad** | Alta | Muy alta (estado del arte) |
 | **Control** | Limitado | Excelente (guiado por texto) |
-| **Velocidad** | Muy rapida | Lenta (multiples pasos) |
+| **Velocidad** | Muy rápida | Lenta (múltiples pasos) |
 
 ---
 
-## 4.5 Difusion en Espacio Latente (Stable Diffusion)
+## 4.5 Difusión en Espacio Latente (Stable Diffusion)
 
 ### El Problema
-Operar en espacio de pixeles es muy costoso (512×512 = 262,144 valores).
+Operar en espacio de píxeles es muy costoso (512×512 = 262,144 valores).
 
-### La Solucion
-Comprimir primero con un VAE, hacer difusion en espacio pequeño:
+### La Solución
+Comprimir primero con un VAE, hacer difusión en espacio pequeño:
 
 ```
-Imagen (512×512) ──> [VAE Encoder] ──> Latente (64×64) ──> [Difusion] ──> Latente ──> [VAE Decoder] ──> Imagen
+Imagen (512×512) ──> [VAE Encoder] ──> Latente (64×64) ──> [Difusión] ──> Latente ──> [VAE Decoder] ──> Imagen
 ```
 
 **Beneficios**:
-- 64× menos computo
+- 64× menos cómputo
 - Misma calidad
 - Posible en GPUs consumer
 
@@ -653,42 +643,42 @@ Imagen (512×512) ──> [VAE Encoder] ──> Latente (64×64) ──> [Difusi
 
 ## 4.6 Modelos Destacados
 
-| Modelo | Organizacion | Caracteristica |
+| Modelo | Organización | Característica |
 |--------|--------------|----------------|
 | DALL-E 2/3 | OpenAI | Text-to-image alta calidad |
 | Stable Diffusion | Stability AI | Open-source, comunidad activa |
-| Midjourney | Midjourney | Estetica artistica |
+| Midjourney | Midjourney | Estética artística |
 | Imagen | Google | Alta fidelidad |
 | Sora | OpenAI | Text-to-video |
 
 ---
 
-## REFLEXION 4.1: Conectando Conceptos
-### Duracion: 10 minutos | Grupos de 3
+## REFLEXIÓN 4.1: Conectando Conceptos
+### Duración: 10 minutos | Grupos de 3
 
-### Discusion
+### Discusión
 
 En grupos, discutan las siguientes preguntas:
 
-1. **Difusion vs GANs**:
+1. **Difusión vs GANs**:
    - Ya experimentaste con ambos al inicio de la clase
-   - ¿Notaste diferencia en tiempo de generacion?
-   - ¿Cual produjo imagenes de mayor calidad?
+   - ¿Notaste diferencia en tiempo de generación?
+   - ¿Cuál produjo imágenes de mayor calidad?
 
 2. **Trade-off velocidad/calidad**:
-   - Para una app de filtros en tiempo real, ¿cual usarias?
-   - Para generar arte de alta calidad, ¿cual usarias?
+   - Para una app de filtros en tiempo real, ¿cuál usarías?
+   - Para generar arte de alta calidad, ¿cuál usarías?
 
-3. **Conexion con VAEs**:
-   - Stable Diffusion usa un VAE internamente. ¿Para que?
-   - ¿Que ventaja da esto sobre difusion "pura"?
+3. **Conexión con VAEs**:
+   - Stable Diffusion usa un VAE internamente. ¿Para qué?
+   - ¿Qué ventaja da esto sobre difusión "pura"?
 
 **Preparen una respuesta de 1 minuto para compartir.**
 
 ---
 
 # BLOQUE 5: Autorregresivo vs No Autorregresivo
-## Duracion: 30 minutos (teoria)
+## Duración: 30 minutos (teoría)
 
 ---
 
@@ -700,23 +690,23 @@ Generan **secuencialmente**, un elemento a la vez:
 P(x₁, x₂, ..., xₙ) = P(x₁) · P(x₂|x₁) · P(x₃|x₁,x₂) · ... · P(xₙ|x₁,...,xₙ₋₁)
 ```
 
-### Ejemplo: Como Genera un LLM
+### Ejemplo: Cómo Genera un LLM
 
 ```
-Prompt: "El gato esta"
+Prompt: "El gato está"
 
-Paso 1: P("sentado" | "El gato esta") = 0.3 → genera "sentado"
-Paso 2: P("en" | "El gato esta sentado") = 0.5 → genera "en"
-Paso 3: P("el" | "El gato esta sentado en") = 0.4 → genera "el"
+Paso 1: P("sentado" | "El gato está") = 0.3 → genera "sentado"
+Paso 2: P("en" | "El gato está sentado") = 0.5 → genera "en"
+Paso 3: P("el" | "El gato está sentado en") = 0.4 → genera "el"
 ...
 ```
 
-### Caracteristicas
+### Características
 
-| Propiedad | Descripcion |
+| Propiedad | Descripción |
 |-----------|-------------|
-| Generacion | Token por token, secuencial |
-| Atencion | Solo mira hacia atras (causal) |
+| Generación | Token por token, secuencial |
+| Atención | Solo mira hacia atrás (causal) |
 | Velocidad | Lenta para secuencias largas |
 | Coherencia | Alta (cada token depende de todos los anteriores) |
 
@@ -727,222 +717,222 @@ Paso 3: P("el" | "El gato esta sentado en") = 0.4 → genera "el"
 
 ## 5.2 Modelos No Autorregresivos
 
-Generan **todo simultaneamente**:
+Generan **todo simultáneamente**:
 
 ```
 P(x₁, x₂, ..., xₙ) ≈ P(x₁|ctx) · P(x₂|ctx) · ... · P(xₙ|ctx)
 ```
 
-### Caracteristicas
+### Características
 
-| Propiedad | Descripcion |
+| Propiedad | Descripción |
 |-----------|-------------|
-| Generacion | Todo en paralelo |
-| Velocidad | Muy rapida |
+| Generación | Todo en paralelo |
+| Velocidad | Muy rápida |
 | Coherencia | Potencialmente menor |
 
 ### Ejemplos
-- BERT (para comprension, no generacion)
-- Algunos modelos de traduccion
-- Modelos de difusion (generan imagen completa por paso)
+- BERT (para comprensión, no generación)
+- Algunos modelos de traducción
+- Modelos de difusión (generan imagen completa por paso)
 
 ---
 
 ## 5.3 Arquitecturas Transformer
 
-| Tipo | Atencion | Uso | Ejemplos |
+| Tipo | Atención | Uso | Ejemplos |
 |------|----------|-----|----------|
-| **Decoder-only** | Causal (masked) | Generacion | GPT, Claude, LLaMA |
-| **Encoder-only** | Bidireccional | Comprension | BERT |
-| **Encoder-Decoder** | Mixta | Traduccion | T5, BART |
+| **Decoder-only** | Causal (masked) | Generación | GPT, Claude, LLaMA |
+| **Encoder-only** | Bidireccional | Comprensión | BERT |
+| **Encoder-Decoder** | Mixta | Traducción | T5, BART |
 
 ---
 
-## 5.4 Implicaciones Practicas
+## 5.4 Implicaciones Prácticas
 
 La naturaleza autorregresiva de los LLMs tiene consecuencias importantes:
 
-| Implicacion | Descripcion |
+| Implicación | Descripción |
 |-------------|-------------|
 | No planifica | Cada palabra se decide localmente |
 | Sensible al inicio | Primeros tokens condicionan todo |
 | Streaming | Tokens se muestran mientras se generan |
-| "Piensa" linealmente | No puede "volver atras" y corregir |
+| "Piensa" linealmente | No puede "volver atrás" y corregir |
 
 ---
 
-# BLOQUE 6: Comparativa y Seleccion de Tecnicas
-## Duracion: 20 minutos (10 teoria + 10 practica final)
+# BLOQUE 6: Comparativa y Selección de Técnicas
+## Duración: 20 minutos (10 teoría + 10 práctica final)
 
 ---
 
-## 6.1 Matriz de Decision
+## 6.1 Matriz de Decisión
 
-| Criterio | GANs | VAEs | Difusion | LLMs |
+| Criterio | GANs | VAEs | Difusión | LLMs |
 |----------|------|------|----------|------|
-| **Tipo de dato** | Imagenes | Imagenes | Imagenes, audio, video | Texto, codigo |
+| **Tipo de dato** | Imágenes | Imágenes | Imágenes, audio, video | Texto, código |
 | **Calidad** | Alta | Media | Muy alta | Muy alta |
-| **Velocidad** | Muy rapida | Muy rapida | Lenta | Media |
+| **Velocidad** | Muy rápida | Muy rápida | Lenta | Media |
 | **Estabilidad** | Baja | Alta | Alta | Alta |
 | **Control** | Limitado | Bueno | Muy bueno | Excelente |
 
 ---
 
-## 6.2 Guia de Seleccion
+## 6.2 Guía de Selección
 
-### ¿Cuando usar cada tecnica?
+### ¿Cuándo usar cada técnica?
 
-| Caso de Uso | Tecnica Recomendada | Razon |
+| Caso de Uso | Técnica Recomendada | Razón |
 |-------------|---------------------|-------|
 | Filtros en tiempo real | GANs | Velocidad |
-| Deteccion de anomalias | VAEs | Espacio latente estructurado |
-| Arte de alta calidad | Difusion | Maxima calidad |
-| Generacion de texto | LLMs | Diseñados para lenguaje |
-| Interpolacion controlada | VAEs | Navegacion del espacio latente |
-| Datos sinteticos | GANs o VAEs | Privacidad + velocidad |
+| Detección de anomalías | VAEs | Espacio latente estructurado |
+| Arte de alta calidad | Difusión | Máxima calidad |
+| Generación de texto | LLMs | Diseñados para lenguaje |
+| Interpolación controlada | VAEs | Navegación del espacio latente |
+| Datos sintéticos | GANs o VAEs | Privacidad + velocidad |
 
 ---
 
-## PRACTICA 6.1: Ejercicio Integrador - Comparativa de Tecnicas
-### Duracion: 10 minutos | Grupal (3-4 personas)
+## PRÁCTICA 6.1: Ejercicio Integrador - Comparativa de Técnicas
+### Duración: 10 minutos | Grupal (3-4 personas)
 
 ### Contexto
-Eres consultor de IA y debes recomendar tecnologias para estos clientes.
+Eres consultor de IA y debes recomendar tecnologías para estos clientes.
 
 ### Casos de Uso
 
 **Caso 1: App de Filtros de Belleza**
-- Requisitos: Tiempo real (<100ms), movil, calidad aceptable
+- Requisitos: Tiempo real (<100ms), móvil, calidad aceptable
 
-**Tu recomendacion**: ________________
+**Tu recomendación**: ________________
 
-**Justificacion** (velocidad, recursos, calidad):
+**Justificación** (velocidad, recursos, calidad):
 
 ---
 
 **Caso 2: Plataforma de Arte Digital**
-- Requisitos: Maxima calidad, control via texto, tiempo no critico
+- Requisitos: Máxima calidad, control vía texto, tiempo no crítico
 
-**Tu recomendacion**: ________________
+**Tu recomendación**: ________________
 
-**Justificacion**:
-
----
-
-**Caso 3: Hospital - Datos Sinteticos de Rayos X**
-- Requisitos: Realismo medico, control de patologias, privacidad
-
-**Tu recomendacion**: ________________
-
-**Justificacion**:
+**Justificación**:
 
 ---
 
-**Caso 4: Archivo de Biblioteca - Compresion de Imagenes**
-- Requisitos: Compresion extrema, reconstruccion fiel, busqueda semantica
+**Caso 3: Hospital - Datos Sintéticos de Rayos X**
+- Requisitos: Realismo médico, control de patologías, privacidad
 
-**Tu recomendacion**: ________________
+**Tu recomendación**: ________________
 
-**Justificacion**:
+**Justificación**:
 
 ---
 
-### Discusion Final (5 min)
+**Caso 4: Archivo de Biblioteca - Compresión de Imágenes**
+- Requisitos: Compresión extrema, reconstrucción fiel, búsqueda semántica
+
+**Tu recomendación**: ________________
+
+**Justificación**:
+
+---
+
+### Discusión Final (5 min)
 - ¿Hubo consenso en las recomendaciones?
-- ¿Que criterio fue mas dificil de evaluar?
-- ¿Hay casos donde varias tecnicas serian validas?
+- ¿Qué criterio fue más difícil de evaluar?
+- ¿Hay casos donde varias técnicas serían válidas?
 
 ---
 
-# EVALUACION: Quiz de Conceptos
-## Duracion: 10 minutos | Individual
+# EVALUACIÓN: Quiz de Conceptos
+## Duración: 10 minutos | Individual
 
 Responde sin consultar material.
 
 ### Pregunta 1
-¿Cual es la principal diferencia entre un modelo discriminativo y uno generativo?
+¿Cuál es la principal diferencia entre un modelo discriminativo y uno generativo?
 
-- [ ] a) Los discriminativos son mas precisos
+- [ ] a) Los discriminativos son más precisos
 - [ ] b) Los generativos aprenden P(X,Y), los discriminativos P(Y|X)
-- [ ] c) Los generativos solo funcionan con imagenes
-- [ ] d) Los discriminativos son mas modernos
+- [ ] c) Los generativos solo funcionan con imágenes
+- [ ] d) Los discriminativos son más modernos
 
 ### Pregunta 2
-En una GAN, ¿que ocurre si el Discriminador se vuelve demasiado bueno muy rapido?
+En una GAN, ¿qué ocurre si el Discriminador se vuelve demasiado bueno muy rápido?
 
 - [ ] a) El entrenamiento se acelera
 - [ ] b) El Generador recibe gradientes muy pequeños y deja de aprender
-- [ ] c) Las imagenes generadas mejoran inmediatamente
-- [ ] d) No tiene ningun efecto
+- [ ] c) Las imágenes generadas mejoran inmediatamente
+- [ ] d) No tiene ningún efecto
 
 ### Pregunta 3
-¿Por que los VAEs producen imagenes mas borrosas que las GANs?
+¿Por qué los VAEs producen imágenes más borrosas que las GANs?
 
-- [ ] a) Usan redes mas pequeñas
-- [ ] b) La funcion de perdida MSE promedia sobre variaciones
+- [ ] a) Usan redes más pequeñas
+- [ ] b) La función de pérdida MSE promedia sobre variaciones
 - [ ] c) El espacio latente es demasiado grande
-- [ ] d) Solo funcionan con imagenes de baja resolucion
+- [ ] d) Solo funcionan con imágenes de baja resolución
 
 ### Pregunta 4
-¿Cual es el proposito del termino KL en la perdida del VAE?
+¿Cuál es el propósito del término KL en la pérdida del VAE?
 
-- [ ] a) Mejorar la calidad de reconstruccion
+- [ ] a) Mejorar la calidad de reconstrucción
 - [ ] b) Regularizar el espacio latente para que siga N(0,1)
 - [ ] c) Acelerar el entrenamiento
 - [ ] d) Reducir el tamaño del modelo
 
 ### Pregunta 5
-¿Por que los modelos de difusion son mas lentos que las GANs?
+¿Por qué los modelos de difusión son más lentos que las GANs?
 
-- [ ] a) Tienen mas parametros
-- [ ] b) Requieren multiples pasos de denoising iterativo
-- [ ] c) Usan imagenes de mayor resolucion
-- [ ] d) Necesitan GPU mas potentes
+- [ ] a) Tienen más parámetros
+- [ ] b) Requieren múltiples pasos de denoising iterativo
+- [ ] c) Usan imágenes de mayor resolución
+- [ ] d) Necesitan GPU más potentes
 
 ---
 
 <details>
 <summary><strong>Ver Respuestas</strong></summary>
 
-1. **b)** - Los generativos modelan la distribucion conjunta, los discriminativos la condicional
+1. **b)** - Los generativos modelan la distribución conjunta, los discriminativos la condicional
 2. **b)** - Vanishing gradients impiden el aprendizaje del Generador
 3. **b)** - El MSE promedia, perdiendo detalles de alta frecuencia
 4. **b)** - Fuerza q(z|x) a aproximar N(0,1), estructurando el espacio latente
-5. **b)** - Necesitan T pasos para revertir el proceso de ruido (20-1000 tipicamente)
+5. **b)** - Necesitan T pasos para revertir el proceso de ruido (20-1000 típicamente)
 
 </details>
 
 ---
 
-# Resumen de la Sesion
+# Resumen de la Sesión
 
 ## Las 5 Ideas Fundamentales
 
-| Concepto | Resumen en una linea |
+| Concepto | Resumen en una línea |
 |----------|----------------------|
 | **Generativo vs Discriminativo** | Discriminativo clasifica, Generativo crea |
 | **GANs** | Dos redes compitiendo: falsificador vs detective |
-| **VAEs** | Espacio latente estructurado con regularizacion KL |
-| **Difusion** | Aprender a revertir proceso de destruccion por ruido |
+| **VAEs** | Espacio latente estructurado con regularización KL |
+| **Difusión** | Aprender a revertir proceso de destrucción por ruido |
 | **Autorregresivo** | Genera secuencialmente, token a token |
 
 ## Para Recordar
 
-- No hay tecnica "mejor" universal - depende del caso
-- GANs para velocidad, Difusion para calidad, VAEs para espacio latente
-- El campo evoluciona muy rapido
-- Entender fundamentos permite evaluar nuevas tecnologias
+- No hay técnica "mejor" universal - depende del caso
+- GANs para velocidad, Difusión para calidad, VAEs para espacio latente
+- El campo evoluciona muy rápido
+- Entender fundamentos permite evaluar nuevas tecnologías
 
 ---
 
-# Proxima Sesion
+# Próxima Sesión
 
-## Sesion 2: Large Language Models en Profundidad
+## Sesión 2: Large Language Models en Profundidad
 
 - Panorama actual: GPT, Claude, Gemini, LLaMA
 - Ciclo de vida: Pre-entrenamiento → RLHF → Producto
-- Funcionamiento interno: Tokenizacion, embeddings, context window
-- Parametros de generacion
+- Funcionamiento interno: Tokenización, embeddings, context window
+- Parámetros de generación
 
 ---
 
@@ -956,8 +946,8 @@ En una GAN, ¿que ocurre si el Discriminador se vuelve demasiado bueno muy rapid
 
 ## Demos para Seguir Explorando
 - [thispersondoesnotexist.com](https://thispersondoesnotexist.com) - StyleGAN
-- [Stable Diffusion](https://huggingface.co/spaces/stabilityai/stable-diffusion) - Difusion
-- [GAN Lab](https://poloclub.github.io/ganlab/) - Visualizacion GAN
+- [Stable Diffusion](https://huggingface.co/spaces/stabilityai/stable-diffusion) - Difusión
+- [GAN Lab](https://poloclub.github.io/ganlab/) - Visualización GAN
 - [MNIST VAE](https://transcranial.github.io/keras-js/#/mnist-vae) - Espacio latente
 
 ## Videos Recomendados
@@ -969,9 +959,9 @@ En una GAN, ¿que ocurre si el Discriminador se vuelve demasiado bueno muy rapid
 
 # Ejercicio para Casa (Opcional)
 
-## Investigacion: Modelo Generativo Reciente
+## Investigación: Modelo Generativo Reciente
 
-Investiga uno de estos modelos y prepara una presentacion de 5 minutos:
+Investiga uno de estos modelos y prepara una presentación de 5 minutos:
 
 1. **DALL-E 3** (OpenAI)
 2. **Sora** (OpenAI) - Video
@@ -979,11 +969,11 @@ Investiga uno de estos modelos y prepara una presentacion de 5 minutos:
 4. **Flux**
 
 ### Puntos a Cubrir
-- ¿Que tecnica(s) usa?
-- ¿Que lo diferencia?
-- ¿Cuales son sus limitaciones?
-- ¿Esta disponible publicamente?
+- ¿Qué técnica(s) usa?
+- ¿Qué lo diferencia?
+- ¿Cuáles son sus limitaciones?
+- ¿Está disponible públicamente?
 
 ---
 
-*Documento generado para el curso de Aprendizaje Automatico II*
+*Documento generado para el curso de Aprendizaje Automático II*
