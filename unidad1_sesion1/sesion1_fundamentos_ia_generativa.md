@@ -134,7 +134,7 @@ Desarrollar intuición sobre las capacidades de modelos generativos antes de est
 
 ### Parte B: Generación con Difusión (10 min)
 
-1. Accede a [Stable Diffusion Demo](https://huggingface.co/spaces/stabilityai/stable-diffusion)
+1. Accede a [Stable Diffusion Demo](https://huggingface.co/spaces/stabilityai/stable-diffusion-3-medium)
 2. Genera imágenes con estos prompts:
 
 ```
