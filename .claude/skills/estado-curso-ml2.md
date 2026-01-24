@@ -1,7 +1,7 @@
 # Skill: Estado del Curso ML2
 
 ## Descripcion
-Muestra el estado actual del curso, listando sesiones completadas y pendientes.
+Muestra el estado actual del curso, listando sesiones y practicas completadas y pendientes.
 
 ## Uso
 ```
@@ -12,42 +12,59 @@ o
 Que sesiones faltan por crear?
 ```
 
+## Estructura por Unidad
+Cada unidad tiene:
+- 2 sesiones de 4 horas cada una
+- 1 practica evaluable (cubre ambas sesiones)
+
+```
+unidadX_sesion1/   → Sesion 1
+unidadX_sesion2/   → Sesion 2
+unidadX_practica/  → Practica evaluable
+```
+
 ## Indice Completo del Curso
 
 ### Unidad 1: Fundamentos de IA Generativa y LLMs
-| Sesion | Tema | Estado | Archivo |
-|--------|------|--------|---------|
-| 1 | Fundamentos de IA Generativa | Completada | `unidad1_sesion1/sesion1_fundamentos_ia_generativa.md` |
-| 2 | LLMs en Profundidad | Completada | `unidad1_sesion2/sesion2_llms_en_profundidad.md` |
+| Elemento | Tema | Estado | Archivo |
+|----------|------|--------|---------|
+| Sesion 1 | Fundamentos de IA Generativa | Completada | `unidad1_sesion1/sesion1_fundamentos_ia_generativa.md` |
+| Sesion 2 | LLMs en Profundidad | Completada | `unidad1_sesion2/sesion2_llms_en_profundidad.md` |
+| Practica | Analisis Comparativo de Tecnicas | Completada | `unidad1_practica/practica.md` |
 
 ### Unidad 2: Prompt Engineering y ChatGPT
-| Sesion | Tema | Estado | Archivo |
-|--------|------|--------|---------|
-| 1 | Prompt Engineering | Pendiente | `unidad2_sesion1/sesion1_prompt_engineering.md` |
-| 2 | Uso Avanzado de ChatGPT | Pendiente | `unidad2_sesion2/sesion2_chatgpt_avanzado.md` |
+| Elemento | Tema | Estado | Archivo |
+|----------|------|--------|---------|
+| Sesion 1 | Prompt Engineering | Pendiente | `unidad2_sesion1/sesion1_prompt_engineering.md` |
+| Sesion 2 | Uso Avanzado de ChatGPT | Pendiente | `unidad2_sesion2/sesion2_chatgpt_avanzado.md` |
+| Practica | Diseno y Evaluacion de Prompts | Pendiente | `unidad2_practica/practica.md` |
 
 ### Unidad 3: Arquitectura y APIs
-| Sesion | Tema | Estado | Archivo |
-|--------|------|--------|---------|
-| 1 | Arquitectura Transformers | Pendiente | `unidad3_sesion1/sesion1_arquitectura_transformers.md` |
-| 2 | Acceso Programatico a LLMs | Pendiente | `unidad3_sesion2/sesion2_acceso_programatico_llms.md` |
+| Elemento | Tema | Estado | Archivo |
+|----------|------|--------|---------|
+| Sesion 1 | Arquitectura Transformers | Pendiente | `unidad3_sesion1/sesion1_arquitectura_transformers.md` |
+| Sesion 2 | Acceso Programatico a LLMs | Pendiente | `unidad3_sesion2/sesion2_acceso_programatico_llms.md` |
+| Practica | Implementacion con APIs | Pendiente | `unidad3_practica/practica.md` |
 
 ### Unidad 4: Automatizacion y Agentes
-| Sesion | Tema | Estado | Archivo |
-|--------|------|--------|---------|
-| 1 | Automatizacion con n8n | Pendiente | `unidad4_sesion1/sesion1_automatizacion_n8n.md` |
-| 2 | Agentes de IA | Pendiente | `unidad4_sesion2/sesion2_agentes_ia.md` |
+| Elemento | Tema | Estado | Archivo |
+|----------|------|--------|---------|
+| Sesion 1 | Automatizacion con n8n | Pendiente | `unidad4_sesion1/sesion1_automatizacion_n8n.md` |
+| Sesion 2 | Agentes de IA | Pendiente | `unidad4_sesion2/sesion2_agentes_ia.md` |
+| Practica | Workflow con Agentes | Pendiente | `unidad4_practica/practica.md` |
 
 ### Unidad 5: RAG y Bases de Datos
-| Sesion | Tema | Estado | Archivo |
-|--------|------|--------|---------|
-| 1 | RAG (Retrieval Augmented Generation) | Pendiente | `unidad5_sesion1/sesion1_rag.md` |
-| 2 | Bases de Datos Vectoriales | Pendiente | `unidad5_sesion2/sesion2_bases_datos_vectoriales.md` |
+| Elemento | Tema | Estado | Archivo |
+|----------|------|--------|---------|
+| Sesion 1 | RAG (Retrieval Augmented Generation) | Pendiente | `unidad5_sesion1/sesion1_rag.md` |
+| Sesion 2 | Bases de Datos Vectoriales | Pendiente | `unidad5_sesion2/sesion2_bases_datos_vectoriales.md` |
+| Practica | Sistema RAG Completo | Pendiente | `unidad5_practica/practica.md` |
 
 ### Unidad 6: Integracion Avanzada
-| Sesion | Tema | Estado | Archivo |
-|--------|------|--------|---------|
-| 1 | Model Context Protocol (MCP) | Pendiente | `unidad6_sesion1/sesion1_mcp.md` |
+| Elemento | Tema | Estado | Archivo |
+|----------|------|--------|---------|
+| Sesion 1 | Model Context Protocol (MCP) | Pendiente | `unidad6_sesion1/sesion1_mcp.md` |
+| Practica | Integracion MCP | Pendiente | `unidad6_practica/practica.md` |
 
 ## Como Verificar el Estado
 
