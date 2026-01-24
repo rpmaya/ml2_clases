@@ -29,7 +29,6 @@ Antes de comenzar, asegúrate de tener acceso a:
 ---
 
 # BLOQUE 1: Introducción a la IA Generativa
-## Duración: 45 minutos (30 teoría + 15 práctica)
 
 ---
 
@@ -116,7 +115,7 @@ Un **modelo generativo** entrenado con correos:
 ---
 
 ## PRÁCTICA 1.1: Primera Exploración de IA Generativa
-### Duración: 15 minutos | Individual
+### Individual
 
 ### Objetivo
 Desarrollar intuición sobre las capacidades de modelos generativos antes de estudiar su teoría.
@@ -160,7 +159,6 @@ Prompt 3: "A medieval knight riding a horse, oil painting"
 ---
 
 # BLOQUE 2: GANs - Generative Adversarial Networks
-## Duración: 50 minutos (35 teoría + 15 práctica)
 
 ---
 
@@ -307,7 +305,7 @@ Genera: gatos, perros,          Genera: solo gatos negros
 ---
 
 ## PRÁCTICA 2.1: Análisis de Arquitectura GAN
-### Duración: 15 minutos | Parejas
+### Parejas
 
 ### Objetivo
 Comprender la dinámica adversarial analizando el flujo de información.
@@ -384,7 +382,6 @@ Observa el siguiente diagrama y responde:
 ---
 
 # BLOQUE 3: VAEs - Variational Autoencoders
-## Duración: 45 minutos (30 teoría + 15 práctica)
 
 ---
 
@@ -502,7 +499,7 @@ La función de pérdida MSE "promedia" sobre posibles outputs, suavizando detall
 ---
 
 ## PRÁCTICA 3.1: Explorando el Espacio Latente de VAEs
-### Duración: 15 minutos | Individual
+### Individual
 
 ### Objetivo
 Visualizar y entender las propiedades del espacio latente estructurado.
@@ -542,7 +539,6 @@ Punto A (3) ──> ??? ──> ??? ──> ??? ──> ??? ──> ??? ──> 
 ---
 
 # BLOQUE 4: Modelos de Difusión
-## Duración: 45 minutos (35 teoría + 10 reflexión)
 
 ---
 
@@ -654,7 +650,7 @@ Imagen (512×512) ──> [VAE Encoder] ──> Latente (64×64) ──> [Difusi
 ---
 
 ## REFLEXIÓN 4.1: Conectando Conceptos
-### Duración: 10 minutos | Grupos de 3
+### Grupos de 3
 
 ### Discusión
 
@@ -678,7 +674,6 @@ En grupos, discutan las siguientes preguntas:
 ---
 
 # BLOQUE 5: Autorregresivo vs No Autorregresivo
-## Duración: 30 minutos (teoría)
 
 ---
 
@@ -762,7 +757,6 @@ La naturaleza autorregresiva de los LLMs tiene consecuencias importantes:
 ---
 
 # BLOQUE 6: Comparativa y Selección de Técnicas
-## Duración: 20 minutos (10 teoría + 10 práctica final)
 
 ---
 
@@ -794,7 +788,7 @@ La naturaleza autorregresiva de los LLMs tiene consecuencias importantes:
 ---
 
 ## PRÁCTICA 6.1: Ejercicio Integrador - Comparativa de Técnicas
-### Duración: 10 minutos | Grupal (3-4 personas)
+### Grupal (3-4 personas)
 
 ### Contexto
 Eres consultor de IA y debes recomendar tecnologías para estos clientes.
@@ -845,7 +839,7 @@ Eres consultor de IA y debes recomendar tecnologías para estos clientes.
 ---
 
 # EVALUACIÓN: Quiz de Conceptos
-## Duración: 10 minutos | Individual
+## Individual
 
 Responde sin consultar material.
 
