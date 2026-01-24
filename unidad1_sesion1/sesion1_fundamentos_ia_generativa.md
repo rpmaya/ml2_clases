@@ -377,10 +377,6 @@ Observa el siguiente diagrama y responde:
 
 ---
 
-# DESCANSO: 15 minutos
-
----
-
 # BLOQUE 3: VAEs - Variational Autoencoders
 
 ---
