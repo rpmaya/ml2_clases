@@ -22,7 +22,7 @@ Antes de comenzar, asegúrate de tener acceso a:
 | Herramienta | URL | Requiere Cuenta |
 |-------------|-----|-----------------|
 | This Person Does Not Exist | https://thispersondoesnotexist.com | No |
-| Stable Diffusion Demo | https://huggingface.co/spaces/stabilityai/stable-diffusion | No |
+| Stable Diffusion Demo | https://huggingface.co/spaces/stabilityai/stable-diffusion-3-medium | No |
 | MNIST VAE Demo | https://transcranial.github.io/keras-js/#/mnist-vae | No |
 | GAN Lab | https://poloclub.github.io/ganlab/ | No |
 
