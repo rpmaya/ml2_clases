@@ -22,7 +22,7 @@ Antes de comenzar, asegúrate de tener acceso a:
 | Herramienta | URL | Requiere Cuenta |
 |-------------|-----|-----------------|
 | This Person Does Not Exist | https://thispersondoesnotexist.com | No |
-| Stable Diffusion Demo | https://huggingface.co/spaces/stabilityai/stable-diffusion-3-medium | No |
+| Stable Diffusion Demo | https://huggingface.co/stabilityai/stable-diffusion-3-medium | No |
 | MNIST VAE Demo | https://transcranial.github.io/keras-js/#/mnist-vae | No |
 | GAN Lab | https://poloclub.github.io/ganlab/ | No |
 
@@ -134,7 +134,7 @@ Desarrollar intuición sobre las capacidades de modelos generativos antes de est
 
 ### Parte B: Generación con Difusión (10 min)
 
-1. Accede a [Stable Diffusion Demo](https://huggingface.co/spaces/stabilityai/stable-diffusion-3-medium)
+1. Accede a [Stable Diffusion Demo](https://huggingface.co/stabilityai/stable-diffusion-3-medium)
 2. Genera imágenes con estos prompts:
 
 ```
@@ -940,7 +940,7 @@ En una GAN, ¿qué ocurre si el Discriminador se vuelve demasiado bueno muy ráp
 
 ## Demos para Seguir Explorando
 - [thispersondoesnotexist.com](https://thispersondoesnotexist.com) - StyleGAN
-- [Stable Diffusion](https://huggingface.co/spaces/stabilityai/stable-diffusion) - Difusión
+- [Stable Diffusion](https://huggingface.co/stabilityai/stable-diffusion-3-medium) - Difusión
 - [GAN Lab](https://poloclub.github.io/ganlab/) - Visualización GAN
 - [MNIST VAE](https://transcranial.github.io/keras-js/#/mnist-vae) - Espacio latente
 
