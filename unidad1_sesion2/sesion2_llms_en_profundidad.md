@@ -317,7 +317,7 @@ Entender cómo RLHF cambia el comportamiento del modelo.
 Compara un modelo "base" (sin RLHF) con uno "instruct/chat" (con RLHF).
 
 Si tienes acceso a Hugging Face, prueba:
-- `meta-llama/Llama-2-7b` (base) vs `meta-llama/Llama-2-7b-chat` (alineado)
+- `meta-llama/Llama-3-2-1B` (base) vs `meta-llama/Llama-3-2-1B-Instruct` (alineado)
 
 O simplemente reflexiona sobre estos ejemplos reales:
 
