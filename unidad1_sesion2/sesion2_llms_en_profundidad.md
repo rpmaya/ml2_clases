@@ -42,7 +42,7 @@ Desde el lanzamiento de ChatGPT en noviembre de 2022, el panorama de los LLMs ha
 ```
 2022           2023              2024              2025
   |              |                 |                 |
-ChatGPT      GPT-4            Claude 3.5        GPT-4.5
+ChatGPT      GPT-4            Claude 3.5        GPT-5
 (Nov)        Claude 2         Gemini 1.5        Claude Opus 4
              LLaMA 1          LLaMA 3           Gemini 2
              PaLM 2           Mixtral           LLaMA 4
@@ -57,7 +57,7 @@ ChatGPT      GPT-4            Claude 3.5        GPT-4.5
 
 | Modelo | Organización | Características Clave |
 |--------|--------------|----------------------|
-| **GPT-4/4.5** | OpenAI | Multimodal, razonamiento avanzado, amplio context window |
+| **GPT-4/5** | OpenAI | Multimodal, razonamiento avanzado, amplio context window |
 | **Claude 3.5/4** | Anthropic | Énfasis en seguridad, context window de 200K+, honestidad |
 | **Gemini** | Google | Integración con Google, multimodal nativo |
 | **Grok** | xAI | Acceso a datos de X (Twitter), tono menos formal |
@@ -105,7 +105,7 @@ Desarrollar intuición sobre las diferencias entre modelos mediante experimentac
 
 ### Instrucciones
 
-Usa el mismo prompt en al menos 2 LLMs diferentes (ChatGPT, Claude, u otros que tengas acceso).
+Usa el mismo prompt en al menos 2 LLMs diferentes (ChatGPT, Claude, Gemini u otros que tengas acceso).
 
 **Prompt de prueba**:
 ```
