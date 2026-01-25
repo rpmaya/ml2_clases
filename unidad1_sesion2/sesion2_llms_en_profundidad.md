@@ -557,9 +557,9 @@ El **número máximo de tokens** que el modelo puede procesar en una sola llamad
 ┌─────────────────────────────────────────────────────────────┐
 │                    CONTEXT WINDOW (ej: 8K)                  │
 ├─────────────────────────────────────────────────────────────┤
-│  [System]  │      [Historial Chat]      │  [Tu mensaje]    │
-│   ~200     │          ~6000             │     ~1800        │
-│  tokens    │         tokens             │    tokens        │
+│  [System]  │      [Historial Chat]      │  [Tu mensaje]     │
+│   ~200     │          ~6000             │     ~1800         │
+│  tokens    │         tokens             │    tokens         │
 └─────────────────────────────────────────────────────────────┘
 ```
 
