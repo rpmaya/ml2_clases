@@ -317,7 +317,8 @@ Entender cómo RLHF cambia el comportamiento del modelo.
 Compara un modelo "base" (sin RLHF) con uno "instruct/chat" (con RLHF).
 
 Si tienes acceso a Hugging Face, prueba:
-- `meta-llama/Llama-3-2-1B` (base) vs `meta-llama/Llama-3-2-1B-Instruct` (alineado)
+- `meta-llama/Llama-2-7b` (base) vs `meta-llama/Llama-2-7b-chat` (alineado)
+
 
 O simplemente reflexiona sobre estos ejemplos reales:
 
@@ -482,12 +483,12 @@ Embedding: [0.12, -0.45, 0.78, ..., 0.33]  ← Vector de ~4096 dimensiones
 ┌──────────────┬─────────────────────────────────────┐
 │   Token ID   │           Embedding Vector          │
 ├──────────────┼─────────────────────────────────────┤
-│      0       │  [0.01, 0.23, -0.15, ..., 0.44]    │
-│      1       │  [0.22, -0.11, 0.67, ..., 0.12]    │
+│      0       │  [0.01, 0.23, -0.15, ..., 0.44]     │
+│      1       │  [0.22, -0.11, 0.67, ..., 0.12]     │
 │     ...      │               ...                   │
-│    23456     │  [0.12, -0.45, 0.78, ..., 0.33]    │ ← "gato"
+│    23456     │  [0.12, -0.45, 0.78, ..., 0.33]     │ ← "gato"
 │     ...      │               ...                   │
-│    100000    │  [0.55, 0.33, -0.22, ..., 0.88]    │
+│    100000    │  [0.55, 0.33, -0.22, ..., 0.88]     │
 └──────────────┴─────────────────────────────────────┘
 ```
 
