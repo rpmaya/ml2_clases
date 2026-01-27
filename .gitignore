@@ -1,4 +1,4 @@
 # Ignorar configuraciones locales de Claude pero mantener skills
-.claude/settings.local.json
+.claude
 CLAUDE.md
 NOTAS*.md
