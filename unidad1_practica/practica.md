@@ -7,7 +7,7 @@
 
 | Campo | Valor |
 |-------|-------|
-| **Nombre** | Analisis Comparativo de Tecnicas Generativas |
+| **Nombre** | Análisis Comparativo de Técnicas Generativas |
 | **Tipo** | Individual |
 | **Duracion estimada** | 90-120 minutos |
 | **Entregable** | Documento PDF (maximo 5 paginas) |
@@ -17,13 +17,13 @@
 
 ## Objetivos de Aprendizaje
 
-Al completar esta practica, el estudiante sera capaz de:
+Al completar esta práctica, el estudiante sera capaz de:
 
 - Distinguir entre modelos generativos y discriminativos en escenarios reales
-- Seleccionar la tecnica generativa apropiada segun requisitos especificos
-- Analizar el ciclo de vida de un LLM y sus implicaciones practicas
-- Evaluar el impacto de los parametros de generacion en la salida de un modelo
-- Reflexionar sobre las limitaciones eticas y tecnicas de la IA generativa
+- Seleccionar la técnica generativa apropiada según requisitos específicos
+- Analizar el ciclo de vida de un LLM y sus implicaciones prácticas
+- Evaluar el impacto de los parámetros de generación en la salida de un modelo
+- Reflexionar sobre las limitaciones éticas y técnicas de la IA generativa
 
 ---
 
