@@ -772,7 +772,7 @@ Desarrollar intuición sobre cómo los parámetros afectan la generación.
 
 ### Experimento
 
-Usa el mismo prompt con diferentes configuraciones. Puedes usar la API de OpenAI o el playground.
+Usa el mismo prompt con diferentes configuraciones. Puedes usar la API de OpenAI o el [playground](https://platform.openai.com/chat/edit?models=gpt-4.1-nano).
 
 **Prompt base**:
 ```
