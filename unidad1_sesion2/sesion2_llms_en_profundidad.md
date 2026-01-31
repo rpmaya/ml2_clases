@@ -923,8 +923,8 @@ Responde sin consultar material.
 ### Pregunta 1
 ¿Cuál es la principal diferencia entre un modelo "base" y uno "instruct/chat"?
 
-- [ ] a) El tamaño del modelo
-- [ ] b) El instruct ha pasado por RLHF/alineamiento
+- [ ] a) El instruct ha pasado por RLHF
+- [ ] b) El tamaño del modelo
 - [ ] c) El base es más reciente
 - [ ] d) El instruct solo funciona en inglés
 
@@ -932,31 +932,31 @@ Responde sin consultar material.
 En tokenización BPE, ¿qué ocurre con palabras muy raras o inventadas?
 
 - [ ] a) El modelo las ignora
-- [ ] b) Se dividen en subpalabras o caracteres
-- [ ] c) Causan un error
+- [ ] b) Causan un error
+- [ ] c) Se dividen en subpalabras
 - [ ] d) Se traducen al inglés
 
 ### Pregunta 3
 Si temperature = 0, ¿qué comportamiento esperas del modelo?
 
 - [ ] a) Máxima creatividad
-- [ ] b) Siempre elige el token más probable (determinista)
+- [ ] b) El modelo no responde
 - [ ] c) Respuestas aleatorias
-- [ ] d) El modelo no responde
+- [ ] d) Siempre elige el token más probable
 
 ### Pregunta 4
 ¿Qué significa "alucinación" en el contexto de LLMs?
 
 - [ ] a) El modelo tiene errores de memoria
-- [ ] b) El modelo genera información falsa con confianza
+- [ ] b) El modelo genera información falsa
 - [ ] c) El modelo se niega a responder
 - [ ] d) El modelo responde muy lento
 
 ### Pregunta 5
 ¿Por qué el español típicamente usa más tokens que el inglés para el mismo contenido?
 
-- [ ] a) El español tiene más palabras
-- [ ] b) Los tokenizadores se entrenan principalmente con inglés
+- [ ] a) Los tokenizadores se entrenan principalmente con inglés
+- [ ] b) El español tiene más palabras
 - [ ] c) El español es más complejo gramaticalmente
 - [ ] d) Los caracteres especiales (ñ, acentos) usan más tokens
 
@@ -965,11 +965,11 @@ Si temperature = 0, ¿qué comportamiento esperas del modelo?
 <details>
 <summary><strong>Ver Respuestas</strong></summary>
 
-1. **b)** - Los modelos instruct/chat han sido alineados con RLHF para seguir instrucciones y ser útiles
-2. **b)** - BPE divide palabras desconocidas en subpalabras conocidas o caracteres
-3. **b)** - Temperature 0 elimina la aleatoriedad, siempre seleccionando el token más probable
+1. **a)** - Los modelos instruct/chat han sido alineados con RLHF para seguir instrucciones y ser útiles
+2. **c)** - BPE divide palabras desconocidas en subpalabras conocidas o caracteres
+3. **d)** - Temperature 0 elimina la aleatoriedad, siempre seleccionando el token más probable
 4. **b)** - Alucinación es cuando el modelo inventa información presentándola como verdadera
-5. **b)** - Los tokenizadores están optimizados para inglés, requiriendo más tokens para otros idiomas
+5. **a)** - Los tokenizadores están optimizados para inglés, requiriendo más tokens para otros idiomas
 
 </details>
 
