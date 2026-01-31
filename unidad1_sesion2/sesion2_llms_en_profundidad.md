@@ -860,9 +860,9 @@ Modelos modernos: Más balanceados pero no perfectos
 
 | Modelo | Knowledge Cutoff |
 |--------|------------------|
-| GPT-4 (original) | Septiembre 2021 |
+| GPT-4 (original) | Septiembre 2023 |
 | GPT-4 Turbo | Abril 2023 |
-| Claude 3 | Principios 2024 |
+| Claude 3 | Principios 2021 |
 
 **Solución**: RAG (Retrieval Augmented Generation) para información actual.
 
