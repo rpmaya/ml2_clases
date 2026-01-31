@@ -897,9 +897,9 @@ Aunque las ventanas crecen, aún tienen límites:
 
 ### Escenarios para Discutir
 
-**Escenario 1**: Un estudiante usa ChatGPT para escribir un ensayo completo.
+**Escenario 1**: Un estudiante usa ChatGPT para escribir un TFG completo.
 - ¿Es plagio?
-- ¿Qué debería hacer el profesor?
+- ¿Qué debería hacer el profesor/tutor?
 - ¿Qué habilidades pierde el estudiante?
 
 **Escenario 2**: Una empresa usa LLMs para filtrar CVs de candidatos.
