@@ -707,8 +707,6 @@ Completa los ejercicios prácticos disponibles en [ejercicios.md](./ejercicios.m
 4. **Diseño de Prompts** - Crear prompts para casos de uso específicos
 5. **Identificación de Anti-patrones** - Detectar y corregir prompts problemáticos
 
-### Práctica Evaluable de la Unidad
-Al finalizar ambas sesiones, completa la [práctica evaluable](../práctica.md) de la Unidad 2.
 
 ---
 
