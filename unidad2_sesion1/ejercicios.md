@@ -1,4 +1,4 @@
-# Ejercicios Prácticos - Unidad 2, Sesión 1
+# Ejercicios Prácticos Tema 3 - Unidad 2, Sesión 1
 ## Fundamentos de Prompt Engineering
 
 ---
