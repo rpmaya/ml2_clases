@@ -486,7 +486,6 @@ nombre,edad,ciudad
 Ana,28,Madrid
 Carlos,35,Barcelona
 '''
-```
 
 Genera una tabla Markdown bien formateada.
 ```
