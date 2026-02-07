@@ -407,10 +407,10 @@ El Prompt Engineering es un proceso iterativo. Raramente el primer prompt es el 
 ┌─────────────────────────────────────────────────────────────┐
 │                    CICLO ITERATIVO                          │
 │                                                             │
-│   ┌──────────┐    ┌──────────┐    ┌──────────┐             │
-│   │  Prompt  │───►│ Probar   │───►│ Evaluar  │             │
-│   │  Inicial │    │ con LLM  │    │ Output   │             │
-│   └──────────┘    └──────────┘    └────┬─────┘             │
+│   ┌──────────┐    ┌──────────┐    ┌──────────┐              │
+│   │  Prompt  │───►│ Probar   │───►│ Evaluar  │              │
+│   │  Inicial │    │ con LLM  │    │ Output   │              │
+│   └──────────┘    └──────────┘    └────┬─────┘              │
 │        ▲                               │                    │
 │        │         ┌──────────┐          │                    │
 │        └─────────│ Refinar  │◄─────────┘                    │
@@ -481,10 +481,11 @@ Responde en formato JSON.
 ```
 Convierte la siguiente tabla CSV a formato Markdown:
 
-```csv
+'''csv
 nombre,edad,ciudad
 Ana,28,Madrid
 Carlos,35,Barcelona
+'''
 ```
 
 Genera una tabla Markdown bien formateada.
