@@ -1,4 +1,4 @@
-# Ejercicios Prácticos - Unidad 2, Sesión 2
+# Ejercicios Prácticos Tema 4 - Unidad 2, Sesión 2
 ## Técnicas Avanzadas y ChatGPT
 
 ---
