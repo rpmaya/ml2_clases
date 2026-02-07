@@ -10,11 +10,9 @@ Al finalizar esta sesión, el estudiante será capaz de:
 - Estructurar outputs para obtener respuestas en formatos específicos
 - Reconocer patrones comunes y anti-patrones en el diseño de prompts
 
-## Duración Total: 4 horas
-
 ---
 
-## Bloque 1: Introducción al Prompt Engineering (45 minutos)
+## Bloque 1: Introducción al Prompt Engineering
 
 ### 1.1 ¿Qué es el Prompt Engineering?
 
@@ -73,7 +71,7 @@ En esta sesión cubriremos los niveles básico e intermedio. La sesión 2 profun
 
 ---
 
-## Bloque 2: Anatomía de un Prompt Efectivo (50 minutos)
+## Bloque 2: Anatomía de un Prompt Efectivo
 
 ### 2.1 Componentes Fundamentales
 
@@ -81,7 +79,7 @@ Un prompt bien estructurado puede incluir los siguientes componentes:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                        PROMPT                                │
+│                        PROMPT                               │
 ├─────────────────────────────────────────────────────────────┤
 │  1. ROL         → ¿Quién debe "ser" el modelo?              │
 │  2. CONTEXTO    → ¿Qué información de fondo necesita?       │
@@ -314,7 +312,7 @@ Para cada punto, usa el formato:
 
 ---
 
-## Bloque 3: Técnicas Básicas de Prompting (60 minutos)
+## Bloque 3: Técnicas Básicas de Prompting 
 
 ### 3.1 Zero-Shot Prompting
 
@@ -526,7 +524,7 @@ Presenta la comparación en una tabla y concluye con una recomendación.
 
 ---
 
-## Bloque 4: Anti-patrones y Errores Comunes (30 minutos)
+## Bloque 4: Anti-patrones y Errores Comunes
 
 ### 4.1 Anti-patrones a Evitar
 
@@ -634,7 +632,7 @@ es mejor que una larga incorrecta."
 
 ---
 
-## Bloque 5: Práctica Guiada (45 minutos)
+## Bloque 5: Práctica Guiada
 
 ### 5.1 Ejercicio en Clase: Mejora Iterativa
 
