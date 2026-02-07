@@ -649,6 +649,70 @@ Prompt inicial:
 3. Añadir restricciones
 4. Añadir rol si es apropiado
 
+<details>
+<summary><strong>Ver solución</strong></summary>
+
+**Iteración 1 — Añadir especificidad:**
+```
+Escribe una función en Python que ordene una lista de números enteros
+de menor a mayor usando el algoritmo de ordenación por inserción
+(insertion sort).
+```
+
+**Iteración 2 — Añadir formato de respuesta:**
+```
+Escribe una función en Python que ordene una lista de números enteros
+de menor a mayor usando el algoritmo de ordenación por inserción.
+
+Estructura tu respuesta así:
+1. Código de la función con type hints
+2. Ejemplo de uso con input y output esperado
+3. Complejidad temporal y espacial (una línea cada una)
+```
+
+**Iteración 3 — Añadir restricciones:**
+```
+Escribe una función en Python que ordene una lista de números enteros
+de menor a mayor usando el algoritmo de ordenación por inserción.
+
+Restricciones:
+- No uses funciones built-in de ordenación (sorted, .sort())
+- La función debe modificar la lista in-place y retornarla
+- Incluye validación para lista vacía
+- Usa type hints
+
+Estructura tu respuesta así:
+1. Código de la función
+2. Ejemplo de uso con input y output esperado
+3. Complejidad temporal y espacial (una línea cada una)
+```
+
+**Iteración 4 — Añadir rol (versión final):**
+```
+Actúa como un profesor de algoritmos explicando a estudiantes
+de segundo año de ingeniería.
+
+Escribe una función en Python que ordene una lista de números enteros
+de menor a mayor usando el algoritmo de ordenación por inserción.
+
+Restricciones:
+- No uses funciones built-in de ordenación (sorted, .sort())
+- La función debe modificar la lista in-place y retornarla
+- Incluye validación para lista vacía
+- Usa type hints
+- Añade comentarios explicando cada paso del algoritmo
+
+Estructura tu respuesta así:
+1. Breve explicación de cómo funciona insertion sort (2-3 líneas)
+2. Código de la función comentado
+3. Ejemplo de uso con input y output esperado
+4. Complejidad temporal y espacial (una línea cada una)
+```
+
+**Observación:** Cada iteración añade más precisión sin sobrecargar el prompt. El resultado final es un prompt que produce una respuesta educativa, estructurada y completa.
+
+</details>
+
 ### 5.2 Ejercicio: Diseño de Prompt para Caso Real
 
 Diseña un prompt para:
@@ -660,6 +724,69 @@ Incluir:
 - Contexto del sistema
 - Formato de salida (campos del ticket)
 - Manejo de información faltante
+
+<details>
+<summary><strong>Ver solución</strong></summary>
+
+```
+Eres un ingeniero de QA senior con experiencia en gestión de incidencias
+y triaje de bugs. Tu tarea es convertir descripciones informales de
+usuarios en tickets estructurados para el equipo de desarrollo.
+
+<contexto>
+Trabajas para una empresa SaaS de gestión de proyectos. Los usuarios
+reportan problemas a través de un chat de soporte y sus descripciones
+suelen ser informales, incompletas y a veces confusas. Tu trabajo es
+interpretar el reporte y generar un ticket claro y accionable.
+</contexto>
+
+<formato_salida>
+Genera el ticket con EXACTAMENTE estos campos en formato Markdown:
+
+## [TÍTULO BREVE Y DESCRIPTIVO]
+
+- **ID**: BUG-[número aleatorio de 4 dígitos]
+- **Severidad**: Crítica | Alta | Media | Baja
+- **Componente**: [módulo o área de la aplicación afectada]
+- **Entorno**: [navegador, SO, dispositivo si se menciona]
+- **Descripción**: [resumen claro del problema en 2-3 oraciones]
+- **Pasos para reproducir**:
+  1. [paso 1]
+  2. [paso 2]
+  ...
+- **Comportamiento esperado**: [qué debería ocurrir]
+- **Comportamiento actual**: [qué ocurre realmente]
+- **Información adicional**: [capturas, logs, frecuencia, etc.]
+</formato_salida>
+
+<reglas>
+- Si el usuario no proporciona información para un campo, indica
+  "[Pendiente - solicitar al usuario]" en lugar de inventar datos.
+- Infiere la severidad según el impacto:
+  · Crítica: la aplicación no funciona o hay pérdida de datos
+  · Alta: funcionalidad principal bloqueada, sin workaround
+  · Media: funcionalidad afectada pero con workaround disponible
+  · Baja: problema cosmético o de menor impacto
+- Si la descripción es ambigua, añade una sección "**Preguntas de
+  clarificación**" al final con las preguntas necesarias.
+- No inventes pasos de reproducción que el usuario no haya mencionado.
+</reglas>
+
+Descripción del usuario:
+"""
+[AQUÍ SE INSERTA LA DESCRIPCIÓN DEL USUARIO]
+"""
+```
+
+**Ejemplo de uso** — Si el usuario escribe:
+
+> "Oigan, cuando intento exportar mi informe a PDF se queda cargando
+> para siempre y nunca termina. Uso Chrome. Ya intenté varias veces
+> y nada."
+
+El prompt generaría un ticket estructurado con severidad Alta, componente "Exportación/Informes", pasos de reproducción inferidos del relato, y marcaría como `[Pendiente - solicitar al usuario]` campos como el SO o la versión del navegador.
+
+</details>
 
 ---
 
