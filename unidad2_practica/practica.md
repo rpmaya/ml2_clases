@@ -10,7 +10,7 @@
 | **Unidad** | 2 - Prompt Engineering y Uso Avanzado de ChatGPT |
 | **Tipo** | Práctica individual |
 | **Duración estimada** | 90 minutos |
-| **Entrega** | PDF de 2-3 páginas |
+| **Entrega** | PDF de 2-3 páginas o Markdown a partir de éste |
 | **Fecha límite** | Según calendario del curso |
 
 ---
