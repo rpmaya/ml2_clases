@@ -3,3 +3,6 @@
 .claude
 CLAUDE.md
 NOTAS*.md
+
+# API keys
+.env
