@@ -303,7 +303,7 @@ def sumar(a, b):
 ```
 
 ### Requisitos Técnicos
-- Formato: PDF
+- Formato: PDF o Markdown
 - Extensión: 2-3 páginas (máximo 4)
 - Incluir capturas de pantalla cuando sea relevante
 - Código y prompts en bloques formateados
