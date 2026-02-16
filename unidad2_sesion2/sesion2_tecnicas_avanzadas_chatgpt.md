@@ -521,47 +521,78 @@ def safe_chat(messages, retries=3):
 
 ---
 
-## Bloque 4: Comparativa de LLMs 
+## Bloque 4: Comparativa de LLMs (Actualizado Feb 2026)
 
 ### 4.1 Principales Modelos para Chat
 
-| Modelo | Proveedor | Fortalezas | Debilidades |
-|--------|-----------|------------|-------------|
-| GPT-4 | OpenAI | Versátil, ecosistema maduro | Coste elevado |
-| GPT-3.5-turbo | OpenAI | Rápido, economico | Menos capaz que GPT-4 |
-| Claude 3 Opus | Anthropic | Context largo, seguro | Coste similar a GPT-4 |
-| Claude 3 Sonnet | Anthropic | Balance calidad/coste | - |
-| Gemini Pro | Google | Multimodal, rápido | Menos maduro |
-| LLaMA 3 | Meta | Open source, privacidad | Requiere infraestructura |
-| Mistral | Mistral AI | Eficiente, open source | Menos capaz que lideres |
+#### Modelos Premium (máxima calidad)
+
+| Modelo | Proveedor | Context Window | Fortalezas | Debilidades |
+|--------|-----------|---------------|------------|-------------|
+| GPT-4.1 | OpenAI | 1M tokens | Versátil, mejor seguimiento de instrucciones | Coste medio-alto |
+| Claude Opus 4 | Anthropic | 200K tokens | Excelente en código y razonamiento | El más caro |
+| Claude Sonnet 4 | Anthropic | 200K (1M en beta) | Balance calidad/coste, coding fuerte | Context extendido solo en tiers altos |
+| Gemini 2.5 Pro | Google | 1M tokens | Multimodal nativo, contexto largo | Ecosistema menos maduro que OpenAI |
+
+#### Modelos Eficientes (mejor relación calidad/precio)
+
+| Modelo | Proveedor | Context Window | Fortalezas | Debilidades |
+|--------|-----------|---------------|------------|-------------|
+| GPT-4.1-mini | OpenAI | 1M tokens | Rápido, muy capaz para su precio | Menos capaz que GPT-4.1 |
+| GPT-4.1-nano | OpenAI | 1M tokens | Ultra-barato, ideal para tareas simples | Capacidad limitada |
+| Gemini 2.5 Flash | Google | 1M tokens | Muy rápido, barato, multimodal | Menos capaz que 2.5 Pro |
+| DeepSeek V3 | DeepSeek | 128K tokens | Extremadamente barato, buen rendimiento | Latencia variable, servidores en China |
+
+#### Modelos Open Source (ejecución local)
+
+| Modelo | Proveedor | Context Window | Fortalezas | Debilidades |
+|--------|-----------|---------------|------------|-------------|
+| Llama 4 Scout | Meta | 10M tokens | Open source, contexto masivo, cabe en 1 GPU | Requiere infraestructura propia |
+| Llama 4 Maverick | Meta | 1M tokens | 128 expertos, multimodal | Requiere más recursos que Scout |
+| Mistral Medium | Mistral AI | 128K tokens | Eficiente, buen rendimiento en europeo | Menos capaz que líderes |
 
 ### 4.2 Factores de Selección
 
 #### Calidad de Respuesta
 - ¿Cuál produce mejores resultados para tu caso de uso?
 - Siempre probar con ejemplos reales
+- Los benchmarks sirven de guía, pero tu caso de uso es lo que importa
 
-#### Coste
+#### Coste (por 1M tokens: input / output)
 ```
-Ejemplo (por 1M tokens input / 1M output):
-- GPT-4:      $30 / $60
-- GPT-3.5:    $0.50 / $1.50
-- Claude 3 Opus: $15 / $75
-- Claude 3 Sonnet: $3 / $15
+Premium:
+  GPT-4.1:           $2.00  / $8.00
+  Claude Opus 4:     $15.00 / $75.00
+  Claude Sonnet 4:   $3.00  / $15.00
+  Gemini 2.5 Pro:    $1.25  / $10.00
+
+Eficientes:
+  GPT-4.1-mini:      $0.40  / $1.60
+  GPT-4.1-nano:      $0.10  / $0.40
+  Gemini 2.5 Flash:  $0.15  / $0.60
+  DeepSeek V3:       $0.28  / $0.42
+
+Open Source (coste = tu infraestructura):
+  Llama 4 / Mistral: Solo coste de GPU (o gratis vía providers)
 ```
 
 #### Latencia
-- GPT-3.5 y Claude Haiku: Más rápidos
-- GPT-4 y Claude Opus: Más lentos
+- Más rápidos: GPT-4.1-nano, Gemini Flash, DeepSeek V3
+- Balance: GPT-4.1-mini, Claude Sonnet
+- Más lentos: Claude Opus, GPT-4.1 (con contextos largos)
 
 #### Context Window
-- Claude: 200K tokens
-- GPT-4: 128K tokens
-- GPT-3.5: 16K tokens
+```
+10M tokens:  Llama 4 Scout (open source)
+ 1M tokens:  GPT-4.1, GPT-4.1-mini/nano, Gemini 2.5 Pro/Flash, Llama 4 Maverick
+200K tokens: Claude Opus 4, Claude Sonnet 4 (1M en beta)
+128K tokens: DeepSeek V3, Mistral Medium
+```
 
 #### Privacidad
-- APIs: Datos enviados a terceros
-- Open source local: Control total
+- APIs comerciales: Datos enviados a terceros (OpenAI, Anthropic, Google)
+- Open source local: Control total (Llama, Mistral)
+- DeepSeek: Servidores en China → considerar regulación de datos
 
 ### 4.3 Estrategia de Selección
 
@@ -569,18 +600,21 @@ Ejemplo (por 1M tokens input / 1M output):
                     ¿Necesitas máxima calidad?
                            │
               ┌────────────┴────────────┐
-              │ SI                      │ NO
+              │ SÍ                      │ NO
               ▼                         ▼
-         GPT-4 / Claude Opus    ¿Sensible a coste?
-                                       │
+     GPT-4.1 / Claude Sonnet 4   ¿Sensible a coste?
+     / Gemini 2.5 Pro                  │
                           ┌────────────┴────────────┐
-                          │ SI                      │ NO
+                          │ SÍ                      │ NO
                           ▼                         ▼
-                    GPT-3.5 / Mistral         GPT-4 (más versátil)
+                  GPT-4.1-mini /            GPT-4.1 (más versátil)
+                  Gemini Flash /
+                  DeepSeek V3
 
-¿Necesitas privacidad total? → LLaMA / Mistral local
-¿Contexto muy largo? → Claude 3
-¿Multimodal (imágenes)? → GPT-4V / Gemini
+¿Necesitas privacidad total? → Llama 4 / Mistral local
+¿Contexto muy largo (>200K)? → GPT-4.1, Gemini 2.5 Pro, Llama 4 Scout
+¿Multimodal (imágenes)?      → Gemini 2.5, GPT-4.1, Llama 4
+¿Presupuesto mínimo?         → GPT-4.1-nano, Gemini Flash, DeepSeek V3
 ```
 
 ### 4.4 Comparativa Práctica
@@ -592,6 +626,8 @@ Para evaluar modelos en tu caso de uso:
 3. **Ejecuta en cada modelo**: Mismo prompt exacto
 4. **Evalúa**: Manual o automática
 5. **Considera coste/beneficio**: A veces 80% calidad a 10% coste vale la pena
+
+> **Nota**: Los precios y modelos cambian constantemente. Consulta las páginas oficiales de pricing de cada proveedor para datos actualizados.
 
 ---
 
