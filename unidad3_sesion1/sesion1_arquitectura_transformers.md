@@ -12,7 +12,7 @@ Al finalizar esta sesión, el estudiante será capaz de:
 
 ---
 
-## Bloque 1: Recapitulación y Contexto (45 minutos)
+## Bloque 1: Recapitulación y Contexto
 
 ### 1.1 Conexión con las Unidades Anteriores
 
@@ -88,7 +88,7 @@ Esta unidad tiene cuatro objetivos principales:
 │  ├──────────────┤                   │    + Add&Norm│         │
 │  │ Feed-Forward │                   ├──────────────┤         │
 │  │    + Add&Norm│                   │ Cross        │         │
-│  └──────┬───────┘ × N              │ Attention    │          │
+│  └──────┬───────┘ × N               │ Attention    │         │
 │         │                           │    + Add&Norm│         │
 │  ┌──────┴───────┐                   ├──────────────┤         │
 │  │ Positional   │                   │ Feed-Forward │         │
@@ -106,7 +106,7 @@ Esta unidad tiene cuatro objetivos principales:
 
 ---
 
-## Bloque 2: Self-Attention y Multi-Head Attention (50 minutos)
+## Bloque 2: Self-Attention y Multi-Head Attention
 
 ### 2.1 El Mecanismo de Self-Attention en Detalle
 
@@ -337,7 +337,7 @@ Herramientas como **BertViz** permiten visualizar estos mapas de atención de fo
 
 ---
 
-## Bloque 3: FFN, Conexiones Residuales y Layer Normalization (45 minutos)
+## Bloque 3: FFN, Conexiones Residuales y Layer Normalization
 
 ### 3.1 Multi-Head Attention
 
@@ -618,7 +618,7 @@ def decoder_block(x, encoder_output):
 
 ---
 
-## Bloque 4: Masked Attention y Tipos de Arquitectura (40 minutos)
+## Bloque 4: Masked Attention y Tipos de Arquitectura
 
 ### 4.1 Masked Self-Attention (Atención Enmascarada)
 
@@ -822,7 +822,7 @@ En la actualidad, la mayoría de los modelos de lenguaje más potentes son decod
 
 ---
 
-## Bloque 5: Ejercicio Práctico Guiado (45 minutos)
+## Bloque 5: Ejercicio Práctico Guiado
 
 ### 5.1 Referencia a Ejercicios
 
