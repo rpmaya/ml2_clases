@@ -363,16 +363,16 @@ donde:
 | ... | ... | ... |
 
 ```
-┌──────────────────────────────────────────────────────────────┐
+┌────────────────────────────────────────────────────────────────┐
 │                  MULTI-HEAD ATTENTION                          │
 │                                                                │
-│   Input ──┬──► Cabeza 1 (sintáctica)    ──┐                   │
+│   Input ──┬──► Cabeza 1 (sintáctica)    ───┐                   │
 │           ├──► Cabeza 2 (correferencia)  ──┤                   │
 │           ├──► Cabeza 3 (semántica)      ──┼──► Concat ──► W_O ──► Output│
 │           ├──► Cabeza 4 (largo alcance)  ──┤                   │
 │           └──► ...                       ──┘                   │
 │                                                                │
-└──────────────────────────────────────────────────────────────┘
+└────────────────────────────────────────────────────────────────┘
 ```
 
 #### Eficiencia: División de Dimensiones
@@ -406,14 +406,14 @@ FFN(x) = GELU(x × W_1 + b_1) × W_2 + b_2
 La red feed-forward expande la dimensionalidad por un factor de 4 y luego la comprime de vuelta:
 
 ```
-┌──────────────────────────────────────────────────────────────┐
+┌────────────────────────────────────────────────────────────────┐
 │                    FEED-FORWARD NETWORK                        │
 │                                                                │
 │   Input (768) ──► Expansión (3072) ──► GELU ──► Compresión (768) ──► Output│
-│                    W_1: 768×3072         │        W_2: 3072×768          │
-│                                     Activación                          │
-│                                     no lineal                           │
-└──────────────────────────────────────────────────────────────┘
+│                    W_1: 768×3072         │        W_2: 3072×768│
+│                                     Activación                 │
+│                                     no lineal                  │
+└────────────────────────────────────────────────────────────────┘
 ```
 
 | Componente | Dimensiones | Descripción |
