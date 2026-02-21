@@ -21,7 +21,7 @@ A lo largo de las primeras dos unidades hemos construido una base sólida:
 ```
 RECORRIDO DEL CURSO:
 
-Unidad 1: Fundamentos de ML y Deep Learning
+Unidad 1 (y Aprendizaje Automático I): Deep Learning e IA Generativa
 ├── Redes neuronales, backpropagation
 ├── CNNs, RNNs, LSTMs
 └── Limitaciones de las arquitecturas secuenciales
@@ -40,7 +40,7 @@ Unidad 3: Arquitectura Transformer en Profundidad  ← ESTAMOS AQUÍ
 
 ### 1.2 De los Modelos Generativos a los Transformers
 
-Las arquitecturas previas (RNNs, LSTMs, GRUs) presentaban limitaciones fundamentales:
+Las arquitecturas previas (RNNs, LSTMs, ...) presentaban limitaciones fundamentales:
 
 | Limitación | RNN/LSTM | Transformer |
 |------------|----------|-------------|
@@ -52,14 +52,14 @@ Las arquitecturas previas (RNNs, LSTMs, GRUs) presentaban limitaciones fundament
 En 2017, el paper **"Attention Is All You Need"** (Vaswani et al.) introdujo la arquitectura Transformer, eliminando por completo la recurrencia y las convoluciones, reemplazándolas por mecanismos de **atención**.
 
 ```
-┌──────────────────────────────────────────────────────────┐
+┌────────────────────────────────────────────────────────────┐
 │                  EVOLUCIÓN DE ARQUITECTURAS                │
 │                                                            │
-│  RNN (1986) → LSTM (1997) → Attention (2014) → Transformer│
-│       │            │              │                  │      │
-│    Secuencial  Compuertas    Atención como      Solo        │
-│    simple      de memoria    complemento        atención    │
-└──────────────────────────────────────────────────────────┘
+│  RNN (1986) → LSTM (1997) → Attention (2014) → Transformer │
+│       │            │              │                  │     │
+│    Secuencial  Compuertas    Atención como      Solo       │
+│    simple      de memoria    complemento        atención   │
+└────────────────────────────────────────────────────────────┘
 ```
 
 ### 1.3 Objetivos de esta Unidad
