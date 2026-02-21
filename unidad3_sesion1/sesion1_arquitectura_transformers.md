@@ -631,16 +631,16 @@ Oración: "El gato come pescado"
 
 Sin máscara (encoder - bidireccional):
         El  gato  come  pescado
-El    [ ✓    ✓     ✓      ✓  ]    ← "El" ve todos los tokens
-gato  [ ✓    ✓     ✓      ✓  ]
-come  [ ✓    ✓     ✓      ✓  ]
+El     [ ✓    ✓     ✓      ✓  ]    ← "El" ve todos los tokens
+gato   [ ✓    ✓     ✓      ✓  ]
+come   [ ✓    ✓     ✓      ✓  ]
 pescado[ ✓    ✓     ✓      ✓  ]
 
 Con máscara causal (decoder - unidireccional):
         El  gato  come  pescado
-El    [ ✓    ✗     ✗      ✗  ]    ← "El" solo se ve a sí mismo
-gato  [ ✓    ✓     ✗      ✗  ]    ← "gato" ve "El" y a sí mismo
-come  [ ✓    ✓     ✓      ✗  ]    ← "come" ve los 3 anteriores
+El     [ ✓    ✗     ✗      ✗  ]    ← "El" solo se ve a sí mismo
+gato   [ ✓    ✓     ✗      ✗  ]    ← "gato" ve "El" y a sí mismo
+come   [ ✓    ✓     ✓      ✗  ]    ← "come" ve los 3 anteriores
 pescado[ ✓    ✓     ✓      ✓  ]    ← "pescado" ve todo lo anterior
 ```
 
