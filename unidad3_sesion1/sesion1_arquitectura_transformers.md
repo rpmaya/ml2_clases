@@ -78,29 +78,29 @@ Esta unidad tiene cuatro objetivos principales:
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│                   ARQUITECTURA TRANSFORMER                     │
-│                                                                │
-│    ENCODER                              DECODER                │
-│  ┌──────────────┐                   ┌──────────────┐           │
-│  │ Multi-Head   │                   │ Masked       │           │
-│  │ Attention    │                   │ Multi-Head   │           │
-│  │    + Add&Norm│                   │ Attention    │           │
-│  ├──────────────┤                   │    + Add&Norm│           │
-│  │ Feed-Forward │                   ├──────────────┤           │
-│  │    + Add&Norm│                   │ Cross        │           │
-│  └──────┬───────┘ × N              │ Attention    │           │
-│         │                           │    + Add&Norm│           │
-│  ┌──────┴───────┐                   ├──────────────┤           │
-│  │ Positional   │                   │ Feed-Forward │           │
-│  │ Encoding     │                   │    + Add&Norm│           │
-│  ├──────────────┤                   └──────┬───────┘ × N      │
-│  │ Input        │                   ┌──────┴───────┐           │
-│  │ Embedding    │                   │ Positional   │           │
-│  └──────────────┘                   │ Encoding     │           │
-│                                     ├──────────────┤           │
-│                                     │ Output       │           │
-│                                     │ Embedding    │           │
-│                                     └──────────────┘           │
+│                   ARQUITECTURA TRANSFORMER                   │
+│                                                              │
+│    ENCODER                              DECODER              │
+│  ┌──────────────┐                   ┌──────────────┐         │
+│  │ Multi-Head   │                   │ Masked       │         │
+│  │ Attention    │                   │ Multi-Head   │         │
+│  │    + Add&Norm│                   │ Attention    │         │
+│  ├──────────────┤                   │    + Add&Norm│         │
+│  │ Feed-Forward │                   ├──────────────┤         │
+│  │    + Add&Norm│                   │ Cross        │         │
+│  └──────┬───────┘ × N              │ Attention    │          │
+│         │                           │    + Add&Norm│         │
+│  ┌──────┴───────┐                   ├──────────────┤         │
+│  │ Positional   │                   │ Feed-Forward │         │
+│  │ Encoding     │                   │    + Add&Norm│         │
+│  ├──────────────┤                   └──────┬───────┘ × N     │
+│  │ Input        │                   ┌──────┴───────┐         │
+│  │ Embedding    │                   │ Positional   │         │
+│  └──────────────┘                   │ Encoding     │         │
+│                                     ├──────────────┤         │
+│                                     │ Output       │         │
+│                                     │ Embedding    │         │
+│                                     └──────────────┘         │
 └──────────────────────────────────────────────────────────────┘
 ```
 
