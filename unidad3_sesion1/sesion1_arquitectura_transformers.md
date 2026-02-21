@@ -694,24 +694,24 @@ A partir de la arquitectura Transformer original, se han desarrollado tres varia
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│               TIPOS DE ARQUITECTURA TRANSFORMER               │
-│                                                               │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────────┐    │
-│  │   ENCODER    │  │   DECODER    │  │ ENCODER-DECODER  │    │
-│  │    ONLY      │  │    ONLY      │  │                  │    │
-│  │              │  │              │  │  ┌─────┐ ┌─────┐ │    │
-│  │  ┌────────┐  │  │  ┌────────┐  │  │  │ ENC │→│ DEC │ │    │
-│  │  │ Encoder│  │  │  │Decoder │  │  │  └─────┘ └─────┘ │    │
-│  │  │ Blocks │  │  │  │ Blocks │  │  │                  │    │
-│  │  └────────┘  │  │  └────────┘  │  │                  │    │
-│  │              │  │              │  │                  │    │
-│  │ Bidireccional│  │  Causal      │  │  Seq-to-Seq     │    │
-│  │              │  │  (izq→der)   │  │                  │    │
-│  └──────────────┘  └──────────────┘  └──────────────────┘    │
-│                                                               │
+│               TIPOS DE ARQUITECTURA TRANSFORMER             │
+│                                                             │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────────┐   │
+│  │   ENCODER    │  │   DECODER    │  │ ENCODER-DECODER  │   │
+│  │    ONLY      │  │    ONLY      │  │                  │   │
+│  │              │  │              │  │  ┌─────┐ ┌─────┐ │   │
+│  │  ┌────────┐  │  │  ┌────────┐  │  │  │ ENC │→│ DEC │ │   │
+│  │  │ Encoder│  │  │  │Decoder │  │  │  └─────┘ └─────┘ │   │
+│  │  │ Blocks │  │  │  │ Blocks │  │  │                  │   │
+│  │  └────────┘  │  │  └────────┘  │  │                  │   │
+│  │              │  │              │  │                  │   │
+│  │ Bidireccional│  │  Causal      │  │  Seq-to-Seq      │   │
+│  │              │  │  (izq→der)   │  │                  │   │
+│  └──────────────┘  └──────────────┘  └──────────────────┘   │
+│                                                             │
 │  BERT, RoBERTa     GPT, Claude       T5, BART               │
-│  ALBERT            LLaMA, Mistral    mT5                     │
-│                    Gemini                                     │
+│  ALBERT            LLaMA, Mistral    mT5                    │
+│                    Gemini                                   │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -802,21 +802,21 @@ En la actualidad, la mayoría de los modelos de lenguaje más potentes son decod
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│            ¿POR QUÉ DECODER-ONLY DOMINA?                      │
-│                                                                │
-│   Escala                                                       │
-│     ▲                                                          │
-│     │           ★ GPT-4, Claude, Gemini                        │
-│     │         ★ LLaMA 3                                        │
-│     │       ★ Mistral                                          │
-│     │                                                          │
-│     │   Una arquitectura simple                                │
-│     │   + Un objetivo simple (next token)                      │
-│     │   + Datos masivos                                        │
-│     │   = Capacidades emergentes extraordinarias               │
-│     │                                                          │
-│     └──────────────────────────────────────────────► Tiempo    │
-│         2017   2018   2019   2020   2021   2022   2023+        │
+│            ¿POR QUÉ DECODER-ONLY DOMINA?                     │
+│                                                              │
+│   Escala                                                     │
+│     ▲                                                        │
+│     │           ★ GPT-4, Claude, Gemini                      │
+│     │         ★ LLaMA 3                                      │
+│     │       ★ Mistral                                        │
+│     │                                                        │
+│     │   Una arquitectura simple                              │
+│     │   + Un objetivo simple (next token)                    │
+│     │   + Datos masivos                                      │
+│     │   = Capacidades emergentes extraordinarias             │
+│     │                                                        │
+│     └──────────────────────────────────────────────► Tiempo  │
+│         2017   2018   2019   2020   2021   2022   2023+      │
 └──────────────────────────────────────────────────────────────┘
 ```
 
@@ -826,7 +826,7 @@ En la actualidad, la mayoría de los modelos de lenguaje más potentes son decod
 
 ### 5.1 Referencia a Ejercicios
 
-Los ejercicios completos y detallados de esta sesión están disponibles en [ejercicios.md](./ejercicios.md). A continuación se presentan los ejercicios guiados que realizaremos en clase.
+A continuación se presentan los ejercicios guiados que realizaremos en clase.
 
 ### 5.2 Ejercicio 1: Cálculo Manual de Self-Attention
 
@@ -952,10 +952,6 @@ Completa los ejercicios prácticos disponibles en [ejercicios.md](./ejercicios.m
 3. **Interpretación de mapas de atención** - Analizar y explicar patrones de atención
 4. **Implementación de componentes** - Codificar atención, FFN y normalización
 5. **Comparación Multi-Head vs Single-Head** - Evaluar el impacto de múltiples cabezas
-
-### Práctica Evaluable de la Unidad
-
-Al finalizar ambas sesiones, completa la [práctica evaluable](./practica.md) de la Unidad 3.
 
 ---
 
