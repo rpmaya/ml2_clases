@@ -448,7 +448,7 @@ output = sublayer(input) + input
 Es decir, la salida de cada subcapa se **suma** con su entrada original.
 
 ```
-┌──────────────────────────────────────────────────────────────┐
+┌────────────────────────────────────────────────────────────────┐
 │                  CONEXIÓN RESIDUAL                             │
 │                                                                │
 │   input ──────────────────────────────┐                        │
@@ -464,7 +464,7 @@ Es decir, la salida de cada subcapa se **suma** con su entrada original.
 │                       │                                        │
 │                       ▼                                        │
 │                    output                                      │
-└──────────────────────────────────────────────────────────────┘
+└────────────────────────────────────────────────────────────────┘
 ```
 
 #### ¿Por qué son importantes?
@@ -509,7 +509,7 @@ output = LayerNorm(x + sublayer(x))
 Este patrón combina las conexiones residuales con la normalización:
 
 ```
-┌──────────────────────────────────────────────────────────────┐
+┌────────────────────────────────────────────────────────────────┐
 │                   BLOQUE ADD & NORM                            │
 │                                                                │
 │   input ──────────────────┐                                    │
@@ -528,7 +528,7 @@ Este patrón combina las conexiones residuales con la normalización:
 │               │                                                │
 │               ▼                                                │
 │            output                                              │
-└──────────────────────────────────────────────────────────────┘
+└────────────────────────────────────────────────────────────────┘
 ```
 
 ### 3.6 Bloque Transformer Completo
@@ -536,7 +536,7 @@ Este patrón combina las conexiones residuales con la normalización:
 Combinando todos los componentes, un bloque completo del Transformer tiene esta estructura:
 
 ```
-┌──────────────────────────────────────────────────────────────┐
+┌────────────────────────────────────────────────────────────────┐
 │              BLOQUE TRANSFORMER (ENCODER)                      │
 │                                                                │
 │   Input                                                        │
@@ -544,7 +544,7 @@ Combinando todos los componentes, un bloque completo del Transformer tiene esta 
 │     ├─────────────────────────┐                                │
 │     ▼                         │                                │
 │  ┌──────────────────────┐     │                                │
-│  │  Multi-Head Attention │     │  (residual)                   │
+│  │  Multi-Head Attention│     │  (residual)                    │
 │  └──────────┬───────────┘     │                                │
 │             │                 │                                │
 │             └──── ADD ◄───────┘                                │
@@ -557,19 +557,19 @@ Combinando todos los componentes, un bloque completo del Transformer tiene esta 
 │                   ├─────────────────────────┐                  │
 │                   ▼                         │                  │
 │            ┌──────────────┐                 │                  │
-│            │  Feed-Forward │                 │  (residual)     │
+│            │  Feed-Forward│                 │  (residual)      │
 │            └──────┬───────┘                 │                  │
 │                   │                         │                  │
 │                   └──── ADD ◄───────────────┘                  │
 │                         │                                      │
 │                         ▼                                      │
-│                  ┌──────────────┐                               │
-│                  │  LayerNorm   │                               │
-│                  └──────┬───────┘                               │
+│                  ┌──────────────┐                              │
+│                  │  LayerNorm   │                              │
+│                  └──────┬───────┘                              │
 │                         │                                      │
 │                         ▼                                      │
 │                      Output                                    │
-└──────────────────────────────────────────────────────────────┘
+└────────────────────────────────────────────────────────────────┘
 ```
 
 ### 3.7 Pseudocódigo: Encoder Block y Decoder Block
