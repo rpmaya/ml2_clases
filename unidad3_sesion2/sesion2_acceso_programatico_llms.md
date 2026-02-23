@@ -879,15 +879,15 @@ print(message.content[0].text)
 ARQUITECTURA DE UN API GATEWAY:
 
 ┌──────────────────────────────────────────────────────────────┐
-│                       TU APLICACIÓN                           │
-│              client = OpenAI(base_url=openrouter)             │
+│                       TU APLICACIÓN                          │
+│              client = OpenAI(base_url=openrouter)            │
 └───────────────────────────┬──────────────────────────────────┘
                             │ Una sola API Key
                             ▼
 ┌──────────────────────────────────────────────────────────────┐
-│                     OPENROUTER (Gateway)                       │
+│                     OPENROUTER (Gateway)                     │
 │   ┌─────────────┬──────────────┬──────────────────────────┐  │
-│   │  Routing     │  Rate Limit  │  Modelos Gratuitos (:free)│  │
+│   │  Routing     │  Rate Limit  │  Modelos Gratuitos (:free)││
 │   └─────────────┴──────────────┴──────────────────────────┘  │
 └───────┬──────────────────┬─────────────────────┬─────────────┘
         │                  │                     │
@@ -1224,24 +1224,24 @@ print(json.dumps(resultado, indent=2, ensure_ascii=False))
 FLUJO DE FUNCTION CALLING:
 
 ┌──────────┐     ┌──────────────┐     ┌──────────────────┐
-│ Usuario  │────►│   Modelo     │────►│ Decide usar tool  │
-│ "¿Qué   │     │  (LLM)       │     │ get_weather(      │
-│ tiempo   │     │              │     │   city="Madrid")  │
+│ Usuario  │────►│   Modelo     │────►│ Decide usar tool │
+│ "¿Qué    │     │  (LLM)       │     │ get_weather(     │
+│ tiempo   │     │              │     │   city="Madrid") │
 │ hace en  │     └──────────────┘     └────────┬─────────┘
 │ Madrid?" │                                    │
 └──────────┘                                    ▼
                                       ┌──────────────────┐
                   ┌───────────────┐   │  Tu aplicación   │
                   │ Respuesta     │◄──│  ejecuta la      │
-                  │ final al      │   │  función real     │
-                  │ usuario       │   │  → {"temp": 22}   │
+                  │ final al      │   │  función real    │
+                  │ usuario       │   │  → {"temp": 22}  │
                   └───────┬───────┘   └──────────────────┘
                           │                     │
                           ▼                     ▼
                   ┌───────────────┐   ┌──────────────────┐
-                  │   Modelo      │◄──│ Resultado enviado │
-                  │ genera resp.  │   │ de vuelta al      │
-                  │ en lenguaje   │   │ modelo             │
+                  │   Modelo      │◄──│ Resultado enviado│
+                  │ genera resp.  │   │ de vuelta al     │
+                  │ en lenguaje   │   │ modelo           │
                   │ natural       │   └──────────────────┘
                   └───────────────┘
 ```
@@ -1718,7 +1718,7 @@ Unidad 6 (MCP):      Model Context Protocol
 
 ## Conexión con la Práctica
 
-La práctica evaluable de esta sesión está disponible en [practica.md](../practica.md).
+La práctica evaluable de esta sesión está disponible en [practica.md](../unidad3_practica/practica.md).
 
 **Proyecto**: Generador de Titulares con Miniature GPT - Aplicarás los conceptos de acceso programático a LLMs para construir una aplicación que genere titulares de noticias, integrando las APIs estudiadas en esta sesión con patrones de diseño de producción.
 
