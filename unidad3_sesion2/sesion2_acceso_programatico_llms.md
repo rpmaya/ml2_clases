@@ -74,14 +74,14 @@ Body (JSON):
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                  PETICIÓN HTTP                           │
+│                  PETICIÓN HTTP                          │
 ├─────────────────────────────────────────────────────────┤
 │  MÉTODO:   POST (siempre para generación)               │
 │  URL:      Endpoint del proveedor                       │
 │  HEADERS:  Authorization + Content-Type                 │
 │  BODY:     Modelo + Mensajes + Parámetros               │
 ├─────────────────────────────────────────────────────────┤
-│                  RESPUESTA HTTP                          │
+│                  RESPUESTA HTTP                         │
 ├─────────────────────────────────────────────────────────┤
 │  STATUS:   200 OK / 4xx Error cliente / 5xx Error srv   │
 │  BODY:     JSON con respuesta, uso de tokens, metadata  │
@@ -1405,24 +1405,24 @@ Cuando trabajamos directamente con las APIs nativas de cada proveedor, nos enfre
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│           PROBLEMAS CON APIs NATIVAS                         │
+│           PROBLEMAS CON APIs NATIVAS                        │
 ├─────────────────────────────────────────────────────────────┤
-│                                                              │
-│  1. Código específico por proveedor                          │
-│     → Si cambias de OpenAI a Claude, reescribes todo         │
-│                                                              │
-│  2. Gestión manual de memoria                                │
-│     → Tú controlas el historial, truncado, resumen           │
-│                                                              │
-│  3. Prompts no reutilizables                                 │
-│     → Strings hardcoded, sin templates parametrizados        │
-│                                                              │
-│  4. Composición manual                                       │
-│     → Encadenar llamadas requiere código ad-hoc              │
-│                                                              │
-│  5. Sin abstracciones comunes                                │
-│     → Cada proyecto reinventa las mismas soluciones          │
-│                                                              │
+│                                                             │
+│  1. Código específico por proveedor                         │
+│     → Si cambias de OpenAI a Claude, reescribes todo        │
+│                                                             │
+│  2. Gestión manual de memoria                               │
+│     → Tú controlas el historial, truncado, resumen          │
+│                                                             │
+│  3. Prompts no reutilizables                                │
+│     → Strings hardcoded, sin templates parametrizados       │
+│                                                             │
+│  4. Composición manual                                      │
+│     → Encadenar llamadas requiere código ad-hoc             │
+│                                                             │
+│  5. Sin abstracciones comunes                               │
+│     → Cada proyecto reinventa las mismas soluciones         │
+│                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
 
