@@ -734,7 +734,7 @@ print(response.text)
 
 ### 3.2 Anthropic Claude - SDK anthropic
 
-#### Instalación y Configuración
+#### Instalación y Configuración (https://platform.claude.com/settings/keys)
 
 ```python
 !pip install anthropic
