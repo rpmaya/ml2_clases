@@ -10,11 +10,9 @@ Al finalizar esta sesión, el estudiante será capaz de:
 - Comprender los fundamentos de Function Calling y generación de embeddings
 - Introducir LangChain como framework de orquestación para aplicaciones con LLMs
 
-## Duración Total: 4 horas
-
 ---
 
-## Bloque 1: Fundamentos de APIs de LLMs (40 minutos)
+## Bloque 1: Fundamentos de APIs de LLMs
 
 ### 1.1 De Interfaces Gráficas a Código
 
@@ -290,7 +288,7 @@ with open('/content/drive/MyDrive/keys/openai_key.txt', 'r') as f:
 
 ---
 
-## Bloque 2: API de OpenAI (50 minutos)
+## Bloque 2: API de OpenAI
 
 ### 2.1 Instalación del SDK y Configuración
 
@@ -644,7 +642,7 @@ print(respuesta)
 
 ---
 
-## Bloque 3: APIs de Google Gemini y Anthropic Claude (40 minutos)
+## Bloque 3: APIs de Google Gemini y Anthropic Claude 
 
 ### 3.1 Google Gemini - SDK google-generativeai
 
@@ -984,7 +982,7 @@ for nombre, modelo_id in modelos.items():
 
 ---
 
-## Bloque 4: Casos Prácticos (50 minutos)
+## Bloque 4: Casos Prácticos
 
 ### 4.1 Chatbot con Memoria de Conversación
 
@@ -1397,7 +1395,7 @@ for i in range(len(textos)):
 
 ---
 
-## Bloque 5: Introducción a LangChain (40 minutos)
+## Bloque 5: Introducción a LangChain
 
 ### 5.1 ¿Por qué un Framework de Orquestación?
 
