@@ -150,6 +150,7 @@ Costo con GPT-4o-mini:
 3. **Limitar tokens de salida**: Usar `max_tokens` para evitar respuestas excesivamente largas
 4. **Implementar caché**: Almacenar respuestas para prompts repetidos
 5. **Procesamiento por lotes**: Agrupar múltiples tareas en una sola llamada cuando sea posible
+6. **Usar API Gateways con modelos gratuitos**: Servicios como [OpenRouter](https://openrouter.ai/) ofrecen acceso a modelos gratuitos de múltiples proveedores con coste cero (ver sección 3.4)
 
 ### 1.4 Rate Limiting y Manejo de Errores
 
@@ -254,6 +255,7 @@ if not api_key:
 OPENAI_API_KEY=sk-tu-clave-aquí
 ANTHROPIC_API_KEY=sk-ant-tu-clave-aquí
 GOOGLE_API_KEY=tu-clave-aquí
+OPENROUTER_API_KEY=sk-or-tu-clave-aquí   # Alternativa gratuita (ver sección 3.4)
 ```
 
 ```python
@@ -305,6 +307,33 @@ load_dotenv()
 # El cliente busca automáticamente OPENAI_API_KEY en las variables de entorno
 client = OpenAI()
 ```
+
+#### Alternativa: Usar OpenRouter como Proxy
+
+Si no dispones de una API Key de OpenAI, puedes usar **OpenRouter** como proxy. OpenRouter utiliza la misma librería `openai`, solo cambia la configuración del cliente:
+
+```python
+from openai import OpenAI
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+# Cliente configurado para OpenRouter (en lugar de OpenAI directo)
+client = OpenAI(
+    base_url="https://openrouter.ai/api/v1",
+    api_key=os.getenv("OPENROUTER_API_KEY"),
+)
+
+# Usar un modelo gratuito en lugar de gpt-4o-mini
+response = client.chat.completions.create(
+    model="google/gemini-2.0-flash-exp:free",  # Modelo gratuito
+    messages=[{"role": "user", "content": "Hola, ¿qué es una API?"}]
+)
+print(response.choices[0].message.content)
+```
+
+> **Nota:** El resto de los ejemplos de esta sesión usan `client = OpenAI()` con modelos de OpenAI. Si usas OpenRouter, simplemente sustituye la inicialización del cliente y el nombre del modelo como se muestra arriba.
 
 ### 2.2 Primera Llamada: Chat Completions
 
@@ -844,17 +873,114 @@ message = client_claude.messages.create(
 print(message.content[0].text)
 ```
 
+### 3.4 OpenRouter: API Gateway Unificado
+
+**OpenRouter** ([openrouter.ai](https://openrouter.ai/)) es un **API Gateway** que actúa como proxy unificado para acceder a modelos de múltiples proveedores (OpenAI, Google, Anthropic, Meta, Mistral y más) a través de una **única API compatible con OpenAI**.
+
+```
+ARQUITECTURA DE UN API GATEWAY:
+
+┌──────────────────────────────────────────────────────────────┐
+│                       TU APLICACIÓN                           │
+│              client = OpenAI(base_url=openrouter)             │
+└───────────────────────────┬──────────────────────────────────┘
+                            │ Una sola API Key
+                            ▼
+┌──────────────────────────────────────────────────────────────┐
+│                     OPENROUTER (Gateway)                       │
+│   ┌─────────────┬──────────────┬──────────────────────────┐  │
+│   │  Routing     │  Rate Limit  │  Modelos Gratuitos (:free)│  │
+│   └─────────────┴──────────────┴──────────────────────────┘  │
+└───────┬──────────────────┬─────────────────────┬─────────────┘
+        │                  │                     │
+        ▼                  ▼                     ▼
+┌──────────────┐  ┌──────────────┐      ┌──────────────┐
+│   OpenAI     │  │   Google     │      │  Meta/Llama  │
+│   GPT-4o     │  │   Gemini     │      │  Llama 4     │
+└──────────────┘  └──────────────┘      └──────────────┘
+```
+
+#### Ventajas de un API Gateway
+
+| Ventaja | Descripción |
+|---------|-------------|
+| **Una sola API Key** | Acceso a decenas de proveedores con una credencial |
+| **Modelos gratuitos** | Modelos con sufijo `:free` sin coste (ideales para aprendizaje) |
+| **Misma librería** | Usa `openai` de Python, solo cambia `base_url` |
+| **Comparar modelos fácilmente** | Cambiar de proveedor es cambiar el nombre del modelo |
+| **Fallback automático** | Si un proveedor falla, puede enrutar a otro |
+
+#### Configuración
+
+```python
+from openai import OpenAI
+import os
+
+client = OpenAI(
+    base_url="https://openrouter.ai/api/v1",
+    api_key=os.getenv("OPENROUTER_API_KEY"),
+)
+```
+
+#### Modelos Gratuitos Disponibles
+
+Consulta la lista actualizada en: https://openrouter.ai/models?q=free&order=most-popular
+
+| Modelo | ID en OpenRouter | Proveedor |
+|--------|-----------------|-----------|
+| Gemini 2.0 Flash | `google/gemini-2.0-flash-exp:free` | Google |
+| DeepSeek R1 | `deepseek/deepseek-r1-0528:free` | DeepSeek |
+| Llama 4 Scout | `meta-llama/llama-4-scout:free` | Meta |
+| Qwen3 30B | `qwen/qwen3-30b-a3b:free` | Alibaba |
+
+#### Ejemplo: Comparar Modelos con una Sola API
+
+```python
+from openai import OpenAI
+import os
+import time
+
+client = OpenAI(
+    base_url="https://openrouter.ai/api/v1",
+    api_key=os.getenv("OPENROUTER_API_KEY"),
+)
+
+modelos = {
+    "Gemini 2.0 Flash": "google/gemini-2.0-flash-exp:free",
+    "Llama 4 Scout": "meta-llama/llama-4-scout:free",
+    "Qwen3 30B": "qwen/qwen3-30b-a3b:free",
+}
+
+prompt = "¿Qué es una API REST? Responde en 2 oraciones."
+
+for nombre, modelo_id in modelos.items():
+    start = time.time()
+    response = client.chat.completions.create(
+        model=modelo_id,
+        messages=[{"role": "user", "content": prompt}],
+        temperature=0.7,
+    )
+    elapsed = time.time() - start
+
+    print(f"=== {nombre} ({elapsed:.2f}s) ===")
+    print(response.choices[0].message.content)
+    print()
+```
+
+> **Nota:** Los modelos gratuitos tienen límites de uso (rate limits) más estrictos que los de pago. Para proyectos de producción se recomienda usar las APIs directas de cada proveedor.
+
 #### Tabla Comparativa de las Tres APIs
 
-| Aspecto | OpenAI | Google Gemini | Anthropic Claude |
-|---------|--------|---------------|------------------|
-| Instalación | `pip install openai` | `pip install google-generativeai` | `pip install anthropic` |
-| System prompt | Mensaje con `role: "system"` | `system_instruction` en modelo | Parámetro `system` en `create()` |
-| Acceso a respuesta | `response.choices[0].message.content` | `response.text` | `message.content[0].text` |
-| Contexto máximo | 128K tokens | 1M tokens | 200K tokens |
-| Multimodal nativo | Sí (GPT-4o) | Sí (nativo) | Sí (imágenes) |
-| Streaming | `stream=True` en `create()` | `generate_content(stream=True)` | `client.messages.stream()` |
-| Variable de entorno | `OPENAI_API_KEY` | `GOOGLE_API_KEY` | `ANTHROPIC_API_KEY` |
+| Aspecto | OpenAI | Google Gemini | Anthropic Claude | OpenRouter |
+|---------|--------|---------------|------------------|------------|
+| Instalación | `pip install openai` | `pip install google-generativeai` | `pip install anthropic` | `pip install openai` (misma) |
+| System prompt | Mensaje con `role: "system"` | `system_instruction` en modelo | Parámetro `system` en `create()` | Mensaje con `role: "system"` |
+| Acceso a respuesta | `response.choices[0].message.content` | `response.text` | `message.content[0].text` | `response.choices[0].message.content` |
+| Contexto máximo | 128K tokens | 1M tokens | 200K tokens | Depende del modelo |
+| Multimodal nativo | Sí (GPT-4o) | Sí (nativo) | Sí (imágenes) | Depende del modelo |
+| Streaming | `stream=True` en `create()` | `generate_content(stream=True)` | `client.messages.stream()` | `stream=True` en `create()` |
+| Variable de entorno | `OPENAI_API_KEY` | `GOOGLE_API_KEY` | `ANTHROPIC_API_KEY` | `OPENROUTER_API_KEY` |
+| Modelos gratuitos | No | Sí (tier gratuito) | No | Sí (sufijo `:free`) |
 
 ---
 
@@ -1350,6 +1476,14 @@ modelo_openai = ChatOpenAI(model="gpt-4o-mini", temperature=0.7)
 modelo_claude = ChatAnthropic(model="claude-3-5-sonnet-20241022", temperature=0.7)
 modelo_gemini = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0.7)
 
+# También se puede usar OpenRouter con LangChain (gratuito)
+modelo_openrouter = ChatOpenAI(
+    model="google/gemini-2.0-flash-exp:free",
+    temperature=0.7,
+    openai_api_key=os.getenv("OPENROUTER_API_KEY"),
+    openai_api_base="https://openrouter.ai/api/v1",
+)
+
 # La misma llamada funciona con cualquiera
 from langchain_core.messages import HumanMessage, SystemMessage
 
@@ -1565,7 +1699,7 @@ Unidad 6 (MCP):      Model Context Protocol
 ### Conceptos Clave
 
 1. **Arquitectura de APIs de LLMs**: Peticiones REST, autenticación, estructura de costos y rate limiting
-2. **Tres APIs integradas**: OpenAI (Chat Completions), Google Gemini (GenerativeModel) y Anthropic Claude (Messages), cada una con su sintaxis pero conceptos comunes
+2. **Cuatro formas de acceso**: OpenAI, Google Gemini, Anthropic Claude (APIs directas) y OpenRouter (gateway unificado con modelos gratuitos)
 3. **Patrones prácticos**: Chatbot con memoria, análisis de sentimiento por lotes, extracción estructurada (JSON), Function Calling y embeddings
 4. **Producción**: Manejo robusto de errores, streaming, gestión segura de API Keys y optimización de costos
 5. **LangChain**: Framework de orquestación que unifica proveedores, ofrece templates de prompts, chains composables y gestión de memoria
@@ -1619,4 +1753,5 @@ Al finalizar ambas sesiones, completa la [práctica evaluable](../practica.md) d
 - LangChain. (2024). Documentation. https://python.langchain.com/docs/
 - OpenAI. (2024). Embeddings Guide. https://platform.openai.com/docs/guides/embeddings
 - OpenAI. (2024). Function Calling Guide. https://platform.openai.com/docs/guides/function-calling
+- OpenRouter. (2025). Documentation & Free Models. https://openrouter.ai/docs
 - Repositorio del curso: https://github.com/rpmaya/ml2_code
