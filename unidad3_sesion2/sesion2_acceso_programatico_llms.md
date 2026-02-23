@@ -1716,14 +1716,6 @@ Unidad 6 (MCP):      Model Context Protocol
 
 ---
 
-## Conexión con la Práctica
-
-La práctica evaluable de esta sesión está disponible en [practica.md](../unidad3_practica/practica.md).
-
-**Proyecto**: Generador de Titulares con Miniature GPT - Aplicarás los conceptos de acceso programático a LLMs para construir una aplicación que genere titulares de noticias, integrando las APIs estudiadas en esta sesión con patrones de diseño de producción.
-
----
-
 ## Actividades
 
 ### Ejercicios de esta Sesión
@@ -1739,7 +1731,7 @@ Completa los ejercicios prácticos disponibles en [ejercicios.md](./ejercicios.m
 
 ### Práctica Evaluable de la Unidad
 
-Al finalizar ambas sesiones, completa la [práctica evaluable](../practica.md) de la Unidad 3.
+Al finalizar ambas sesiones, completa la [práctica evaluable](../unidad3_practica/practica.md) de la Unidad 3.
 
 ---
 
