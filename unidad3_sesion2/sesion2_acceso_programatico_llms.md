@@ -461,16 +461,16 @@ print(response.choices[0].message.content)
 FLUJO DE MENSAJES EN LA API:
 
 ┌─────────────────────────────────────────────────┐
-│ messages = [                                     │
+│ messages = [                                    │
 │   {system: "Eres un tutor de Python..."},       │ ← Comportamiento base
 │   {user: "¿Qué es una list comprehension?"},    │ ← Pregunta 1
-│   {assistant: "Una list comprehension es..."},   │ ← Respuesta 1
+│   {assistant: "Una list comprehension es..."},  │ ← Respuesta 1
 │   {user: "¿Puedo añadir condiciones?"},         │ ← Pregunta 2 (actual)
-│ ]                                                │
-│                                                  │
-│ → El modelo tiene TODO el historial              │
-│ → Entiende que "condiciones" se refiere a        │
-│   list comprehensions                            │
+│ ]                                               │
+│                                                 │
+│ → El modelo tiene TODO el historial             │
+│ → Entiende que "condiciones" se refiere a       │
+│   list comprehensions                           │
 └─────────────────────────────────────────────────┘
 ```
 
@@ -654,7 +654,7 @@ print(respuesta)
 import google.generativeai as genai
 import os
 
-# Configurar la API Key
+# Configurar la API Key (https://aistudio.google.com/api-keys)
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 # Crear el modelo
