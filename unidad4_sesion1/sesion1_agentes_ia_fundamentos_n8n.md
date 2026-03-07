@@ -276,21 +276,21 @@ n8n destaca especialmente para la construcción de agentes de IA por cuatro razo
 | **Canales de entrada diversos** | Chat embebido, Webhook, Telegram, Slack, WhatsApp, formularios |
 
 ```
-┌──────────────────────────────────────────────────────────────┐
-│               AGENTE DE IA EN n8n                              │
-│                                                                │
-│   CANALES           AI AGENT              HERRAMIENTAS         │
+┌───────────────────────────────────────────────────────────────┐
+│               AGENTE DE IA EN n8n                             │
+│                                                               │
+│   CANALES           AI AGENT              HERRAMIENTAS        │
 │  ┌─────────┐    ┌──────────────┐    ┌──────────────────┐      │
 │  │  Chat   │───►│              │───►│  Gmail           │      │
 │  │  Web    │    │   LLM        │    │  Google Sheets   │      │
 │  ├─────────┤    │  (GPT/Claude)│    │  HTTP Request    │      │
 │  │ Telegram│───►│              │    │  Base de datos   │      │
 │  ├─────────┤    │   Memoria    │    │  Calendario      │      │
-│  │ Webhook │───►│   ┌──────┐  │    │  Slack           │      │
-│  ├─────────┤    │   │Buffer│  │    │  Vector Store    │      │
-│  │  Slack  │───►│   └──────┘  │    │  Código custom   │      │
+│  │ Webhook │───►│   ┌──────┐   │    │  Slack           │      │
+│  ├─────────┤    │   │Buffer│   │    │  Vector Store    │      │
+│  │  Slack  │───►│   └──────┘   │    │  Código custom   │      │
 │  └─────────┘    └──────────────┘    └──────────────────┘      │
-└──────────────────────────────────────────────────────────────┘
+└───────────────────────────────────────────────────────────────┘
 ```
 
 ### 2.4 Integraciones Disponibles: Apps, APIs y Modelos de IA
@@ -331,23 +331,23 @@ n8n ofrece tres modalidades de despliegue según las necesidades:
 | **Local (desarrollo)** | Ejecución en tu máquina con npx o Docker | Aprendizaje, desarrollo, pruebas | Gratuito |
 
 ```
-┌──────────────────────────────────────────────────────────────┐
-│              OPCIONES DE DESPLIEGUE DE n8n                     │
-│                                                                │
+┌───────────────────────────────────────────────────────────────┐
+│              OPCIONES DE DESPLIEGUE DE n8n                    │
+│                                                               │
 │   ┌──────────────┐  ┌──────────────┐  ┌──────────────┐        │
 │   │  n8n CLOUD   │  │ SELF-HOSTED  │  │    LOCAL     │        │
 │   │              │  │              │  │              │        │
-│   │  ☁ SaaS      │  │  🖥 Tu server │  │  💻 Tu PC    │        │
-│   │  Gestionado  │  │  Docker      │  │  npx n8n    │        │
-│   │  HTTPS auto  │  │  Control     │  │  Desarrollo │        │
-│   │  Backups     │  │  total       │  │  Pruebas    │        │
+│   │  ☁ SaaS      │  │  🖥 Tu server│  │  💻 Tu PC    │        │
+│   │  Gestionado  │  │  Docker      │  │  npx n8n     │        │
+│   │  HTTPS auto  │  │  Control     │  │  Desarrollo  │        │
+│   │  Backups     │  │  total       │  │  Pruebas     │        │
 │   │              │  │              │  │              │        │
-│   │  20€/mes+    │  │  Gratuito    │  │  Gratuito   │        │
+│   │  20€/mes+    │  │  Gratuito    │  │  Gratuito    │        │
 │   └──────────────┘  └──────────────┘  └──────────────┘        │
-│                                                                │
-│   Producción          Producción          Desarrollo           │
-│   rápida              con control         y aprendizaje        │
-└──────────────────────────────────────────────────────────────┘
+│                                                               │
+│   Producción          Producción          Desarrollo          │
+│   rápida              con control         y aprendizaje       │
+└───────────────────────────────────────────────────────────────┘
 ```
 
 ### 3.2 Instalación Local con npx
@@ -376,7 +376,7 @@ npx n8n
 #### Primera Ejecución
 
 ```
-┌──────────────────────────────────────────────────────────────┐
+┌────────────────────────────────────────────────────────────────┐
 │              PRIMERA EJECUCIÓN DE n8n                          │
 │                                                                │
 │   Terminal:                                                    │
@@ -384,16 +384,16 @@ npx n8n
 │   ┌─────────────────────────────────────────────────────┐      │
 │   │  n8n ready on 0.0.0.0, port 5678                    │      │
 │   │  Version: 1.x.x                                     │      │
-│   │  Editor: http://localhost:5678                       │      │
+│   │  Editor: http://localhost:5678                      │      │
 │   └─────────────────────────────────────────────────────┘      │
 │                                                                │
-│   Navegador → http://localhost:5678                             │
+│   Navegador → http://localhost:5678                            │
 │   ┌─────────────────────────────────────────────────────┐      │
 │   │  1. Crear cuenta de propietario (email + contraseña)│      │
 │   │  2. Acceder al lienzo de workflows                  │      │
-│   │  3. ¡Listo para crear tu primer workflow!            │      │
+│   │  3. ¡Listo para crear tu primer workflow!           │      │
 │   └─────────────────────────────────────────────────────┘      │
-└──────────────────────────────────────────────────────────────┘
+└────────────────────────────────────────────────────────────────┘
 ```
 
 > **Nota**: Los datos se guardan en `~/.n8n/` por defecto (base de datos SQLite).
@@ -434,19 +434,19 @@ PASO 4: Desplegar
 ```
 
 ```
-┌──────────────────────────────────────────────────────────────┐
-│              DESPLIEGUE EN KOYEB                               │
-│                                                                │
-│   GitHub (Fork)          Koyeb                  URL Pública    │
+┌───────────────────────────────────────────────────────────────┐
+│              DESPLIEGUE EN KOYEB                              │
+│                                                               │
+│   GitHub (Fork)          Koyeb                  URL Pública   │
 │   ┌──────────┐     ┌──────────────┐     ┌──────────────────┐  │
 │   │ Repo n8n │────►│ Build auto   │────►│ https://tu-app   │  │
 │   │ forkeado │     │ Deploy auto  │     │ .koyeb.app       │  │
 │   └──────────┘     │ Free tier    │     │                  │  │
 │                    └──────────────┘     │ n8n accesible    │  │
-│                                        │ desde cualquier   │  │
-│                                        │ lugar             │  │
-│                                        └──────────────────┘  │
-└──────────────────────────────────────────────────────────────┘
+│                                         │ desde cualquier  │  │
+│                                         │ lugar            │  │
+│                                         └──────────────────┘  │
+└───────────────────────────────────────────────────────────────┘
 ```
 
 > **Ventaja**: Al tener una URL pública, puedes recibir webhooks de servicios externos (GitHub, Stripe, Telegram, etc.), algo que no es posible con la instalación local sin herramientas adicionales.
@@ -462,19 +462,19 @@ PASO 4: Desplegar
 Un **workflow** en n8n es como una **receta de cocina**: una secuencia ordenada de pasos que transforma ingredientes (datos de entrada) en un plato final (resultado deseado).
 
 ```
-┌──────────────────────────────────────────────────────────────┐
+┌────────────────────────────────────────────────────────────────┐
 │              ANALOGÍA: WORKFLOW = RECETA                       │
 │                                                                │
 │   Receta de cocina:                                            │
-│   [Ingredientes] → [Picar] → [Cocinar] → [Emplatar] → [Plato]│
+│   [Ingredientes] → [Picar] → [Cocinar] → [Emplatar] → [Plato]. │
 │                                                                │
-│   Workflow de n8n:                                              │
-│   [Trigger]  → [Procesar] → [Decidir] → [Actuar] → [Resultado]│
+│   Workflow de n8n:                                             │
+│   [Trigger]  → [Procesar] → [Decidir] → [Actuar] → [Resultado] │
 │                                                                │
 │   Ejemplo: Notificación de emails importantes                  │
-│   [Gmail     → [Filtrar   → [Resumir  → [Enviar  → [Registro  │
+│   [Gmail     → [Filtrar   → [Resumir  → [Enviar  → [Registro   │
 │    Trigger]     emails]      con IA]     Slack]     en Sheets] │
-└──────────────────────────────────────────────────────────────┘
+└────────────────────────────────────────────────────────────────┘
 ```
 
 #### Nodo: La Unidad de Trabajo
@@ -496,21 +496,21 @@ Las **conexiones** son las líneas que unen los nodos. Definen:
 2. **El orden de ejecución**: Qué nodo se ejecuta después de cuál
 
 ```
-┌──────────────────────────────────────────────────────────────┐
-│              ANATOMÍA DE UN WORKFLOW                            │
+┌────────────────────────────────────────────────────────────────┐
+│              ANATOMÍA DE UN WORKFLOW                           │
 │                                                                │
-│   ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌────────┐  │
-│   │ TRIGGER  │───►│  NODO 1  │───►│  NODO 2  │───►│ NODO 3 │  │
-│   │          │    │          │    │          │    │        │  │
-│   │ "¿Cuándo │    │ "Obtener │    │ "Procesar│    │"Enviar │  │
-│   │  empezar?"│    │  datos"  │    │  datos"  │    │resultado"│ │
-│   └──────────┘    └──────────┘    └──────────┘    └────────┘  │
+│   ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌────────┐   │
+│   │ TRIGGER  │───►│  NODO 1  │───►│  NODO 2  │───►│ NODO 3 │   │
+│   │          │    │          │    │          │    │        │   │
+│   │ "¿Cuándo │    │ "Obtener │    │ "Procesar│    │"Enviar │   │
+│   │  empezar?"│   │  datos"  │    │  datos"  │    │resultado"│ │
+│   └──────────┘    └──────────┘    └──────────┘    └────────┘   │
 │       │                │                │              │       │
 │       ▼                ▼                ▼              ▼       │
-│   Evento que       Datos JSON       Datos JSON     Acción     │
-│   inicia el        de entrada       transformados  final      │
+│   Evento que       Datos JSON       Datos JSON     Acción      │
+│   inicia el        de entrada       transformados  final       │
 │   workflow                                                     │
-└──────────────────────────────────────────────────────────────┘
+└────────────────────────────────────────────────────────────────┘
 ```
 
 ### 4.2 Tipos de Nodos
@@ -560,22 +560,22 @@ n8n organiza sus nodos en cuatro categorías principales:
 | **Aggregate** | Combinar múltiples elementos en uno solo |
 
 ```
-┌──────────────────────────────────────────────────────────────┐
-│              TIPOS DE NODOS EN n8n                              │
+┌────────────────────────────────────────────────────────────────┐
+│              TIPOS DE NODOS EN n8n                             │
 │                                                                │
 │   TRIGGERS           ACCIONES          CONTROL         TRANSF. │
-│  ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌─────────┐  │
-│  │ Manual   │    │ Gmail    │    │ IF       │    │ Set     │  │
-│  │ Schedule │    │ Sheets   │    │ Switch   │    │ Code    │  │
-│  │ Webhook  │    │ HTTP Req │    │ Merge    │    │ Split   │  │
-│  │ App Event│    │ Slack    │    │ Loop     │    │ Aggr.   │  │
-│  │ Chat     │    │ OpenAI   │    │ Wait     │    │         │  │
-│  │ Form     │    │ Postgres │    │ Filter   │    │         │  │
-│  └──────────┘    └──────────┘    └──────────┘    └─────────┘  │
+│  ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌─────────┐   │
+│  │ Manual   │    │ Gmail    │    │ IF       │    │ Set     │   │
+│  │ Schedule │    │ Sheets   │    │ Switch   │    │ Code    │   │
+│  │ Webhook  │    │ HTTP Req │    │ Merge    │    │ Split   │   │
+│  │ App Event│    │ Slack    │    │ Loop     │    │ Aggr.   │   │
+│  │ Chat     │    │ OpenAI   │    │ Wait     │    │         │   │
+│  │ Form     │    │ Postgres │    │ Filter   │    │         │   │
+│  └──────────┘    └──────────┘    └──────────┘    └─────────┘   │
 │                                                                │
-│  "¿Cuándo?"     "¿Qué hacer?"   "¿Cómo fluir?"  "¿Cómo       │
+│  "¿Cuándo?"     "¿Qué hacer?"   "¿Cómo fluir?"  "¿Cómo         │
 │                                                   transformar?"│
-└──────────────────────────────────────────────────────────────┘
+└────────────────────────────────────────────────────────────────┘
 ```
 
 ### 4.3 El Lienzo Visual: Navegación y Organización
@@ -738,11 +738,11 @@ Ejemplos de Schedule:
 
 En n8n (configuración visual):
 ┌──────────────────────────────────────┐
-│ Trigger Rule:                         │
+│ Trigger Rule:                        │
 │ ├── Interval: Every 1 day            │
 │ ├── At hour: 9                       │
 │ └── At minute: 0                     │
-│                                       │
+│                                      │
 │ → Se ejecuta cada día a las 09:00    │
 └──────────────────────────────────────┘
 ```
@@ -767,18 +767,18 @@ URL generada (producción):
 ```
 
 ```
-┌──────────────────────────────────────────────────────────────┐
-│              WEBHOOK TRIGGER                                    │
+┌────────────────────────────────────────────────────────────────┐
+│              WEBHOOK TRIGGER                                   │
 │                                                                │
 │   Servicio externo                    n8n                      │
 │   ┌──────────────┐              ┌──────────────┐               │
 │   │  GitHub      │              │  Webhook     │               │
 │   │  (push event)│──── POST ───►│  Trigger     │──►[workflow]  │
 │   │              │   /webhook/  │              │               │
-│   │  Stripe     │   github     │  Recibe JSON │               │
-│   │  (payment)  │              │  del body    │               │
+│   │  Stripe      │   github     │  Recibe JSON │               │
+│   │  (payment)   │              │  del body    │               │
 │   └──────────────┘              └──────────────┘               │
-└──────────────────────────────────────────────────────────────┘
+└────────────────────────────────────────────────────────────────┘
 ```
 
 #### Form Trigger
@@ -806,8 +806,8 @@ Configuración del Form:
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│  WORKFLOW: NOTIFICACIÓN DE EMAILS IMPORTANTES                  │
-│                                                                │
+│  WORKFLOW: NOTIFICACIÓN DE EMAILS IMPORTANTES                │
+│                                                              │
 │  ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐   │
 │  │  Gmail   │──►│  Filter  │──►│  OpenAI  │──►│  Slack   │   │
 │  │  Trigger │   │          │   │          │   │          │   │
@@ -815,11 +815,11 @@ Configuración del Form:
 │  │ Nuevos   │   │ contains │   │  este    │   │ resumen  │   │
 │  │ emails   │   │ "urgente"│   │  email"  │   │ a #alerts│   │
 │  └──────────┘   └──────────┘   └──────────┘   └──────────┘   │
-│                                                                │
-│  Trigger:  Cada nuevo email en la bandeja de entrada           │
-│  Filtro:   Solo emails con "urgente" en el asunto              │
-│  IA:       GPT-4 resume el contenido en 2-3 líneas            │
-│  Acción:   Envía el resumen al canal #alertas de Slack        │
+│                                                              │
+│  Trigger:  Cada nuevo email en la bandeja de entrada         │
+│  Filtro:   Solo emails con "urgente" en el asunto            │
+│  IA:       GPT-4 resume el contenido en 2-3 líneas           │
+│  Acción:   Envía el resumen al canal #alertas de Slack       │
 └──────────────────────────────────────────────────────────────┘
 ```
 
@@ -834,20 +834,20 @@ Configuración del Form:
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│  WORKFLOW: REGISTRO AUTOMÁTICO EN GOOGLE SHEETS                │
-│                                                                │
+│  WORKFLOW: REGISTRO AUTOMÁTICO EN GOOGLE SHEETS              │
+│                                                              │
 │  ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐   │
 │  │  Form    │──►│  Set     │──►│  Google  │──►│  Gmail   │   │
 │  │  Trigger │   │          │   │  Sheets  │   │          │   │
 │  │          │   │ Añadir   │   │          │   │ Enviar   │   │
-│  │ Formulario│   │ fecha y  │   │ Append   │   │ confirm. │   │
+│  │ Formulario│  │ fecha y  │   │ Append   │   │ confirm. │   │
 │  │ de alta  │   │ ID único │   │ Row      │   │ al user  │   │
 │  └──────────┘   └──────────┘   └──────────┘   └──────────┘   │
-│                                                                │
-│  Trigger:  Usuario envía formulario de alta                    │
-│  Set:      Añade timestamp e ID único a los datos              │
-│  Sheets:   Inserta nueva fila con todos los datos              │
-│  Gmail:    Envía email de confirmación al usuario              │
+│                                                              │
+│  Trigger:  Usuario envía formulario de alta                  │
+│  Set:      Añade timestamp e ID único a los datos            │
+│  Sheets:   Inserta nueva fila con todos los datos            │
+│  Gmail:    Envía email de confirmación al usuario            │
 └──────────────────────────────────────────────────────────────┘
 ```
 
@@ -970,19 +970,19 @@ En la próxima sesión abordaremos la construcción de agentes de IA completos e
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│              MAPA DE CONEXIONES DEL CURSO                      │
-│                                                                │
-│   Unidad 3: APIs y Function Calling                            │
-│        │                                                       │
-│        ▼  Function Calling es la BASE de los agentes           │
-│                                                                │
-│   Unidad 4: Agentes de IA y n8n  ← ESTAMOS AQUÍ               │
-│        │                                                       │
-│        ├──► Unidad 5: RAG (extensión de agentes con            │
-│        │    conocimiento externo mediante vectores)             │
-│        │                                                       │
-│        └──► Unidad 6: MCP (estándar para definir               │
-│             herramientas que usan los agentes)                  │
+│              MAPA DE CONEXIONES DEL CURSO                    │
+│                                                              │
+│   Unidad 3: APIs y Function Calling                          │
+│        │                                                     │
+│        ▼  Function Calling es la BASE de los agentes         │
+│                                                              │
+│   Unidad 4: Agentes de IA y n8n  ← ESTAMOS AQUÍ              │
+│        │                                                     │
+│        ├──► Unidad 5: RAG (extensión de agentes con          │
+│        │    conocimiento externo mediante vectores)          │
+│        │                                                     │
+│        └──► Unidad 6: MCP (estándar para definir             │
+│             herramientas que usan los agentes)               │
 └──────────────────────────────────────────────────────────────┘
 ```
 
