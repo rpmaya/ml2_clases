@@ -149,18 +149,18 @@ Agente → PASO 1: get_weather("Madrid", "próxima semana")
 Todo agente de IA se puede diseñar respondiendo a tres preguntas fundamentales:
 
 ```
-┌──────────────────────────────────────────────────────────────┐
+┌────────────────────────────────────────────────────────────────┐
 │              PARADIGMA PDA (PERCEPCIÓN-DECISIÓN-ACCIÓN)        │
 │                                                                │
-│   ┌─────────────┐      ┌─────────────┐      ┌─────────────┐   │
-│   │  PERCEPCIÓN │─────►│  DECISIÓN   │─────►│   ACCIÓN    │   │
-│   │             │      │             │      │             │   │
-│   │ ¿Qué recibe│      │ ¿Cómo       │      │ ¿Qué hace   │   │
-│   │  el agente? │      │  procesa?   │      │  el agente? │   │
-│   └─────────────┘      └─────────────┘      └─────────────┘   │
+│   ┌─────────────┐      ┌─────────────┐      ┌─────────────┐    │
+│   │  PERCEPCIÓN │─────►│  DECISIÓN   │─────►│   ACCIÓN    │    │
+│   │             │      │             │      │             │    │
+│   │ ¿Qué recibe │      │ ¿Cómo       │      │ ¿Qué hace   │    │
+│   │  el agente? │      │  procesa?   │      │  el agente? │    │
+│   └─────────────┘      └─────────────┘      └─────────────┘    │
 │         │                     │                     │          │
 │         ▼                     ▼                     ▼          │
-│   - Mensajes texto      - LLM (GPT,          - Enviar emails  │
+│   - Mensajes texto      - LLM (GPT,          - Enviar emails   │
 │   - Webhooks              Claude)             - Actualizar DB  │
 │   - Formularios         - Reglas de           - Llamar APIs    │
 │   - Eventos de apps       negocio             - Generar docs   │
@@ -168,7 +168,7 @@ Todo agente de IA se puede diseñar respondiendo a tres preguntas fundamentales:
 │   - Archivos             condicional          - Crear tickets  │
 │                         - Memoria             - Publicar       │
 │                           contextual                           │
-└──────────────────────────────────────────────────────────────┘
+└────────────────────────────────────────────────────────────────┘
 ```
 
 #### Preguntas de Diseño para Cada Componente
@@ -200,16 +200,16 @@ Al diseñar un agente, hazte estas preguntas:
 **n8n** (pronunciado "nodemation", de *node automation*) es una plataforma de automatización de workflows **open source** con una interfaz visual y soporte nativo para **agentes de IA**.
 
 ```
-┌──────────────────────────────────────────────────────────────┐
+┌────────────────────────────────────────────────────────────────┐
 │                       ¿QUÉ ES n8n?                             │
 │                                                                │
 │   ┌─────────────────────────────────────────────────────────┐  │
-│   │                  INTERFAZ VISUAL (LIENZO)                │  │
-│   │                                                          │  │
-│   │   [Trigger] ──► [Nodo 1] ──► [Nodo 2] ──► [Nodo 3]     │  │
-│   │    (Evento)    (Procesar)   (Decidir)    (Actuar)        │  │
-│   │                                                          │  │
-│   │   Arrastra, conecta, configura. Sin escribir código.     │  │
+│   │                  INTERFAZ VISUAL (LIENZO)               │  │
+│   │                                                         │  │
+│   │   [Trigger] ──► [Nodo 1] ──► [Nodo 2] ──► [Nodo 3]      │  │
+│   │    (Evento)    (Procesar)   (Decidir)    (Actuar)       │  │
+│   │                                                         │  │
+│   │   Arrastra, conecta, configura. Sin escribir código.    │  │
 │   └─────────────────────────────────────────────────────────┘  │
 │                                                                │
 │   CARACTERÍSTICAS CLAVE:                                       │
@@ -217,7 +217,7 @@ Al diseñar un agente, hazte estas preguntas:
 │   ✔ Self-hosted o cloud                                        │
 │   ✔ +400 integraciones nativas                                 │
 │   ✔ Nodo AI Agent nativo                                       │
-│   ✔ Soporte para modelos de IA (OpenAI, Claude, Gemini, etc.) │
+│   ✔ Soporte para modelos de IA (OpenAI, Claude, Gemini, etc.)  │
 │   ✔ Código personalizado cuando sea necesario (JavaScript/Python)│
 └──────────────────────────────────────────────────────────────┘
 ```
