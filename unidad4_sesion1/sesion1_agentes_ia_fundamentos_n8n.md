@@ -160,7 +160,7 @@ Todo agente de IA se puede diseñar respondiendo a tres preguntas fundamentales:
 │   └─────────────┘      └─────────────┘      └─────────────┘    │
 │         │                     │                     │          │
 │         ▼                     ▼                     ▼          │
-│   - Mensajes texto      - LLM (GPT,          - Enviar emails   │
+│   - Mensajes texto      - LLM (GPT,           - Enviar emails  │
 │   - Webhooks              Claude)             - Actualizar DB  │
 │   - Formularios         - Reglas de           - Llamar APIs    │
 │   - Eventos de apps       negocio             - Generar docs   │
@@ -200,26 +200,26 @@ Al diseñar un agente, hazte estas preguntas:
 **n8n** (pronunciado "nodemation", de *node automation*) es una plataforma de automatización de workflows **open source** con una interfaz visual y soporte nativo para **agentes de IA**.
 
 ```
-┌────────────────────────────────────────────────────────────────┐
-│                       ¿QUÉ ES n8n?                             │
-│                                                                │
-│   ┌─────────────────────────────────────────────────────────┐  │
-│   │                  INTERFAZ VISUAL (LIENZO)               │  │
-│   │                                                         │  │
-│   │   [Trigger] ──► [Nodo 1] ──► [Nodo 2] ──► [Nodo 3]      │  │
-│   │    (Evento)    (Procesar)   (Decidir)    (Actuar)       │  │
-│   │                                                         │  │
-│   │   Arrastra, conecta, configura. Sin escribir código.    │  │
-│   └─────────────────────────────────────────────────────────┘  │
-│                                                                │
-│   CARACTERÍSTICAS CLAVE:                                       │
-│   ✔ Open source (licencia fair-code)                           │
-│   ✔ Self-hosted o cloud                                        │
-│   ✔ +400 integraciones nativas                                 │
-│   ✔ Nodo AI Agent nativo                                       │
-│   ✔ Soporte para modelos de IA (OpenAI, Claude, Gemini, etc.)  │
+┌──────────────────────────────────────────────────────────────────┐
+│                       ¿QUÉ ES n8n?                               │
+│                                                                  │
+│   ┌─────────────────────────────────────────────────────────┐    │
+│   │                  INTERFAZ VISUAL (LIENZO)               │    │
+│   │                                                         │    │
+│   │   [Trigger] ──► [Nodo 1] ──► [Nodo 2] ──► [Nodo 3]      │    │
+│   │    (Evento)    (Procesar)   (Decidir)    (Actuar)       │    │
+│   │                                                         │    │
+│   │   Arrastra, conecta, configura. Sin escribir código.    │    │
+│   └─────────────────────────────────────────────────────────┘    │
+│                                                                  │
+│   CARACTERÍSTICAS CLAVE:                                         │
+│   ✔ Open source (licencia fair-code)                             │
+│   ✔ Self-hosted o cloud                                          │
+│   ✔ +400 integraciones nativas                                   │
+│   ✔ Nodo AI Agent nativo                                         │
+│   ✔ Soporte para modelos de IA (OpenAI, Claude, Gemini, etc.)    │
 │   ✔ Código personalizado cuando sea necesario (JavaScript/Python)│
-└──────────────────────────────────────────────────────────────┘
+└──────────────────────────────────────────────────────────────────┘
 ```
 
 #### Filosofía de n8n
