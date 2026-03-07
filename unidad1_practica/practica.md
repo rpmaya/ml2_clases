@@ -207,8 +207,6 @@ c) ¿Debería desplegarse este sistema? Justifica tu posición en 3-4 oraciones.
 - Herramientas mencionadas en los ejercicios
 - Documentación oficial de APIs (OpenAI, Anthropic)
 
-**No permitido**: Compartir respuestas con compañeros, usar IA para generar respuestas completas (si se detecta, se penalizará).
-
 ---
 
-*Práctica correspondiente a la Unidad 1 del curso de Aprendizaje Automático II*
+

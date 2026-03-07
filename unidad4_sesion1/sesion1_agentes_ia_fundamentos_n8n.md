@@ -31,7 +31,7 @@ Los agentes de IA funcionan exactamente igual, pero en el mundo digital.
 #### Ejemplo Concreto: Chatbot de Atención al Cliente
 
 ```
-┌──────────────────────────────────────────────────────────────┐
+┌────────────────────────────────────────────────────────────────┐
 │              AGENTE: CHATBOT DE ATENCIÓN AL CLIENTE            │
 │                                                                │
 │   PERCEPCIÓN              DECISIÓN                ACCIÓN       │
@@ -45,7 +45,7 @@ Los agentes de IA funcionan exactamente igual, pero en el mundo digital.
 │  │ Datos del    │───►│ Decide acción│───►│ Escalar a    │      │
 │  │ cliente      │    │ más adecuada │    │ humano       │      │
 │  └──────────────┘    └──────────────┘    └──────────────┘      │
-└──────────────────────────────────────────────────────────────┘
+└────────────────────────────────────────────────────────────────┘
 ```
 
 #### Los Tres Componentes Fundamentales
@@ -61,8 +61,8 @@ Los agentes de IA funcionan exactamente igual, pero en el mundo digital.
 La convergencia de tres factores hace que este sea el momento ideal para los agentes de IA:
 
 ```
-┌──────────────────────────────────────────────────────────────┐
-│            ¿POR QUÉ AGENTES DE IA AHORA?                      │
+┌────────────────────────────────────────────────────────────────┐
+│            ¿POR QUÉ AGENTES DE IA AHORA?                       │
 │                                                                │
 │   1. AUTOMATIZACIÓN INTELIGENTE                                │
 │      │  Antes: reglas fijas ("si X, entonces Y")               │
@@ -77,8 +77,8 @@ La convergencia de tres factores hace que este sea el momento ideal para los age
 │      │  Ahora: cualquiera con herramientas como n8n            │
 │                                                                │
 │   LLMs potentes + APIs accesibles + Herramientas no-code       │
-│                    = Agentes al alcance de todos                │
-└──────────────────────────────────────────────────────────────┘
+│                    = Agentes al alcance de todos               │
+└────────────────────────────────────────────────────────────────┘
 ```
 
 ### 1.3 De Function Calling a Agentes Autónomos
