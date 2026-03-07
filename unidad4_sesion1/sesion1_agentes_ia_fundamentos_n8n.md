@@ -495,12 +495,12 @@ Las **conexiones** son las líneas que unen los nodos. Definen:
 ┌────────────────────────────────────────────────────────────────┐
 │              ANATOMÍA DE UN WORKFLOW                           │
 │                                                                │
-│   ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌────────┐   │
-│   │ TRIGGER  │───►│  NODO 1  │───►│  NODO 2  │───►│ NODO 3 │   │
-│   │          │    │          │    │          │    │        │   │
-│   │ "¿Cuándo │    │ "Obtener │    │ "Procesar│    │"Enviar │   │
-│   │  empezar?"│   │  datos"  │    │  datos"  │    │resultado"│ │
-│   └──────────┘    └──────────┘    └──────────┘    └────────┘   │
+│   ┌───────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐│
+│   │ TRIGGER   │───►│  NODO 1  │───►│  NODO 2  │───►│ NODO 3   ││
+│   │           │    │          │    │          │    │          ││
+│   │ "¿Cuándo  │    │ "Obtener │    │ "Procesar│    │"Enviar   ││
+│   │  empezar?"│    │  datos"  │    │  datos"  │    │resultado"││
+│   └───────────┘    └──────────┘    └──────────┘    └──────────┘│
 │       │                │                │              │       │
 │       ▼                ▼                ▼              ▼       │
 │   Evento que       Datos JSON       Datos JSON     Acción      │
