@@ -314,10 +314,6 @@ n8n ofrece más de 400 integraciones nativas organizadas por categorías:
 
 ---
 
-### --- DESCANSO (15 minutos) ---
-
----
-
 ## Bloque 3: Instalación y Configuración de n8n (45 minutos)
 
 ### 3.1 Opciones de Despliegue
