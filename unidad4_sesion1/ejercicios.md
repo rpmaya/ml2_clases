@@ -412,26 +412,36 @@ _______________________________________________
 - **Tipo**: Hands-on / Práctico
 - **Modalidad**: Individual
 - **Dificultad**: Básica
-- **Prerequisitos**: n8n instalado y funcionando, cuenta en OpenAI con API key disponible, lectura de secciones 4.3 y 4.5
+- **Prerequisitos**: n8n instalado y funcionando, cuenta en OpenAI o en OpenRouter (alternativa gratuita) con API key disponible, lectura de secciones 4.3 y 4.5
 
 ### Contexto
 Antes de construir agentes de IA en n8n, necesitamos configurar las credenciales que permiten a n8n comunicarse con los proveedores de modelos de lenguaje. La gestión segura de credenciales es un aspecto crítico de cualquier plataforma de automatización: las API keys deben almacenarse de forma cifrada y nunca exponerse en los workflows. En este ejercicio configurarás tus primeras credenciales y verificarás que la conexión funciona correctamente.
 
 ### Objetivo de Aprendizaje
-- Configurar credenciales de OpenAI en n8n de forma segura
+- Configurar credenciales de un proveedor de IA (OpenAI u OpenRouter) en n8n de forma segura
 - Comprender el sistema de gestión de credenciales de n8n
 - Realizar una primera llamada a un modelo de IA desde n8n
 - Verificar la conexión y diagnosticar errores comunes
 
 ### Enunciado
 
-### Paso 1: Obtener tu API Key de OpenAI (3 min)
+### Paso 1: Obtener tu API Key (3 min)
 
+Puedes usar **OpenAI** o **OpenRouter** (alternativa gratuita recomendada). Elige una de las dos opciones:
+
+**Opción A: OpenAI (de pago)**
 1. Accede a [platform.openai.com](https://platform.openai.com)
 2. Ve a **API Keys** en el menú lateral
-3. Crea una nueva API key (si no tienes una): haz clic en **"Create new secret key"**
+3. Crea una nueva API key: haz clic en **"Create new secret key"**
 4. **Copia la key inmediatamente** (solo se muestra una vez)
 5. Verifica que tienes créditos disponibles en **Usage** > **Billing**
+
+**Opción B: OpenRouter (gratuita)**
+1. Accede a [openrouter.ai](https://openrouter.ai) y crea una cuenta (puedes usar Google o GitHub)
+2. Ve a **Keys** en el menú lateral ([openrouter.ai/keys](https://openrouter.ai/keys))
+3. Crea una nueva API key haciendo clic en **"Create Key"**
+4. **Copia la key inmediatamente** (comienza por `sk-or-...`)
+5. OpenRouter ofrece modelos gratuitos, no necesitas añadir saldo para este ejercicio
 
 > **Importante**: Tu API key es como una contraseña. Nunca la compartas, no la pongas en código fuente y no la pegues en chats o documentos compartidos. n8n la almacenará cifrada.
 
@@ -439,13 +449,24 @@ Antes de construir agentes de IA en n8n, necesitamos configurar las credenciales
 
 1. En n8n, ve a **Settings** (icono de engranaje) > **Credentials**
 2. Haz clic en **"Add Credential"**
-3. Busca **"OpenAI"** en la lista de tipos de credencial
+3. Busca **"Header Auth"** en la lista de tipos de credencial
 4. Rellena los campos:
+
+**Si usas OpenAI:**
 
 | Campo | Valor |
 |-------|-------|
 | Credential Name | `OpenAI - Mi cuenta` |
-| API Key | `sk-...` (pega tu API key) |
+| Name | `Authorization` |
+| Value | `Bearer sk-...` (pega tu API key con el prefijo Bearer) |
+
+**Si usas OpenRouter:**
+
+| Campo | Valor |
+|-------|-------|
+| Credential Name | `OpenRouter - Mi cuenta` |
+| Name | `Authorization` |
+| Value | `Bearer sk-or-...` (pega tu API key con el prefijo Bearer) |
 
 5. Haz clic en **"Save"**
 6. n8n mostrará un mensaje de confirmación indicando que las credenciales se han guardado
@@ -454,29 +475,40 @@ Antes de construir agentes de IA en n8n, necesitamos configurar las credenciales
 
 ### Paso 3: Crear un Workflow de Prueba con IA (7 min)
 
-1. Crea un nuevo workflow llamado `Ejercicio 5 - Test OpenAI`
+1. Crea un nuevo workflow llamado `Ejercicio 5 - Test IA`
 2. Añade los siguientes nodos en orden:
 
 **Nodo 1: Manual Trigger**
 - Tipo: `Manual Trigger`
 
-**Nodo 2: OpenAI (Chat Model)**
-- Tipo: Busca **"OpenAI"** en los nodos (no en la sección de AI, sino como nodo regular)
-- Si no lo encuentras directamente, busca **"AI Agent"** y luego configura el modelo; o bien usa el nodo **"HTTP Request"** con la configuración de la API de OpenAI:
+**Nodo 2: HTTP Request (llamada al modelo de IA)**
+- Tipo: Busca **"HTTP Request"** en los nodos
 
-**Alternativa recomendada para prueba rápida - Nodo HTTP Request:**
+Configura el nodo HTTP Request según el proveedor que elegiste:
+
+**Si usas OpenAI:**
 
 | Parámetro | Valor |
 |-----------|-------|
 | Method | `POST` |
 | URL | `https://api.openai.com/v1/chat/completions` |
-| Authentication | Header Auth |
-| → Name | `Authorization` |
-| → Value | `Bearer {{ $credentials.openAiApi.apiKey }}` |
+| Authentication | Predefined Credential Type → Header Auth |
+| Credential | Selecciona `OpenAI - Mi cuenta` |
 | Body Content Type | JSON |
 | Body | Ver abajo |
 
-**Body del request:**
+**Si usas OpenRouter:**
+
+| Parámetro | Valor |
+|-----------|-------|
+| Method | `POST` |
+| URL | `https://openrouter.ai/api/v1/chat/completions` |
+| Authentication | Predefined Credential Type → Header Auth |
+| Credential | Selecciona `OpenRouter - Mi cuenta` |
+| Body Content Type | JSON |
+| Body | Ver abajo |
+
+**Body del request (igual para ambos proveedores):**
 ```json
 {
   "model": "gpt-4o-mini",
@@ -495,17 +527,19 @@ Antes de construir agentes de IA en n8n, necesitamos configurar las credenciales
 }
 ```
 
-3. Conecta los nodos: `Manual Trigger → OpenAI / HTTP Request`
+> **Nota OpenRouter**: Si usas OpenRouter, puedes cambiar el modelo a uno gratuito como `google/gemma-3-4b-it:free` o `meta-llama/llama-4-scout:free`. Consulta los modelos gratuitos disponibles en [openrouter.ai/models?q=free](https://openrouter.ai/models?q=free).
+
+3. Conecta los nodos: `Manual Trigger → HTTP Request`
 
 ### Paso 4: Ejecutar y Verificar (5 min)
 
 1. Haz clic en **"Test workflow"**
-2. Inspecciona la salida del nodo de OpenAI/HTTP Request
+2. Inspecciona la salida del nodo HTTP Request
 3. Verifica que la respuesta contiene texto generado por el modelo
 
 **Verificaciones:**
 - [ ] Las credenciales se configuraron sin errores
-- [ ] El nodo se conecta exitosamente a la API de OpenAI
+- [ ] El nodo se conecta exitosamente a la API (OpenAI u OpenRouter)
 - [ ] La respuesta contiene un campo `choices` con el texto generado
 - [ ] El texto está en español como se solicitó en el system prompt
 - [ ] No hay errores de autenticación (código 401) ni de cuota (código 429)
@@ -516,10 +550,10 @@ Si la ejecución falla, consulta esta tabla:
 
 | Error | Código HTTP | Causa Probable | Solución |
 |-------|-------------|----------------|----------|
-| Invalid API key | 401 | API key incorrecta o expirada | Verifica la key en platform.openai.com |
+| Invalid API key | 401 | API key incorrecta o expirada | Verifica la key en platform.openai.com u openrouter.ai/keys |
 | Rate limit exceeded | 429 | Demasiadas peticiones | Espera unos segundos y reintenta |
-| Insufficient quota | 429 | Sin créditos | Añade saldo en Billing |
-| Model not found | 404 | Nombre de modelo incorrecto | Verifica que el modelo existe (ej: `gpt-4o-mini`) |
+| Insufficient quota | 429 | Sin créditos (OpenAI) | Añade saldo en Billing. Con OpenRouter usa un modelo gratuito |
+| Model not found | 404 | Nombre de modelo incorrecto | Verifica que el modelo existe. En OpenRouter consulta openrouter.ai/models |
 | Connection refused | - | n8n no puede acceder a internet | Verifica la configuración de red/Docker |
 
 ### Preguntas de Reflexión
@@ -527,6 +561,7 @@ Si la ejecución falla, consulta esta tabla:
 1. ¿Qué diferencia hay entre usar el nodo nativo de OpenAI en n8n y hacer una llamada HTTP Request manual? ¿Cuándo preferirías uno sobre el otro?
 2. ¿Qué pasaría si compartes el workflow exportado (JSON) con un compañero? ¿Se incluyen las credenciales en la exportación? ¿Por qué es importante que no se incluyan?
 3. Si quisieras usar Claude (Anthropic) en lugar de OpenAI, ¿qué cambiarías en la configuración? ¿n8n soporta múltiples proveedores de IA?
+4. ¿Qué ventajas e inconvenientes tiene usar un servicio como OpenRouter frente a usar directamente la API del proveedor (OpenAI, Anthropic, etc.)? Considera aspectos como coste, latencia, disponibilidad y variedad de modelos.
 
 ---
 
