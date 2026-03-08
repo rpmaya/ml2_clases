@@ -696,10 +696,6 @@ IMPORTAR:
 
 ---
 
-### --- DESCANSO (15 minutos) ---
-
----
-
 ## Bloque 5: Automatización de Procesos con n8n (45 minutos)
 
 ### 5.1 Triggers: Manual, Schedule, Webhook, Form Submission
