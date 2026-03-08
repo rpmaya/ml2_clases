@@ -992,10 +992,6 @@ Completa los ejercicios prácticos disponibles en [ejercicios.md](./ejercicios.m
 4. **Workflow con webhook** - Configurar un webhook que reciba datos y los procese
 5. **Expresiones y variables** - Practicar el uso de expresiones para transformar datos entre nodos
 
-### Práctica Evaluable de la Unidad
-
-Al finalizar ambas sesiones, completa la [práctica evaluable](../practica.md) de la Unidad 4.
-
 ---
 
 ## Referencias
