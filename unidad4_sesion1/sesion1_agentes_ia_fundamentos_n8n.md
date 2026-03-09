@@ -5,7 +5,7 @@
 Al finalizar esta sesión, el estudiante será capaz de:
 - Comprender qué es un agente de IA, sus componentes y el paradigma Percepción-Decisión-Acción
 - Entender la filosofía y ventajas de n8n como plataforma de automatización no-code con IA nativa
-- Instalar y configurar n8n en entorno local y en la nube (Koyeb)
+- Instalar y configurar n8n en entorno local y en la nube (Koyeb, Railway, AWS, ...)
 - Dominar la arquitectura de n8n: workflows, nodos, conexiones y credenciales
 - Construir automatizaciones básicas con triggers, acciones y expresiones
 
