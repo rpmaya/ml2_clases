@@ -10,7 +10,7 @@
 | **Unidad** | 4 - Automatización con n8n y Agentes de IA |
 | **Tipo** | Práctica individual |
 | **Duración estimada** | 120-150 minutos |
-| **Entrega** | Archivo ZIP con workflow (JSON), documentación y reflexión |
+| **Entrega** | En GitHub con workflow (JSON), documentación y reflexión |
 | **Fecha límite** | Según calendario del curso |
 
 ---
