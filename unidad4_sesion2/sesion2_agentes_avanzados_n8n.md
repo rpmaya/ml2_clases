@@ -287,12 +287,12 @@ El nodo **AI Agent** es el componente central para construir agentes inteligente
 
 #### Configuración del System Prompt
 
-El nodo AI Agent permite configurar el prompt de sistema de dos formas:
+El nodo AI Agent permite configurar el prompt de sistema de dos formas en "Options - System Message:
 
 | Opción | Cuándo Usarla | Ejemplo |
 |--------|---------------|---------|
-| **Define Below** | Prompt estático, siempre igual | "Eres un asistente de soporte técnico" |
-| **Connected Chat Model** | Prompt dinámico, depende del contexto | `{{ $json.promptPersonalizado }}` |
+| **Fixed** | Prompt estático, siempre igual | "Eres un asistente de soporte técnico" |
+| **Expression** | Prompt dinámico, depende del contexto | `{{ $json.promptPersonalizado }}` |
 
 ### 2.2 Herramientas (Tools) para Agentes
 
@@ -338,37 +338,30 @@ La función `$fromAI()` permite que el agente genere dinámicamente los parámet
 ```
 FLUJO DE $fromAI():
 
-1. El usuario pregunta: "Busca el precio del iPhone 15 en Amazon"
+1. El usuario pregunta: "Busca el precio del iPhone 17 en Google Shopping"
 
 2. El AI Agent decide usar la herramienta HTTP Request
 
 3. $fromAI() genera los parámetros:
-   ┌──────────────────────────────────────────┐
-   │  HTTP Request Tool                       │
-   │                                          │
-   │  URL: https://api.amazon.com/search      │
-   │  Query: {{ $fromAI("query", "string",    │
-   │           "Término de búsqueda") }}      │
-   │                                          │
-   │  → El agente rellena: "iPhone 15 precio" │
-   └──────────────────────────────────────────┘
+   ┌──────────────────────────────────────────────────────┐
+   │  HTTP Request Tool                                   │
+   │                                                      │
+   │  URL: https://serpapi.com/search                     │
+   │  Parámetros:                                         │
+   │    engine: google_shopping                           │
+   │    q: "Defined automatically by the model"           │
+   │    api_key: <tu_api_key_de_serpapi>                  │
+   │                                                      │
+   │  → El agente rellena q: "iPhone 17 precio"           │
+   └──────────────────────────────────────────────────────┘
 
 4. n8n ejecuta la petición HTTP con el parámetro generado
 
 5. El resultado se envía de vuelta al agente para la respuesta final
 ```
 
-#### Sintaxis de $fromAI()
+> **Nota**: SerpAPI es una API real que permite hacer búsquedas en Google (incluyendo Google Shopping) y devuelve resultados estructurados en JSON. Ofrece 100 búsquedas gratuitas al mes. Obtén tu API Key en [serpapi.com](https://serpapi.com).
 
-```
-$fromAI("nombreParametro", "tipo", "descripción")
-```
-
-| Argumento | Descripción | Ejemplo |
-|-----------|-------------|---------|
-| `nombreParametro` | Nombre del parámetro que el agente debe rellenar | `"searchQuery"` |
-| `tipo` | Tipo de dato esperado: `"string"`, `"number"`, `"boolean"` | `"string"` |
-| `descripción` | Instrucción para el agente sobre qué valor generar | `"Término de búsqueda del usuario"` |
 
 ### 2.3 System Prompts Efectivos para Agentes en n8n
 
@@ -410,7 +403,7 @@ Un buen system prompt es determinante para el comportamiento del agente. La estr
 └───────────────────────────────────────────────────────────────┘
 ```
 
-#### Ejemplo Completo de System Prompt
+#### Ejemplo Completo de System Prompt (Options / System Message)
 
 ```
 Eres un asistente virtual de soporte técnico para la empresa TechStore.
@@ -464,9 +457,9 @@ WORKFLOW: AGENTE Q&A CON HERRAMIENTAS
 │               │     │   que busca en Wikipedia y calcula"  │
 │               │     │                                      │
 │               │     │  ┌────────────┐  ┌────────────────┐  │
-│               │     │  │ OpenAI     │  │ Window Buffer  │  │
-│               │     │  │ Chat Model │  │ Memory         │  │
-│               │     │  │ gpt-4o-mini│  │                │  │
+│               │     │  │ OpenRouter │  │ Window Buffer  │  │
+│               │     │  │ Chat Model │  │ Memory (10)    │  │
+│               │     │  │ trinity    │  │                │  │
 │               │     │  └────────────┘  └────────────────┘  │
 │               │     │                                      │
 │               │     │  ┌────────────┐  ┌────────────────┐  │
@@ -483,7 +476,7 @@ WORKFLOW: AGENTE Q&A CON HERRAMIENTAS
 | 1 | Crear nuevo workflow | Nombre: "Agente Q&A" |
 | 2 | Añadir **Chat Trigger** | Arrastrarlo al canvas |
 | 3 | Añadir **AI Agent** | Conectar salida del Chat Trigger a la entrada del AI Agent |
-| 4 | Configurar **System Prompt** | Source: "Define Below". Escribir el prompt con estructura RTRF |
+| 4 | Configurar **System Prompt** | Add Optin: "System Message". Escribir el prompt con estructura RTRF |
 | 5 | Añadir **OpenAI Chat Model** | Subnodo del AI Agent. Seleccionar gpt-4o-mini. Configurar credenciales |
 | 6 | Añadir **Wikipedia** | Subnodo Tool del AI Agent. Sin configuración adicional |
 | 7 | Añadir **Calculator** | Subnodo Tool del AI Agent. Sin configuración adicional |
@@ -505,10 +498,6 @@ Usuario: "¿Cuál es la población de Japón y cuánto es el 10% de esa cifra?"
 Agente: [Usa Wikipedia + Calculator] → "Japón tiene ~125 millones...
          El 10% es 12.5 millones"
 ```
-
----
-
-## --- DESCANSO 15 minutos ---
 
 ---
 
