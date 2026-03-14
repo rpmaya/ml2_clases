@@ -105,6 +105,7 @@ OpenRouter actúa como proxy unificado que expone una API compatible con OpenAI,
 │  │             google/gemini-2.0-flash                  │    │
 │  │             meta-llama/llama-3.3-70b-instruct        │    │
 │  │             mistralai/mistral-large                  │    │
+   │             arcee-ai/trinity-large-preview:free      │    │
 │  └──────────────────────────────────────────────────────┘    │
 │                                                              │
 │  Ventajas:                                                   │
