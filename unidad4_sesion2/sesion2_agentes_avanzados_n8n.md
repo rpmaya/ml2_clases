@@ -636,7 +636,7 @@ Para mantener el historial de conversaciones entre reinicios del servidor, n8n o
 | **PostgreSQL** | SQL relacional | Robusto, maduro, buen ecosistema | Media |
 | **Supabase** | PostgreSQL cloud | Gratis (tier inicial), API REST incluida | Baja |
 | **Redis** | Key-value en memoria | Muy rápido, ideal para alta concurrencia | Media |
-| **Motorhead** | Servicio de memoria | Diseñado específicamente para chat | Baja |
+| **Motorhead** | Servicio de memoria | Diseñado específicamente para chat (deprecated) | Baja |
 
 #### Configuración de PostgreSQL Chat Memory
 
@@ -657,6 +657,7 @@ CONFIGURACIÓN: POSTGRESQL CHAT MEMORY
    │ Password: ********             │
    │ Table:    chat_histories       │
    └────────────────────────────────┘
+   Nota: Para Supabase, "Connect to your project" con Method: Session pooler
 
 4. n8n crea automáticamente la tabla si no existe
 
@@ -822,9 +823,9 @@ WORKFLOW: AGENTE EN TELEGRAM
 ┌──────────────────┐     ┌───────────────────────────────────┐
 │  Telegram        │────►│  AI Agent                         │
 │  Trigger         │     │                                   │
-│                  │     │  Chat Model: gpt-4o-mini          │
-│  Evento:         │     │  Memory: Window Buffer            │
-│  "message"       │     │  Session ID:                      │
+│                  │     │  Chat Model: trinity-large-preview│
+│  Evento:         │     │  Memory: Postgres Chat Memory     │
+│  "Message"       │     │  Session ID:                      │
 │                  │     │  {{ $json.message.chat.id }}      │
 │  Credenciales:   │     │                                   │
 │  Bot Token       │     │  Tools: Wikipedia, Calculator     │
