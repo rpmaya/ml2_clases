@@ -248,32 +248,32 @@ WORKFLOW: CHAT BÁSICO CON IA
 El nodo **AI Agent** es el componente central para construir agentes inteligentes en n8n. A diferencia del Basic LLM Chain, el AI Agent puede usar herramientas, mantener memoria y tomar decisiones autónomas.
 
 ```
-┌──────────────────────────────────────────────────────────────┐
-│                  ANATOMÍA DEL NODO AI AGENT                    │
-│                                                               │
-│  ┌───────────────────────────────────────────────────────┐   │
-│  │                    AI AGENT                            │   │
-│  │                                                        │   │
-│  │   ┌─────────────────┐  ┌──────────────────────────┐   │   │
-│  │   │  Chat Model      │  │  System Prompt             │   │   │
-│  │   │  (obligatorio)   │  │  (Rol + Tareas +           │   │   │
-│  │   │  OpenAI/Gemini/  │  │   Restricciones + Formato) │   │   │
-│  │   │  Claude/Ollama   │  │                            │   │   │
-│  │   └─────────────────┘  └──────────────────────────┘   │   │
-│  │                                                        │   │
-│  │   ┌─────────────────┐  ┌──────────────────────────┐   │   │
-│  │   │  Memory          │  │  Tools                     │   │   │
-│  │   │  (opcional)      │  │  (opcionales)              │   │   │
-│  │   │  Window Buffer   │  │  Wikipedia, Calculator,    │   │   │
-│  │   │  PostgreSQL      │  │  Google Sheets, Custom...  │   │   │
-│  │   │  Redis           │  │                            │   │   │
-│  │   └─────────────────┘  └──────────────────────────┘   │   │
-│  │                                                        │   │
-│  └───────────────────────────────────────────────────────┘   │
-│                                                               │
-│  Entrada:  {{ $json.chatInput }} del Chat Trigger             │
-│  Salida:   Respuesta generada por el agente                   │
-└──────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────┐
+│                  ANATOMÍA DEL NODO AI AGENT                 │
+│                                                             │
+│  ┌───────────────────────────────────────────────────────┐  │
+│  │                    AI AGENT                           │  │
+│  │                                                       │  │
+│  │   ┌─────────────────┐  ┌───────────────────────────┐  │  │
+│  │   │  Chat Model     │  │  System Prompt            │  │  │
+│  │   │  (obligatorio)  │  │  (Rol + Tareas +          │  │  │
+│  │   │  OpenAI/Gemini/ │  │   Restricciones + Formato)│  │  │
+│  │   │  Claude/Ollama  │  │                           │  │  │
+│  │   └─────────────────┘  └───────────────────────────┘  │  │
+│  │                                                       │  │
+│  │   ┌─────────────────┐  ┌──────────────────────────┐   │  │
+│  │   │  Memory         │  │  Tools                   │   │  │
+│  │   │  (opcional)     │  │  (opcionales)            │   │  │
+│  │   │  Window Buffer  │  │  Wikipedia, Calculator,  │   │  │
+│  │   │  PostgreSQL     │  │  Google Sheets, Custom...│   │  │
+│  │   │  Redis          │  │                          │   │  │
+│  │   └─────────────────┘  └──────────────────────────┘   │  │
+│  │                                                       │  │
+│  └───────────────────────────────────────────────────────┘  │
+│                                                             │
+│  Entrada:  {{ $json.chatInput }} del Chat Trigger           │
+│  Salida:   Respuesta generada por el agente                 │
+└─────────────────────────────────────────────────────────────┘
 ```
 
 #### Componentes del AI Agent
@@ -304,20 +304,20 @@ Las herramientas son la clave que diferencia a un agente de un simple chatbot. P
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│              HERRAMIENTAS NATIVAS DEL AI AGENT                │
-│                                                              │
-│  Información:        Productividad:        Comunicación:     │
+│              HERRAMIENTAS NATIVAS DEL AI AGENT              │
+│                                                             │
+│  Información:        Productividad:        Comunicación:    │
 │  ┌────────────────┐  ┌────────────────┐  ┌───────────────┐  │
-│  │ Wikipedia       │  │ Google Sheets   │  │ Gmail          │  │
-│  │ WolframAlpha    │  │ Google Calendar │  │ Slack          │  │
-│  │ SerpAPI         │  │ Notion          │  │ Telegram       │  │
+│  │ Wikipedia      │  │ Google Sheets  │  │ Gmail         │  │
+│  │ WolframAlpha   │  │ Google Calendar│  │ Slack         │  │
+│  │ SerpAPI        │  │ Notion         │  │ Telegram      │  │
 │  └────────────────┘  └────────────────┘  └───────────────┘  │
-│                                                              │
-│  Utilidades:         Código:              Datos:             │
+│                                                             │
+│  Utilidades:         Código:              Datos:            │
 │  ┌────────────────┐  ┌────────────────┐  ┌───────────────┐  │
-│  │ Calculator       │  │ Code Tool       │  │ HTTP Request   │  │
-│  │ Date/Time        │  │ Execute         │  │ Database       │  │
-│  │ Text Formatter   │  │ Workflow        │  │ Vector Store   │  │
+│  │ Calculator     │  │ Code Tool      │  │ HTTP Request  │  │
+│  │ Date/Time      │  │ Execute        │  │ Database      │  │
+│  │ Text Formatter │  │ Workflow       │  │ Vector Store  │  │
 │  └────────────────┘  └────────────────┘  └───────────────┘  │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -344,13 +344,13 @@ FLUJO DE $fromAI():
 
 3. $fromAI() genera los parámetros:
    ┌──────────────────────────────────────────┐
-   │  HTTP Request Tool                        │
-   │                                           │
-   │  URL: https://api.amazon.com/search       │
-   │  Query: {{ $fromAI("query", "string",     │
-   │           "Término de búsqueda") }}        │
-   │                                           │
-   │  → El agente rellena: "iPhone 15 precio"  │
+   │  HTTP Request Tool                       │
+   │                                          │
+   │  URL: https://api.amazon.com/search      │
+   │  Query: {{ $fromAI("query", "string",    │
+   │           "Término de búsqueda") }}      │
+   │                                          │
+   │  → El agente rellena: "iPhone 15 precio" │
    └──────────────────────────────────────────┘
 
 4. n8n ejecuta la petición HTTP con el parámetro generado
@@ -377,7 +377,7 @@ Un buen system prompt es determinante para el comportamiento del agente. La estr
 #### Estructura Recomendada
 
 ```
-┌──────────────────────────────────────────────────────────────┐
+┌───────────────────────────────────────────────────────────────┐
 │           ESTRUCTURA DE SYSTEM PROMPT PARA AGENTES            │
 │                                                               │
 │  1. ROL                                                       │
@@ -407,7 +407,7 @@ Un buen system prompt es determinante para el comportamiento del agente. La estr
 │     "Tienes disponibles las siguientes herramientas:          │
 │      - Wikipedia: para buscar información general             │
 │      - Calculator: para cálculos de precios y descuentos"     │
-└──────────────────────────────────────────────────────────────┘
+└───────────────────────────────────────────────────────────────┘
 ```
 
 #### Ejemplo Completo de System Prompt
@@ -456,24 +456,24 @@ Construyamos paso a paso un agente que puede buscar información y hacer cálcul
 ```
 WORKFLOW: AGENTE Q&A CON HERRAMIENTAS
 
-┌──────────────┐     ┌──────────────────────────────────────┐
-│  Chat         │────►│  AI Agent                             │
+┌───────────────┐     ┌──────────────────────────────────────┐
+│  Chat         │────►│  AI Agent                            │
 │  Trigger      │     │                                      │
 │               │     │  System Prompt:                      │
 │               │     │  "Eres un asistente de investigación │
 │               │     │   que busca en Wikipedia y calcula"  │
 │               │     │                                      │
-│               │     │  ┌────────────┐  ┌───────────────┐  │
+│               │     │  ┌────────────┐  ┌────────────────┐  │
 │               │     │  │ OpenAI     │  │ Window Buffer  │  │
 │               │     │  │ Chat Model │  │ Memory         │  │
 │               │     │  │ gpt-4o-mini│  │                │  │
-│               │     │  └────────────┘  └───────────────┘  │
+│               │     │  └────────────┘  └────────────────┘  │
 │               │     │                                      │
-│               │     │  ┌────────────┐  ┌───────────────┐  │
+│               │     │  ┌────────────┐  ┌────────────────┐  │
 │               │     │  │ Wikipedia  │  │ Calculator     │  │
 │               │     │  │ Tool       │  │ Tool           │  │
-│               │     │  └────────────┘  └───────────────┘  │
-└──────────────┘     └──────────────────────────────────────┘
+│               │     │  └────────────┘  └────────────────┘  │
+└───────────────┘     └──────────────────────────────────────┘
 ```
 
 #### Paso a Paso de Construcción
@@ -520,26 +520,26 @@ Los LLMs son **stateless** por naturaleza: cada llamada a la API es independient
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│              PROBLEMA: LLMs SON STATELESS                      │
-│                                                               │
-│  Sin memoria:                                                 │
+│              PROBLEMA: LLMs SON STATELESS                    │
+│                                                              │
+│  Sin memoria:                                                │
 │  ┌─────────────────────────────────────────────────┐         │
-│  │ Usuario: "Me llamo Carlos"                       │         │
+│  │ Usuario: "Me llamo Carlos"                      │         │
 │  │ Agente:  "¡Hola Carlos! ¿En qué puedo ayudarte?"│         │
-│  │                                                  │         │
-│  │ Usuario: "¿Cómo me llamo?"                       │         │
+│  │                                                 │         │
+│  │ Usuario: "¿Cómo me llamo?"                      │         │
 │  │ Agente:  "No tengo esa información."   ← ERROR  │         │
 │  └─────────────────────────────────────────────────┘         │
-│                                                               │
-│  Con memoria:                                                 │
+│                                                              │
+│  Con memoria:                                                │
 │  ┌─────────────────────────────────────────────────┐         │
-│  │ Usuario: "Me llamo Carlos"                       │         │
+│  │ Usuario: "Me llamo Carlos"                      │         │
 │  │ Agente:  "¡Hola Carlos! ¿En qué puedo ayudarte?"│         │
-│  │ [Memoria guarda: user="Me llamo Carlos",         │         │
-│  │  assistant="¡Hola Carlos!..."]                   │         │
-│  │                                                  │         │
-│  │ Usuario: "¿Cómo me llamo?"                       │         │
-│  │ [Memoria inyecta historial en el prompt]         │         │
+│  │ [Memoria guarda: user="Me llamo Carlos",        │         │
+│  │  assistant="¡Hola Carlos!..."]                  │         │
+│  │                                                 │         │
+│  │ Usuario: "¿Cómo me llamo?"                      │         │
+│  │ [Memoria inyecta historial en el prompt]        │         │
 │  │ Agente:  "Te llamas Carlos."           ← OK     │         │
 │  └─────────────────────────────────────────────────┘         │
 └──────────────────────────────────────────────────────────────┘
@@ -557,13 +557,13 @@ Los LLMs son **stateless** por naturaleza: cada llamada a la API es independient
 La **Window Buffer Memory** es el tipo de memoria más común en n8n. Almacena los últimos N turnos de conversación en un buffer temporal.
 
 ```
-┌──────────────────────────────────────────────────────────────┐
-│              WINDOW BUFFER MEMORY                              │
+┌───────────────────────────────────────────────────────────────┐
+│              WINDOW BUFFER MEMORY                             │
 │                                                               │
 │  Context Window Length = 5 (guarda 5 pares user/assistant)    │
 │                                                               │
 │  Buffer:                                                      │
-│  ┌──────────────────────────────────────────────────┐        │
+│  ┌───────────────────────────────────────────────────┐        │
 │  │ [1] User: "Hola, me llamo Ana"                    │        │
 │  │     Assistant: "¡Hola Ana!"                       │        │
 │  │ [2] User: "Quiero saber sobre Python"             │        │
@@ -572,13 +572,13 @@ La **Window Buffer Memory** es el tipo de memoria más común en n8n. Almacena l
 │  │     Assistant: "Las principales son pandas..."    │        │
 │  │ [4] User: "¿Cómo instalo pandas?"                 │        │
 │  │     Assistant: "Ejecuta: pip install pandas"      │        │
-│  │ [5] User: "¿Cómo me llamo?"    ← ¡Todavía       │        │
+│  │ [5] User: "¿Cómo me llamo?"    ← ¡Todavía         │        │
 │  │     Assistant: "Te llamas Ana"     en el buffer!  │        │
-│  └──────────────────────────────────────────────────┘        │
+│  └───────────────────────────────────────────────────┘        │
 │                                                               │
 │  Si llega el turno [6], se elimina el turno [1]               │
 │  (ventana deslizante)                                         │
-└──────────────────────────────────────────────────────────────┘
+└───────────────────────────────────────────────────────────────┘
 ```
 
 #### Configuración en n8n
@@ -620,25 +620,25 @@ Para mantener el historial de conversaciones entre reinicios del servidor, n8n o
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│           OPCIONES DE MEMORIA PERSISTENTE EN n8n               │
-│                                                               │
-│  ┌────────────────────┐  ┌────────────────────┐              │
-│  │  PostgreSQL          │  │  Supabase            │              │
-│  │  Chat Memory         │  │  Chat Memory         │              │
-│  │  ──────────────────  │  │  ──────────────────  │              │
-│  │  Base de datos SQL   │  │  PostgreSQL en la    │              │
-│  │  Auto-hosted         │  │  nube (gratuito)     │              │
-│  │  Mayor control       │  │  Fácil de configurar │              │
-│  └────────────────────┘  └────────────────────┘              │
-│                                                               │
-│  ┌────────────────────┐  ┌────────────────────┐              │
-│  │  Redis               │  │  Motorhead           │              │
-│  │  Chat Memory         │  │  Chat Memory         │              │
-│  │  ──────────────────  │  │  ──────────────────  │              │
-│  │  Base de datos       │  │  Servicio             │              │
-│  │  en memoria,         │  │  especializado en    │              │
-│  │  muy rápida          │  │  memoria de chat     │              │
-│  └────────────────────┘  └────────────────────┘              │
+│           OPCIONES DE MEMORIA PERSISTENTE EN n8n             │
+│                                                              │
+│  ┌────────────────────┐  ┌──────────────────────┐            │
+│  │  PostgreSQL        │  │  Supabase            │            │
+│  │  Chat Memory       │  │  Chat Memory         │            │
+│  │  ──────────────────│  │  ──────────────────  │            │
+│  │  Base de datos SQL │  │  PostgreSQL en la    │            │
+│  │  Auto-hosted       │  │  nube (gratuito)     │            │
+│  │  Mayor control     │  │  Fácil de configurar │            │
+│  └────────────────────┘  └──────────────────────┘            │
+│                                                              │
+│  ┌────────────────────┐  ┌──────────────────────┐            │
+│  │  Redis             │  │  Motorhead           │            │
+│  │  Chat Memory       │  │  Chat Memory         │            │
+│  │  ──────────────────│  │  ──────────────────  │            │
+│  │  Base de datos     │  │  Servicio            │            │
+│  │  en memoria,       │  │  especializado en    │            │
+│  │  muy rápida        │  │  memoria de chat     │            │
+│  └────────────────────┘  └──────────────────────┘            │
 └──────────────────────────────────────────────────────────────┘
 ```
 
@@ -661,23 +661,23 @@ CONFIGURACIÓN: POSTGRESQL CHAT MEMORY
 
 3. Credenciales:
    ┌────────────────────────────────┐
-   │ Host:     localhost             │
-   │ Port:     5432                  │
-   │ Database: n8n_memory            │
-   │ User:     postgres              │
-   │ Password: ********              │
-   │ Table:    chat_histories        │
+   │ Host:     localhost            │
+   │ Port:     5432                 │
+   │ Database: n8n_memory           │
+   │ User:     postgres             │
+   │ Password: ********             │
+   │ Table:    chat_histories       │
    └────────────────────────────────┘
 
 4. n8n crea automáticamente la tabla si no existe
 
 5. Estructura de la tabla:
    ┌────────────┬──────────┬─────────────────────┐
-   │ session_id │ role     │ content              │
+   │ session_id │ role     │ content             │
    ├────────────┼──────────┼─────────────────────┤
-   │ user_123   │ user     │ "Me llamo Carlos"    │
-   │ user_123   │ assistant│ "¡Hola Carlos!"      │
-   │ user_456   │ user     │ "Hola, soy Ana"      │
+   │ user_123   │ user     │ "Me llamo Carlos"   │
+   │ user_123   │ assistant│ "¡Hola Carlos!"     │
+   │ user_456   │ user     │ "Hola, soy Ana"     │
    └────────────┴──────────┴─────────────────────┘
 ```
 
@@ -687,22 +687,22 @@ Cuando un agente atiende a múltiples usuarios, es fundamental que cada uno teng
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│        SESIONES: SEPARAR CONTEXTO POR USUARIO                  │
-│                                                               │
-│  Usuario A (session_id: "user_A")                             │
+│        SESIONES: SEPARAR CONTEXTO POR USUARIO                │
+│                                                              │
+│  Usuario A (session_id: "user_A")                            │
 │  ┌─────────────────────────────────────────┐                 │
-│  │ "Me llamo Ana, trabajo en Microsoft"     │                 │
-│  │ "¿Dónde trabajo?" → "En Microsoft"       │                 │
+│  │ "Me llamo Ana, trabajo en Microsoft"    │                 │
+│  │ "¿Dónde trabajo?" → "En Microsoft"      │                 │
 │  └─────────────────────────────────────────┘                 │
-│                                                               │
-│  Usuario B (session_id: "user_B")                             │
+│                                                              │
+│  Usuario B (session_id: "user_B")                            │
 │  ┌─────────────────────────────────────────┐                 │
-│  │ "Soy Pedro, estudio en la UNAM"          │                 │
-│  │ "¿Cómo me llamo?" → "Pedro"              │                 │
+│  │ "Soy Pedro, estudio en la UNAM"         │                 │
+│  │ "¿Cómo me llamo?" → "Pedro"             │                 │
 │  └─────────────────────────────────────────┘                 │
-│                                                               │
-│  Las conversaciones están COMPLETAMENTE aisladas.             │
-│  Ana no puede ver la conversación de Pedro y viceversa.       │
+│                                                              │
+│  Las conversaciones están COMPLETAMENTE aisladas.            │
+│  Ana no puede ver la conversación de Pedro y viceversa.      │
 └──────────────────────────────────────────────────────────────┘
 ```
 
@@ -724,17 +724,13 @@ Window Buffer Memory / PostgreSQL Chat Memory:
 
 Session ID:
   ┌──────────────────────────────────────────┐
-  │  Opción 1: "Connected Chat Trigger"       │  ← Automático
-  │  Opción 2: "Define Below"                 │  ← Manual
-  │             {{ $json.message.chat.id }}    │
+  │  Opción 1: "Connected Chat Trigger"      │  ← Automático
+  │  Opción 2: "Define Below"                │  ← Manual
+  │             {{ $json.message.chat.id }}  │
   └──────────────────────────────────────────┘
 ```
 
 > **Buena práctica**: Usar siempre un Session ID que identifique unívocamente al usuario o conversación. Esto es crítico cuando el agente se despliega en canales con múltiples usuarios concurrentes.
-
----
-
-## --- DESCANSO 15 minutos ---
 
 ---
 
@@ -748,27 +744,27 @@ n8n proporciona dos formas de interactuar con el agente a través de chat: una i
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│              CHAT INTERNO DE n8n                                │
-│                                                               │
-│  Acceso: Botón "Chat" en la barra superior del workflow       │
-│                                                               │
+│              CHAT INTERNO DE n8n                             │
+│                                                              │
+│  Acceso: Botón "Chat" en la barra superior del workflow      │
+│                                                              │
 │  ┌──────────────────────────────────────────────────┐        │
-│  │  n8n Chat (Test Mode)                             │        │
+│  │  n8n Chat (Test Mode)                            │        │
 │  ├──────────────────────────────────────────────────┤        │
-│  │                                                   │        │
+│  │                                                  │        │
 │  │  Agente: ¡Hola! ¿En qué puedo ayudarte?          │        │
-│  │                                                   │        │
-│  │  Tú: ¿Quién fue Marie Curie?                      │        │
-│  │                                                   │        │
-│  │  Agente: [Consultando Wikipedia...]               │        │
-│  │  Marie Curie fue una científica polaca...         │        │
-│  │                                                   │        │
+│  │                                                  │        │
+│  │  Tú: ¿Quién fue Marie Curie?                     │        │
+│  │                                                  │        │
+│  │  Agente: [Consultando Wikipedia...]              │        │
+│  │  Marie Curie fue una científica polaca...        │        │
+│  │                                                  │        │
 │  ├──────────────────────────────────────────────────┤        │
-│  │  [Escribe tu mensaje...]              [Enviar]    │        │
+│  │  [Escribe tu mensaje...]              [Enviar]   │        │
 │  └──────────────────────────────────────────────────┘        │
-│                                                               │
-│  Uso: Pruebas rápidas durante el desarrollo                   │
-│  Limitación: Solo accesible dentro de n8n                     │
+│                                                              │
+│  Uso: Pruebas rápidas durante el desarrollo                  │
+│  Limitación: Solo accesible dentro de n8n                    │
 └──────────────────────────────────────────────────────────────┘
 ```
 
@@ -835,27 +831,27 @@ CREACIÓN DE BOT EN TELEGRAM:
 WORKFLOW: AGENTE EN TELEGRAM
 
 ┌──────────────────┐     ┌───────────────────────────────────┐
-│  Telegram         │────►│  AI Agent                          │
-│  Trigger          │     │                                   │
-│                   │     │  Chat Model: gpt-4o-mini          │
-│  Evento:          │     │  Memory: Window Buffer            │
-│  "message"        │     │  Session ID:                      │
-│                   │     │  {{ $json.message.chat.id }}      │
-│  Credenciales:    │     │                                   │
-│  Bot Token        │     │  Tools: Wikipedia, Calculator     │
-│                   │     │                                   │
+│  Telegram        │────►│  AI Agent                         │
+│  Trigger         │     │                                   │
+│                  │     │  Chat Model: gpt-4o-mini          │
+│  Evento:         │     │  Memory: Window Buffer            │
+│  "message"       │     │  Session ID:                      │
+│                  │     │  {{ $json.message.chat.id }}      │
+│  Credenciales:   │     │                                   │
+│  Bot Token       │     │  Tools: Wikipedia, Calculator     │
+│                  │     │                                   │
 └──────────────────┘     └─────────────┬─────────────────────┘
                                        │
                                        ▼
                          ┌───────────────────────────────────┐
-                         │  Telegram                          │
-                         │  Send Message                      │
+                         │  Telegram                         │
+                         │  Send Message                     │
                          │                                   │
-                         │  Chat ID:                          │
-                         │  {{ $json.message.chat.id }}       │
+                         │  Chat ID:                         │
+                         │  {{ $json.message.chat.id }}      │
                          │                                   │
-                         │  Text:                             │
-                         │  {{ $json.output }}                │
+                         │  Text:                            │
+                         │  {{ $json.output }}               │
                          └───────────────────────────────────┘
 ```
 
@@ -895,12 +891,12 @@ El nodo Webhook permite que cualquier aplicación externa interactúe con el age
 WORKFLOW: AGENTE VÍA WEBHOOK
 
 ┌──────────────────┐     ┌──────────────────┐     ┌──────────────┐
-│  Webhook          │────►│  AI Agent         │────►│  Respond to   │
-│  Trigger          │     │                   │     │  Webhook      │
-│                   │     │  Chat Model       │     │               │
-│  Method: POST     │     │  Memory           │     │  Respuesta    │
-│  Path: /mi-agente │     │  Tools            │     │  JSON         │
-│                   │     │                   │     │               │
+│  Webhook         │────►│  AI Agent        │────►│  Respond to  │
+│  Trigger         │     │                  │     │  Webhook     │
+│                  │     │  Chat Model      │     │              │
+│  Method: POST    │     │  Memory          │     │  Respuesta   │
+│  Path: /mi-agente│     │  Tools           │     │  JSON        │
+│                  │     │                  │     │              │
 └──────────────────┘     └──────────────────┘     └──────────────┘
 ```
 
@@ -937,26 +933,26 @@ La integración con WhatsApp es posible pero requiere pasos adicionales debido a
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│           INTEGRACIÓN CON WHATSAPP BUSINESS                    │
-│                                                               │
-│  Requisitos:                                                  │
+│           INTEGRACIÓN CON WHATSAPP BUSINESS                  │
+│                                                              │
+│  Requisitos:                                                 │
 │  ┌──────────────────────────────────────────────────┐        │
-│  │ 1. Cuenta de Meta Business verificada             │        │
-│  │ 2. Aplicación creada en Meta for Developers       │        │
-│  │ 3. Número de teléfono dedicado para WhatsApp      │        │
-│  │ 4. Acceso a la WhatsApp Business API              │        │
-│  │ 5. Webhook configurado para recibir mensajes      │        │
+│  │ 1. Cuenta de Meta Business verificada            │        │
+│  │ 2. Aplicación creada en Meta for Developers      │        │
+│  │ 3. Número de teléfono dedicado para WhatsApp     │        │
+│  │ 4. Acceso a la WhatsApp Business API             │        │
+│  │ 5. Webhook configurado para recibir mensajes     │        │
 │  └──────────────────────────────────────────────────┘        │
-│                                                               │
-│  Flujo:                                                       │
-│  ┌────────┐    ┌──────────┐    ┌────────┐    ┌────────────┐ │
-│  │WhatsApp│───►│ Meta API  │───►│Webhook │───►│ AI Agent   │ │
-│  │Usuario │    │          │    │ n8n    │    │            │ │
-│  │        │◄───│          │◄───│        │◄───│            │ │
-│  └────────┘    └──────────┘    └────────┘    └────────────┘ │
-│                                                               │
-│  Alternativa más sencilla: servicios intermediarios           │
-│  como Twilio o 360dialog que simplifican la integración.      │
+│                                                              │
+│  Flujo:                                                      │
+│  ┌────────┐    ┌──────────┐    ┌────────┐    ┌────────────┐  │
+│  │WhatsApp│───►│ Meta API │───►│Webhook │───►│ AI Agent   │  │
+│  │Usuario │    │          │    │ n8n    │    │            │  │
+│  │        │◄───│          │◄───│        │◄───│            │  │
+│  └────────┘    └──────────┘    └────────┘    └────────────┘  │
+│                                                              │
+│  Alternativa más sencilla: servicios intermediarios          │
+│  como Twilio o 360dialog que simplifican la integración.     │
 └──────────────────────────────────────────────────────────────┘
 ```
 
@@ -989,13 +985,13 @@ Construir un agente completo de investigación que:
 
 ```
 ┌─────────────────────────────────────────────┐
-│  Nodo: Chat Trigger                          │
-│                                              │
-│  Configuración: Ninguna necesaria            │
-│  Salida: {{ $json.chatInput }}               │
-│                                              │
-│  Este nodo proporciona la interfaz de chat   │
-│  interna de n8n para pruebas.                │
+│  Nodo: Chat Trigger                         │
+│                                             │
+│  Configuración: Ninguna necesaria           │
+│  Salida: {{ $json.chatInput }}              │
+│                                             │
+│  Este nodo proporciona la interfaz de chat  │
+│  interna de n8n para pruebas.               │
 └─────────────────────────────────────────────┘
 ```
 
@@ -1003,19 +999,19 @@ Construir un agente completo de investigación que:
 
 ```
 ┌─────────────────────────────────────────────┐
-│  Nodo: AI Agent                              │
-│                                              │
-│  Prompt: {{ $json.chatInput }}               │
-│                                              │
-│  Subnodo Chat Model:                         │
+│  Nodo: AI Agent                             │
+│                                             │
+│  Prompt: {{ $json.chatInput }}              │
+│                                             │
+│  Subnodo Chat Model:                        │
 │  ┌─────────────────────────────────────┐    │
-│  │  Tipo: OpenAI Chat Model             │    │
-│  │  Modelo: gpt-4o-mini                 │    │
-│  │  Temperature: 0.7                     │    │
-│  │  Credencial: Tu API Key de OpenAI     │    │
-│  │                                       │    │
-│  │  Alternativa: Google Gemini           │    │
-│  │  Modelo: gemini-1.5-flash             │    │
+│  │  Tipo: OpenAI Chat Model            │    │
+│  │  Modelo: gpt-4o-mini                │    │
+│  │  Temperature: 0.7                   │    │
+│  │  Credencial: Tu API Key de OpenAI   │    │
+│  │                                     │    │
+│  │  Alternativa: Google Gemini         │    │
+│  │  Modelo: gemini-1.5-flash           │    │
 │  └─────────────────────────────────────┘    │
 └─────────────────────────────────────────────┘
 ```
@@ -1050,13 +1046,13 @@ Eres un asistente de investigación y cálculo llamado "InvestigaBot".
 
 ```
 ┌─────────────────────────────────────────────┐
-│  Subnodo: Window Buffer Memory               │
-│                                              │
-│  Context Window Length: 10                    │
-│  Session ID: Connected Chat Trigger          │
-│                                              │
-│  Esto permite que el agente recuerde los     │
-│  últimos 10 turnos de conversación.          │
+│  Subnodo: Window Buffer Memory              │
+│                                             │
+│  Context Window Length: 10                  │
+│  Session ID: Connected Chat Trigger         │
+│                                             │
+│  Esto permite que el agente recuerde los    │
+│  últimos 10 turnos de conversación.         │
 └─────────────────────────────────────────────┘
 ```
 
@@ -1064,12 +1060,12 @@ Eres un asistente de investigación y cálculo llamado "InvestigaBot".
 
 ```
 ┌─────────────────────────────────────────────┐
-│  Subnodo Tool: Wikipedia                     │
-│                                              │
-│  Configuración: Ninguna necesaria            │
-│                                              │
-│  El agente decidirá autónomamente cuándo     │
-│  buscar en Wikipedia según la pregunta.      │
+│  Subnodo Tool: Wikipedia                    │
+│                                             │
+│  Configuración: Ninguna necesaria           │
+│                                             │
+│  El agente decidirá autónomamente cuándo    │
+│  buscar en Wikipedia según la pregunta.     │
 └─────────────────────────────────────────────┘
 ```
 
@@ -1077,12 +1073,12 @@ Eres un asistente de investigación y cálculo llamado "InvestigaBot".
 
 ```
 ┌─────────────────────────────────────────────┐
-│  Subnodo Tool: Calculator                    │
-│                                              │
-│  Configuración: Ninguna necesaria            │
-│                                              │
-│  El agente decidirá cuándo necesita          │
-│  realizar un cálculo matemático.             │
+│  Subnodo Tool: Calculator                   │
+│                                             │
+│  Configuración: Ninguna necesaria           │
+│                                             │
+│  El agente decidirá cuándo necesita         │
+│  realizar un cálculo matemático.            │
 └─────────────────────────────────────────────┘
 ```
 
@@ -1117,27 +1113,27 @@ Para los estudiantes que quieran ir un paso más allá:
 
 ```
 ┌──────────────────────────────────────────────────────────────────┐
-│              WORKFLOW COMPLETO: INVESTIGA-BOT                      │
-│                                                                   │
+│              WORKFLOW COMPLETO: INVESTIGA-BOT                    │
+│                                                                  │
 │  ┌──────────────┐     ┌──────────────────────────────────────┐   │
-│  │  Chat Trigger  │────►│  AI Agent                            │   │
-│  │  (o Telegram   │     │                                      │   │
-│  │   Trigger)     │     │  System Prompt: "InvestigaBot"       │   │
+│  │  Chat Trigger│────►│  AI Agent                            │   │
+│  │  (o Telegram │     │                                      │   │
+│  │   Trigger)   │     │  System Prompt: "InvestigaBot"       │   │
 │  └──────────────┘     │                                      │   │
-│                        │  ┌──────────────┐ ┌───────────────┐ │   │
-│                        │  │ OpenAI Chat   │ │ Window Buffer  │ │   │
-│                        │  │ Model         │ │ Memory         │ │   │
-│                        │  │ gpt-4o-mini   │ │ Length: 10     │ │   │
-│                        │  └──────────────┘ └───────────────┘ │   │
-│                        │                                      │   │
-│                        │  ┌──────────────┐ ┌───────────────┐ │   │
-│                        │  │ Wikipedia     │ │ Calculator     │ │   │
-│                        │  │ Tool          │ │ Tool           │ │   │
-│                        │  └──────────────┘ └───────────────┘ │   │
-│                        │                                      │   │
-│                        └──────────────────────────────────────┘   │
-│                                                                   │
-│  Si Telegram: añadir nodo Telegram Send Message al final          │
+│                       │  ┌──────────────┐ ┌───────────────┐  │   │
+│                       │  │ OpenAI Chat  │ │ Window Buffer │  │   │
+│                       │  │ Model        │ │ Memory        │  │   │
+│                       │  │ gpt-4o-mini  │ │ Length: 10    │  │   │
+│                       │  └──────────────┘ └───────────────┘  │   │
+│                       │                                      │   │
+│                       │  ┌──────────────┐ ┌───────────────┐  │   │
+│                       │  │ Wikipedia    │ │ Calculator    │  │   │
+│                       │  │ Tool         │ │ Tool          │  │   │
+│                       │  └──────────────┘ └───────────────┘  │   │
+│                       │                                      │   │
+│                       └──────────────────────────────────────┘   │
+│                                                                  │
+│  Si Telegram: añadir nodo Telegram Send Message al final         │
 └──────────────────────────────────────────────────────────────────┘
 ```
 
