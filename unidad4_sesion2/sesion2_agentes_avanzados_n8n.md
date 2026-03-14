@@ -10,8 +10,6 @@ Al finalizar esta sesión, el estudiante será capaz de:
 - Desplegar agentes en canales de comunicación reales: chat embebido, Telegram y webhooks
 - Diseñar system prompts efectivos para agentes con estructura Rol-Tareas-Restricciones-Formato
 
-## Duración Total: 4 horas
-
 ---
 
 ## Bloque 1: Inteligencia Artificial en n8n (40 minutos)
@@ -22,26 +20,26 @@ n8n incorpora un ecosistema completo de nodos de IA que permiten construir workf
 
 ```
 ┌──────────────────────────────────────────────────────────────────┐
-│              ECOSISTEMA DE NODOS DE IA EN n8n                     │
-│                                                                   │
-│  ┌─────────────────┐  ┌─────────────────┐  ┌──────────────────┐ │
-│  │  Chat Models     │  │  Embeddings      │  │  Vector Stores   │ │
-│  │  ─────────────   │  │  ─────────────   │  │  ──────────────  │ │
-│  │  OpenAI          │  │  OpenAI          │  │  Pinecone        │ │
-│  │  Anthropic       │  │  Google Gemini   │  │  Supabase        │ │
-│  │  Google Gemini   │  │  Cohere          │  │  Qdrant          │ │
-│  │  Ollama          │  │  Ollama          │  │  In-Memory       │ │
-│  └─────────────────┘  └─────────────────┘  └──────────────────┘ │
-│                                                                   │
-│  ┌─────────────────┐  ┌─────────────────┐  ┌──────────────────┐ │
-│  │  Document        │  │  Text            │  │  AI Agent        │ │
-│  │  Loaders         │  │  Splitters       │  │  ──────────────  │ │
-│  │  ─────────────   │  │  ─────────────   │  │  Agent node      │ │
-│  │  PDF             │  │  Recursive       │  │  Tools           │ │
-│  │  CSV             │  │  Character       │  │  Memory          │ │
-│  │  Google Drive    │  │  Token           │  │  Output Parser   │ │
-│  │  Notion          │  │  Markdown        │  │                  │ │
-│  └─────────────────┘  └─────────────────┘  └──────────────────┘ │
+│              ECOSISTEMA DE NODOS DE IA EN n8n                    │
+│                                                                  │
+│  ┌─────────────────┐   ┌─────────────────┐  ┌──────────────────┐ │
+│  │  Chat Models    │   │  Embeddings     │  │  Vector Stores   │ │
+│  │  ─────────────  │   │  ─────────────  │  │  ──────────────  │ │
+│  │  OpenAI         │   │  OpenAI         │  │  Pinecone        │ │
+│  │  Anthropic      │   │  Google Gemini  │  │  Supabase        │ │
+│  │  Google Gemini  │   │  Cohere         │  │  Qdrant          │ │
+│  │  Ollama         │   │  Ollama         │  │  In-Memory       │ │
+│  └─────────────────┘   └─────────────────┘  └──────────────────┘ │
+│                                                                  │
+│  ┌─────────────────┐  ┌──────────────────┐  ┌──────────────────┐ │
+│  │  Document       │  │  Text            │  │  AI Agent        │ │
+│  │  Loaders        │  │  Splitters       │  │  ──────────────  │ │
+│  │  ─────────────  │  │  ─────────────   │  │  Agent node      │ │
+│  │  PDF            │  │  Recursive       │  │  Tools           │ │
+│  │  CSV            │  │  Character       │  │  Memory          │ │
+│  │  Google Drive   │  │  Token           │  │  Output Parser   │ │
+│  │  Notion         │  │  Markdown        │  │                  │ │
+│  └─────────────────┘  └──────────────────┘  └──────────────────┘ │
 └──────────────────────────────────────────────────────────────────┘
 ```
 
@@ -67,17 +65,17 @@ El nodo más utilizado. Permite conectar con los modelos de OpenAI.
 
 ```
 ┌─────────────────────────────────────────────┐
-│         OPENAI CHAT MODEL NODE               │
+│         OPENAI CHAT MODEL NODE              │
 ├─────────────────────────────────────────────┤
-│                                              │
-│  Model:        gpt-4o / gpt-4o-mini          │
+│                                             │
+│  Model:        gpt-4o / gpt-4o-mini         │
 │  Temperature:  0.0 - 2.0 (default: 0.7)     │
-│  Max Tokens:   Límite de tokens de salida    │
-│  Top P:        Nucleus sampling              │
-│                                              │
-│  Credenciales: OpenAI API Key                │
-│  Conexión:     Se conecta como subnodo       │
-│                del AI Agent o Chain           │
+│  Max Tokens:   Límite de tokens de salida   │
+│  Top P:        Nucleus sampling             │
+│                                             │
+│  Credenciales: OpenAI API Key               │
+│  Conexión:     Se conecta como subnodo      │
+│                del AI Agent o Chain         │
 └─────────────────────────────────────────────┘
 ```
 
@@ -89,23 +87,56 @@ El nodo más utilizado. Permite conectar con los modelos de OpenAI.
 | **Google** | Google Gemini Chat Model | gemini-1.5-pro, gemini-1.5-flash | Contexto de 1M tokens, buen rendimiento |
 | **Anthropic** | Anthropic Chat Model | claude-3-sonnet, claude-3-haiku | Excelente seguimiento de instrucciones |
 | **Ollama** | Ollama Chat Model | llama3, mistral, codellama | Gratuito, privacidad total, sin API Key |
+| **OpenRouter** | OpenAI Chat Model (URL personalizada) | 200+ modelos: Claude, Gemini, Llama, Mistral... | Acceso unificado a todos los proveedores con una sola API Key |
+
+#### OpenRouter: Acceso Unificado a Múltiples Modelos
+
+OpenRouter actúa como proxy unificado que expone una API compatible con OpenAI, permitiendo acceder a más de 200 modelos de distintos proveedores con una sola cuenta y API Key.
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│              OPENROUTER EN n8n                               │
+│                                                              │
+│  Configuración del nodo OpenAI Chat Model:                   │
+│  ┌──────────────────────────────────────────────────────┐    │
+│  │  Base URL:  https://openrouter.ai/api/v1             │    │
+│  │  API Key:   sk-or-v1-xxxxxxxxxxxxx                   │    │
+│  │  Model:     anthropic/claude-3.5-sonnet              │    │
+│  │             google/gemini-2.0-flash                  │    │
+│  │             meta-llama/llama-3.3-70b-instruct        │    │
+│  │             mistralai/mistral-large                  │    │
+│  └──────────────────────────────────────────────────────┘    │
+│                                                              │
+│  Ventajas:                                                   │
+│  - Una sola API Key para todos los modelos                   │
+│  - Comparar modelos fácilmente cambiando solo el nombre      │
+│  - Acceso a modelos gratuitos (muchos disponibles en free)   │
+│  - Fallback automático si un modelo no está disponible       │
+│                                                              │
+│  Cómo obtener la API Key:                                    │
+│  https://openrouter.ai/keys                                  │
+└──────────────────────────────────────────────────────────────┘
+```
+
+> **Truco**: OpenRouter es especialmente útil en clase para probar distintos modelos sin necesidad de crear cuentas en cada proveedor.
 
 #### Modelos Locales con Ollama
 
 Ollama permite ejecutar LLMs en el propio servidor, sin enviar datos a terceros.
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│              MODELOS LOCALES CON OLLAMA                       │
+┌──────────────────────────────────────────────────────────────┐
+│              MODELOS LOCALES CON OLLAMA                      │
 │                                                              │
-│  Instalación:  curl -fsSL https://ollama.ai/install.sh | sh │
+│  Instalación:  curl -fsSL https://ollama.ai/install.sh | sh  │
+│                http://ollama.com/download/windows  (Windows) │    
 │  Ejecutar:     ollama run llama3                             │
 │                                                              │
 │  En n8n:                                                     │
-│  ┌──────────────┐     ┌──────────────────┐                   │
-│  │  Ollama Chat  │────►│  http://localhost │                  │
-│  │  Model Node   │     │  :11434           │                  │
-│  └──────────────┘     └──────────────────┘                   │
+│  ┌──────────────┐     ┌───────────────────┐                  │
+│  │  Ollama Chat │────►│  http://localhost │                  │
+│  │  Model Node  │     │  :11434           │                  │
+│  └──────────────┘     └───────────────────┘                  │
 │                                                              │
 │  Ventajas:                                                   │
 │  - Sin coste por token                                       │
@@ -115,7 +146,7 @@ Ollama permite ejecutar LLMs en el propio servidor, sin enviar datos a terceros.
 │  Limitaciones:                                               │
 │  - Requiere GPU para buen rendimiento                        │
 │  - Modelos más pequeños que los comerciales                  │
-└─────────────────────────────────────────────────────────────┘
+└──────────────────────────────────────────────────────────────┘
 ```
 
 ### 1.3 Configuración de Credenciales de IA
@@ -128,11 +159,11 @@ Para conectar n8n con proveedores de LLMs, es necesario configurar las credencia
 CONFIGURACIÓN DE CREDENCIALES EN n8n:
 
 1. Obtener la API Key
-   ┌────────────────────────────────────┐
+   ┌──────────────────────────────────────┐
    │ https://platform.openai.com/api-keys │
-   │ → Create new secret key            │
-   │ → Copiar: sk-proj-xxxxxxxxxxxxx    │
-   └────────────────────────────────────┘
+   │ → Create new secret key              │
+   │ → Copiar: sk-proj-xxxxxxxxxxxxx      │
+   └──────────────────────────────────────┘
 
 2. Crear credencial en n8n
    ┌────────────────────────────────────┐
@@ -164,6 +195,7 @@ CONFIGURACIÓN DE CREDENCIALES EN n8n:
 | Google Gemini | API Key | aistudio.google.com/apikey | Google AI |
 | Anthropic | API Key | console.anthropic.com/settings/keys | Anthropic API |
 | Ollama | Sin credencial | Local (localhost:11434) | Ollama API |
+| OpenRouter | API Key + Base URL | openrouter.ai/keys | OpenAI API (con Base URL personalizada) |
 
 > **Nota de seguridad**: Las credenciales se almacenan cifradas en la base de datos de n8n. Nunca se exponen en los workflows exportados.
 
@@ -174,7 +206,7 @@ El workflow más sencillo con IA en n8n conecta un Chat Trigger con un modelo de
 ```
 WORKFLOW: CHAT BÁSICO CON IA
 
-┌──────────────┐     ┌──────────────────┐     ┌──────────────┐
+┌───────────────┐     ┌──────────────────┐     ┌──────────────┐
 │  Chat         │────►│  Basic LLM       │────►│  Respuesta   │
 │  Trigger      │     │  Chain           │     │  al usuario  │
 │               │     │                  │     │              │
@@ -183,7 +215,7 @@ WORKFLOW: CHAT BÁSICO CON IA
 │               │     │  │ Chat Model │  │     │              │
 │               │     │  │ (subnodo)  │  │     │              │
 │               │     │  └────────────┘  │     │              │
-└──────────────┘     └──────────────────┘     └──────────────┘
+└───────────────┘     └──────────────────┘     └──────────────┘
 ```
 
 #### Configuración Paso a Paso
