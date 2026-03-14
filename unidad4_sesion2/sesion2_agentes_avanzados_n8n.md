@@ -255,7 +255,7 @@ El nodo **AI Agent** es el componente central para construir agentes inteligente
 │  │                    AI AGENT                           │  │
 │  │                                                       │  │
 │  │   ┌─────────────────┐  ┌───────────────────────────┐  │  │
-│  │   │  Chat Model     │  │  System Prompt            │  │  │
+│  │   │  Chat Model     │  │  System Prompt (Options)  │  │  │
 │  │   │  (obligatorio)  │  │  (Rol + Tareas +          │  │  │
 │  │   │  OpenAI/Gemini/ │  │   Restricciones + Formato)│  │  │
 │  │   │  Claude/Ollama  │  │                           │  │  │
