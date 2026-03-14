@@ -264,10 +264,10 @@ Construirás un asistente personal versátil que combine búsqueda de informaci�
 ### Nombre del Archivo
 
 ```
-Apellido_Nombre_U4_Practica.zip
+en tu repo de github en la carpeta practicas/unidad4
 ```
 
-### Contenido del ZIP
+### Contenido del directorio en tu repo
 
 1. **Workflow JSON:** Archivo `.json` exportado desde n8n (Menú > Descargar > Export Workflow)
 2. **Documento de pruebas:** Archivo PDF o Word con capturas de pantalla de:
@@ -281,15 +281,14 @@ Apellido_Nombre_U4_Practica.zip
    - ¿Cómo aplicarías este tipo de agentes en un contexto profesional real?
 4. **Datos auxiliares** (si aplica): Hojas de cálculo u otros archivos necesarios para reproducir el workflow
 
-> **Nota:** El Ejercicio 0 (Agente Q&A guiado) **no se entrega**. Solo se evalúa el caso práctico elegido (Caso 1, 2 o 3).
+> **Nota:** El Ejercicio 0 (Agente Q&A guiado) **no se entrega**. Solo se evalúa el caso práctico elegido (Caso 1, 2 ó 3).
 
 ### Proceso de Entrega
 
 1. Exporta el workflow desde n8n en formato JSON
 2. Prepara el documento de pruebas con capturas y reflexión
-3. Comprime todo en un archivo ZIP con el nombre indicado
-4. Sube el archivo en Blackboard antes de la fecha límite
-5. Verifica que la entrega se ha realizado correctamente
+3. Sube el contenido a un directorio de tu repo github
+4. Copia la url en Blackboard: https://github.com/tunombre/practica_unidad4/
 
 ---
 
@@ -318,6 +317,4 @@ Apellido_Nombre_U4_Practica.zip
 - Se valora la originalidad en el diseño de las instrucciones del agente y en la reflexión personal
 - Asegúrate de que el workflow exportado funciona correctamente al importarlo
 - Si usas credenciales, **no las incluyas en la entrega** (se configurarán en el entorno del evaluador)
-- En caso de dudas, consulta al profesor
 
-**Fecha de entrega:** Consultar calendario del curso
