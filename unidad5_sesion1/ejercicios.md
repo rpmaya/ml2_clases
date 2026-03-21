@@ -71,15 +71,6 @@ Una empresa SaaS con documentación técnica extensa (API reference, tutoriales,
 2. **Privacidad**: El Escenario A maneja documentos legales confidenciales. ¿Cómo afecta esto a la elección de modelo de embeddings y LLM? ¿Usarías APIs en la nube o modelos locales?
 3. **Escalabilidad**: Si el Escenario C pasa de 1.000 a 100.000 documentos, ¿qué componentes de tu arquitectura necesitarían cambiar?
 
-### Solución Esperada
-
-El alumno debe demostrar:
-- **Coherencia** entre las decisiones (por ejemplo, si elige un modelo de embeddings multilingüe, el LLM también debería soportar el idioma)
-- **Adecuación al contexto**: documentos legales largos requieren chunks más grandes que FAQs cortas
-- **Conocimiento de las opciones**: nombrar tecnologías reales (OpenAI text-embedding-3-small, Chroma, Pinecone, FAISS, etc.)
-- **Justificaciones razonadas**: no basta con elegir, hay que explicar por qué
-- En las preguntas de reflexión: argumentar que RAG es preferible a fine-tuning para datos que cambian y donde se necesita trazabilidad; que datos confidenciales requieren modelos locales o APIs con acuerdos de privacidad; que la escalabilidad afecta principalmente a la base vectorial
-
 ---
 
 ## Ejercicio 2: Experimentación con Embeddings y Similitud Semántica
@@ -241,17 +232,6 @@ plt.savefig("embeddings_2d.png", dpi=150)
 plt.show()
 ```
 
-### Solución Esperada
-
-- **A1-A2**: Similitud alta (~0.75-0.90) ya que son paráfrasis
-- **A1-A3**: Similitud moderada-alta (~0.65-0.85), los modelos multilingües capturan bien la semántica entre idiomas
-- **B1-B2-B3**: Forman un cluster coherente con similitudes internas (~0.60-0.80) superiores a las cruzadas con otros grupos
-- **C1-C2**: Similitud sorprendentemente alta (~0.85-0.95) a pesar de la negación. Este es un hallazgo clave: los embeddings capturan el tema pero no siempre la negación
-- **C1-C3**: Puede ser similar a C1-C2, mostrando que los embeddings se centran en la temática más que en el sentimiento
-- **D1-D2**: Baja similitud entre sí y con otros grupos
-
-**Conclusión clave**: Los embeddings son excelentes para capturar similitud temática pero tienen limitaciones con la negación. Esto es importante para RAG: una búsqueda de "restaurantes con mala comida" podría recuperar documentos sobre restaurantes con buena comida.
-
 ### Extensión (Opcional)
 
 - Compara los resultados usando `text-embedding-3-small` vs `text-embedding-3-large` de OpenAI. ¿El modelo más grande captura mejor la negación?
@@ -324,19 +304,6 @@ Para cada escenario, elige la base de datos vectorial más adecuada y justifica 
 ### Parte 3: Pregunta de Reflexión
 
 ¿Es posible empezar con ChromaDB para un prototipo y migrar después a Pinecone para producción? ¿Qué abstracción de LangChain facilita esta migración? ¿Qué cambios serían necesarios en el código?
-
-### Solución Esperada
-
-**Tabla**: El alumno debe completar la tabla con información precisa. Datos clave:
-- **FAISS**: Librería de Meta, C++/Python, en memoria, gratuita, sin búsqueda híbrida nativa, ideal para investigación y prototipos de alto rendimiento
-- **ChromaDB**: BD embebida, Python, disco local, open-source, ideal para prototipos y desarrollo
-- **Pinecone**: Servicio cloud, SaaS, freemium (tier gratuito limitado), serverless, búsqueda híbrida, ideal para producción sin DevOps
-- **Weaviate**: BD vectorial completa, Go, cloud o self-hosted, open-source (cloud de pago), búsqueda híbrida, ideal para producción con control
-- **pgvector**: Extensión PostgreSQL, C, se integra en PostgreSQL existente, gratuita, ideal para equipos que ya usan PostgreSQL
-
-**Escenarios**: 1-ChromaDB (simplicidad), 2-Pinecone (serverless, escalable), 3-Weaviate o FAISS self-hosted (on-premise), 4-pgvector (no introduce nueva tecnología)
-
-**Reflexión**: Sí, LangChain proporciona una interfaz `VectorStore` que abstrae la base vectorial. El cambio implica modificar la inicialización del store pero no la lógica de indexación o búsqueda.
 
 ### Extensión (Opcional)
 
@@ -528,16 +495,6 @@ Completa la siguiente tabla con los resultados de tus experimentos:
 4. Si tu documento fuera código fuente Python en lugar de texto, ¿cambiarías los separadores? ¿Cuáles usarías?
 5. ¿Qué configuración elegirías para un documento legal con párrafos largos y densos? ¿Y para un FAQ con preguntas y respuestas cortas?
 
-### Solución Esperada
-
-- **Chunks de 100 sin overlap**: Producen fragmentos que cortan frases a mitad, perdiendo contexto. Muchos chunks (~20+).
-- **Chunks de 300 con overlap de 50**: Buen equilibrio para texto general. Las secciones se preservan razonablemente.
-- **Chunks de 500-1000**: Menos chunks pero cada uno contiene más contexto. Mejor para documentos con párrafos extensos.
-- **Overlap**: El overlap de ~10-20% del chunk_size es una regla general razonable (ej: 50 para 300, 100 para 500).
-- **Separadores**: La jerarquía garantiza que se corte primero por párrafos, luego por líneas, luego por frases, minimizando la pérdida de coherencia.
-- Para código Python, los separadores serían: `["\nclass ", "\ndef ", "\n\n", "\n", " ", ""]`.
-- Documentos legales: chunks grandes (800-1000) con overlap generoso (200). FAQs: chunks pequeños (200-300), overlap mínimo.
-
 ### Extensión (Opcional)
 
 - Prueba `MarkdownHeaderTextSplitter` de LangChain, que divide por encabezados Markdown preservando la jerarquía. Compara los resultados con `RecursiveCharacterTextSplitter` sobre el mismo documento.
@@ -659,16 +616,6 @@ Cada grupo presenta brevemente su diseño al resto de la clase, explicando:
 1. El caso de uso elegido y por qué
 2. Las 2-3 decisiones técnicas más importantes y su justificación
 3. El riesgo que consideran más crítico y cómo lo mitigan
-
-### Solución Esperada
-
-El grupo debe demostrar:
-
-- **Coherencia del pipeline**: Todas las decisiones deben ser compatibles entre sí. Por ejemplo, si eligen modelos de OpenAI para embeddings, el LLM debería ser también accesible por API (no un modelo local incompatible con la API de embeddings elegida).
-- **Justificaciones basadas en el contexto**: No es lo mismo un FAQ universitario (documentos estáticos, consultas simples) que documentación técnica (actualización frecuente, consultas complejas).
-- **Prompt template robusto**: Debe incluir instrucciones para no inventar información, citar fuentes cuando sea posible y admitir cuando no tiene la información.
-- **Análisis de riesgos realista**: Los riesgos comunes incluyen alucinaciones, consultas fuera de alcance, documentos mal procesados, embeddings de baja calidad para jerga técnica y latencia excesiva.
-- **Comunicación clara**: El diagrama debe ser comprensible para alguien que no participó en el diseño.
 
 ### Extensión (Opcional)
 
