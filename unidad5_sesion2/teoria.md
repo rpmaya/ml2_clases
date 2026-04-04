@@ -1814,7 +1814,7 @@ Completa los ejercicios prácticos disponibles en [ejercicios.md](./ejercicios.m
 
 ### Práctica Evaluable de la Unidad
 
-Ahora que has completado ambas sesiones, realiza la [práctica evaluable](../practica.md) de la unidad.
+Ahora que has completado ambas sesiones, realiza la [práctica evaluable](../unidad5_practica/practica.md) de la unidad.
 
 ---
 
