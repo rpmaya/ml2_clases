@@ -11,11 +11,9 @@ Al finalizar esta sesión, el estudiante será capaz de:
 - Evaluar la calidad de un sistema RAG utilizando el framework RAGAS
 - Diseñar soluciones RAG para casos de uso reales en producción
 
-## Duración Total: 4 horas
-
 ---
 
-## Bloque 1: Pipeline RAG Completo (40 minutos)
+## Bloque 1: Pipeline RAG Completo
 
 ### 5.5 Uniendo Todas las Piezas
 
@@ -28,22 +26,22 @@ Un sistema RAG se compone de dos fases claramente diferenciadas: la **fase de in
 │                    PIPELINE RAG COMPLETO                                │
 │                                                                         │
 │  ╔═══════════════════════════════════════════════════════════════════╗  │
-│  ║  FASE 1: INDEXACIÓN (Offline)                                    ║  │
+│  ║  FASE 1: INDEXACIÓN (Offline)                                     ║  │
 │  ║                                                                   ║  │
-│  ║  ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────────┐  ║  │
-│  ║  │Documentos│──►│ Chunking │──►│Embeddings│──►│ Vector Store  │  ║  │
-│  ║  │ PDF, TXT │   │ Split en │   │ Texto →  │   │ Pinecone,    │  ║  │
-│  ║  │ CSV, Web │   │ fragmentos│  │ Vector   │   │ Chroma, FAISS│  ║  │
-│  ║  └──────────┘   └──────────┘   └──────────┘   └──────────────┘  ║  │
+│  ║  ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────────┐    ║  │
+│  ║  │Documentos│──►│ Chunking │──►│Embeddings│──►│ Vector Store │    ║  │
+│  ║  │ PDF, TXT │   │ Split en │   │ Texto →  │   │ Pinecone,    │    ║  │
+│  ║  │ CSV, Web │   │ fragmentos│  │ Vector   │   │ Chroma, FAISS│    ║  │
+│  ║  └──────────┘   └──────────┘   └──────────┘   └──────────────┘    ║  │
 │  ╚═══════════════════════════════════════════════════════════════════╝  │
 │                                                                         │
 │  ╔═══════════════════════════════════════════════════════════════════╗  │
-│  ║  FASE 2: CONSULTA (Online)                                       ║  │
+│  ║  FASE 2: CONSULTA (Online)                                        ║  │
 │  ║                                                                   ║  │
-│  ║  ┌────────┐  ┌────────┐  ┌──────────┐  ┌─────────┐  ┌────────┐ ║  │
-│  ║  │Pregunta│─►│Embedding│─►│ Búsqueda │─►│ Prompt  │─►│  LLM   │ ║  │
-│  ║  │usuario │  │consulta │  │ vectorial│  │+contexto│  │responde│ ║  │
-│  ║  └────────┘  └────────┘  └──────────┘  └─────────┘  └────────┘ ║  │
+│  ║  ┌────────┐  ┌─────────┐  ┌──────────┐  ┌─────────┐  ┌────────┐   ║  │
+│  ║  │Pregunta│─►│Embedding│─►│ Búsqueda │─►│ Prompt  │─►│  LLM   │   ║  │
+│  ║  │usuario │  │consulta │  │ vectorial│  │+contexto│  │responde│   ║  │
+│  ║  └────────┘  └─────────┘  └──────────┘  └─────────┘  └────────┘.  ║  │
 │  ║                               │                                   ║  │
 │  ║                        Top-K chunks                               ║  │
 │  ║                        relevantes                                 ║  │
@@ -61,7 +59,7 @@ PASO A PASO DE LA INDEXACIÓN:
 1. CARGA DE DOCUMENTOS
    ┌──────────────────────────────────────────────┐
    │ Fuentes soportadas:                          │
-   │  - Archivos locales: PDF, TXT, DOCX, CSV    │
+   │  - Archivos locales: PDF, TXT, DOCX, CSV     │
    │  - APIs: Notion, Confluence, Google Drive    │
    │  - Web: URLs, sitemaps, crawlers             │
    │  - Bases de datos: SQL, MongoDB              │
@@ -108,20 +106,20 @@ FLUJO DETALLADO DE CONSULTA:
 Usuario: "¿Cuál es la política de devoluciones para productos electrónicos?"
                     │
                     ▼
-            ┌──────────────┐
+            ┌───────────────┐
             │  1. Embedding │  Convertir pregunta a vector
             │  de consulta  │  [0.023, -0.041, 0.087, ...]
-            └──────┬───────┘
+            └──────┬────────┘
                    │
                    ▼
-            ┌──────────────┐
+            ┌───────────────┐
             │  2. Búsqueda  │  Similitud coseno con todos
             │  vectorial    │  los chunks indexados
             │  (Top-K = 4)  │
-            └──────┬───────┘
+            └──────┬────────┘
                    │
                    ▼
-        ┌──────────────────────┐
+        ┌───────────────────────┐
         │  3. Chunks relevantes │
         │                       │
         │  [0.92] "Las devoluciones de productos electrónicos    │
@@ -130,35 +128,35 @@ Usuario: "¿Cuál es la política de devoluciones para productos electrónicos?"
         │         debe presentar el ticket de compra..."         │
         │  [0.81] "Los productos electrónicos defectuosos        │
         │         se reemplazan sin coste adicional..."          │
-        │  [0.74] "Excepciones: software abierto, productos     │
+        │  [0.74] "Excepciones: software abierto, productos      │
         │         personalizados no son retornables..."          │
-        └──────────┬───────────┘
+        └──────────┬────────────┘
                    │
                    ▼
-        ┌──────────────────────┐
+        ┌───────────────────────┐
         │  4. Construcción      │
         │  del prompt           │
         │                       │
         │  Sistema: "Eres un asistente de atención al cliente.  │
         │  Responde basándote ÚNICAMENTE en el contexto."       │
-        │                                                        │
-        │  Contexto: [chunks recuperados]                        │
-        │                                                        │
+        │                                                       │
+        │  Contexto: [chunks recuperados]                       │
+        │                                                       │
         │  Pregunta: "¿Cuál es la política de devoluciones      │
-        │  para productos electrónicos?"                         │
+        │  para productos electrónicos?"                        │
         └──────────┬───────────┘
                    │
                    ▼
-        ┌──────────────────────┐
-        │  5. LLM genera       │
+        ┌───────────────────────┐
+        │  5. LLM genera        │
         │  respuesta            │
         │                       │
         │  "Los productos electrónicos pueden devolverse en     │
         │   un plazo de 30 días con el ticket de compra.        │
         │   Los productos defectuosos se reemplazan sin         │
         │   coste. Excepciones: software abierto y productos    │
-        │   personalizados."                                     │
-        └──────────────────────┘
+        │   personalizados."                                    │
+        └───────────────────────┘
 ```
 
 ### Búsqueda Híbrida: Vectorial + BM25
@@ -167,32 +165,32 @@ La búsqueda puramente vectorial (semántica) tiene una limitación importante: 
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                    BÚSQUEDA HÍBRIDA                              │
-│                                                                  │
+│                    BÚSQUEDA HÍBRIDA                             │
+│                                                                 │
 │  Consulta: "Error ERR-4502 en módulo de facturación"            │
-│                    │                                             │
+│                   │                                             │
 │          ┌────────┴────────┐                                    │
-│          │                  │                                    │
-│          ▼                  ▼                                    │
-│  ┌──────────────┐  ┌──────────────┐                             │
+│          │                 │                                    │
+│          ▼                 ▼                                    │
+│  ┌───────────────┐  ┌──────────────┐                            │
 │  │  Búsqueda     │  │  Búsqueda    │                            │
 │  │  VECTORIAL    │  │  LÉXICA      │                            │
 │  │  (Semántica)  │  │  (BM25)      │                            │
-│  │               │  │              │                             │
+│  │               │  │              │                            │
 │  │  Encuentra    │  │  Encuentra   │                            │
 │  │  documentos   │  │  documentos  │                            │
 │  │  sobre errores│  │  con texto   │                            │
 │  │  y facturación│  │  "ERR-4502"  │                            │
-│  └──────┬───────┘  └──────┬───────┘                             │
-│         │                  │                                     │
+│  └──────┬────────┘  └──────┬───────┘                            │
+│         │                  │                                    │
 │         └────────┬─────────┘                                    │
-│                  ▼                                               │
-│         ┌──────────────┐                                        │
+│                  ▼                                              │
+│         ┌───────────────┐                                       │
 │         │  Reciprocal   │  Fusiona rankings de ambas            │
 │         │  Rank Fusion  │  búsquedas con pesos                  │
 │         │  (RRF)        │  configurables                        │
-│         └──────┬───────┘                                        │
-│                ▼                                                 │
+│         └──────┬────────┘                                       │
+│                ▼                                                │
 │         Resultados combinados                                   │
 │         (lo mejor de ambos)                                     │
 └─────────────────────────────────────────────────────────────────┘
