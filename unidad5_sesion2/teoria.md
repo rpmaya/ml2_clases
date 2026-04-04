@@ -299,7 +299,7 @@ print(results)
 
 ---
 
-## Bloque 2: Implementación con Pinecone y n8n (50 minutos)
+## Bloque 2: Implementación con Pinecone y n8n
 
 ### 5.6 Pinecone como Vector Store en la Nube
 
@@ -356,7 +356,7 @@ PASO A PASO: CREAR CUENTA Y PRIMER ÍNDICE EN PINECONE
 │  │ ÍNDICE: "ml2-knowledge-base"                              │  │
 │  │ (Equivalente a una "base de datos")                       │  │
 │  │                                                           │  │
-│  │  ┌─────────────────┐  ┌─────────────────┐                 │  │
+│  │  ┌──────────────────┐  ┌──────────────────┐               │  │
 │  │  │ Namespace:       │  │ Namespace:       │               │  │
 │  │  │ "rrhh"           │  │ "ventas"         │               │  │
 │  │  │                  │  │                  │               │  │
@@ -373,7 +373,7 @@ PASO A PASO: CREAR CUENTA Y PRIMER ÍNDICE EN PINECONE
 │  │  │ │ Vector 2     │ │  │ │ Vector 2     │ │               │  │
 │  │  │ │ ...          │ │  │ │ ...          │ │               │  │
 │  │  │ └──────────────┘ │  │ └──────────────┘ │               │  │
-│  │  └──────────────────┘  └─────────────────┘                │  │
+│  │  └──────────────────┘  └──────────────────┘               │  │
 │  └───────────────────────────────────────────────────────────┘  │
 └─────────────────────────────────────────────────────────────────┘
 
@@ -396,7 +396,7 @@ El workflow de ingesta se encarga de procesar documentos nuevos y almacenarlos e
 ```
 WORKFLOW DE INGESTA: Google Drive → Pinecone
 
-┌──────────────┐     ┌──────────────┐     ┌────────────────────────────┐
+┌───────────────┐     ┌──────────────┐     ┌────────────────────────────┐
 │ Google Drive  │────►│ Download     │────►│ Pinecone Vector Store      │
 │ Trigger       │     │ File         │     │ (Operation: Add Documents) │
 │               │     │              │     │                            │
@@ -405,7 +405,7 @@ WORKFLOW DE INGESTA: Google Drive → Pinecone
 │ en carpeta    │     │ binario      │     │ │ Binary (Default)       │ │
 │ específica    │     │              │     │ │ Metadata: {{ $json.    │ │
 │               │     │              │     │ │   name }} (filename)   │ │
-└──────────────┘     └──────────────┘     │ └────────────────────────┘ │
+└───────────────┘     └──────────────┘     │ └────────────────────────┘ │
                                            │                            │
                                            │ ┌────────────────────────┐ │
                                            │ │ Text Splitter:         │ │
@@ -429,36 +429,36 @@ WORKFLOW DE INGESTA: Google Drive → Pinecone
 **Nodo 1: Google Drive Trigger**
 ```
 ┌────────────────────────────────────────────────┐
-│ Google Drive Trigger                            │
-│                                                 │
-│ Trigger On:        Changes involving a          │
-│                    specific folder               │
-│ Folder:            (seleccionar carpeta de      │
-│                    documentos)                   │
-│ Event:             File Created                  │
-│ Poll Times:        Every 5 minutes              │
-│                                                 │
-│ Credenciales: Google Drive OAuth2               │
-│                                                 │
-│ Output: { id, name, mimeType, ... }             │
+│ Google Drive Trigger                           │
+│                                                │
+│ Trigger On:        Changes involving a         │
+│                    specific folder             │
+│ Folder:            (seleccionar carpeta de     │
+│                    documentos)                 │
+│ Event:             File Created                │
+│ Poll Times:        Every 5 minutes             │
+│                                                │
+│ Credenciales: Google Drive OAuth2              │
+│                                                │
+│ Output: { id, name, mimeType, ... }            │
 └────────────────────────────────────────────────┘
 ```
 
 **Nodo 2: Google Drive (Download File)**
 ```
 ┌────────────────────────────────────────────────┐
-│ Google Drive                                    │
-│                                                 │
-│ Operation:         Download                     │
-│ File ID:           {{ $json.id }}               │
-│                                                 │
-│ Output: archivo binario (PDF, TXT, etc.)        │
+│ Google Drive                                   │
+│                                                │
+│ Operation:         Download                    │
+│ File ID:           {{ $json.id }}              │
+│                                                │
+│ Output: archivo binario (PDF, TXT, etc.)       │
 └────────────────────────────────────────────────┘
 ```
 
 **Nodo 3: Pinecone Vector Store**
 ```
-┌────────────────────────────────────────────────┐
+┌─────────────────────────────────────────────────┐
 │ Pinecone Vector Store                           │
 │                                                 │
 │ Operation:         Add Documents                │
@@ -477,7 +477,7 @@ WORKFLOW DE INGESTA: Google Drive → Pinecone
 │  └── Embeddings: OpenAI Embeddings              │
 │      ├── Model: text-embedding-3-small          │
 │      └── Dimensions: 1536                       │
-└────────────────────────────────────────────────┘
+└─────────────────────────────────────────────────┘
 ```
 
 #### Configuración de Credenciales de Pinecone en n8n
@@ -499,13 +499,13 @@ Una vez que los documentos están indexados en Pinecone, construimos el agente q
 ```
 WORKFLOW DEL AGENTE RAG
 
-┌──────────────┐     ┌────────────────────────────────────────────────┐
-│ Chat Trigger  │────►│ AI Agent                                      │
+┌───────────────┐     ┌────────────────────────────────────────────────┐
+│ Chat Trigger  │────►│ AI Agent                                       │
 │               │     │                                                │
 │ (Interfaz de  │     │ ┌────────────────────────────────────────────┐ │
 │  chat o       │     │ │ Chat Model:                                │ │
 │  webhook)     │     │ │ OpenAI Chat Model                          │ │
-│               │     │ │ - Model: gpt-4o-mini                      │ │
+│               │     │ │ - Model: gpt-4o-mini                       │ │
 │               │     │ │ - Temperature: 0.3                         │ │
 │               │     │ └────────────────────────────────────────────┘ │
 │               │     │                                                │
@@ -518,26 +518,26 @@ WORKFLOW DEL AGENTE RAG
 │               │     │ ┌────────────────────────────────────────────┐ │
 │               │     │ │ Tool: Vector Store (Answer Questions)      │ │
 │               │     │ │                                            │ │
-│               │     │ │ Name: "knowledge_base"                    │ │
-│               │     │ │ Description: "Consulta la base de         │ │
+│               │     │ │ Name: "knowledge_base"                     │ │
+│               │     │ │ Description: "Consulta la base de          │ │
 │               │     │ │  conocimiento de la empresa para           │ │
 │               │     │ │  responder preguntas sobre políticas,      │ │
 │               │     │ │  procedimientos y productos."              │ │
 │               │     │ │                                            │ │
-│               │     │ │ ┌──────────────────────┐                  │ │
-│               │     │ │ │ Vector Store:        │                  │ │
-│               │     │ │ │ Pinecone             │                  │ │
-│               │     │ │ │ Index: ml2-kb        │                  │ │
-│               │     │ │ │ Namespace: "docs"    │                  │ │
-│               │     │ │ └──────────────────────┘                  │ │
-│               │     │ │ ┌──────────────────────┐                  │ │
-│               │     │ │ │ Embeddings:          │                  │ │
-│               │     │ │ │ OpenAI Embeddings    │                  │ │
-│               │     │ │ │ text-embedding-       │                 │ │
-│               │     │ │ │ 3-small (1536)       │                  │ │
-│               │     │ │ └──────────────────────┘                  │ │
+│               │     │ │ ┌──────────────────────┐                   │ │
+│               │     │ │ │ Vector Store:        │                   │ │
+│               │     │ │ │ Pinecone             │                   │ │
+│               │     │ │ │ Index: ml2-kb        │                   │ │
+│               │     │ │ │ Namespace: "docs"    │                   │ │
+│               │     │ │ └──────────────────────┘                   │ │
+│               │     │ │ ┌──────────────────────┐                   │ │
+│               │     │ │ │ Embeddings:          │                   │ │
+│               │     │ │ │ OpenAI Embeddings    │                   │ │
+│               │     │ │ │ text-embedding-      │                   │ │
+│               │     │ │ │ 3-small (1536)       │                   │ │
+│               │     │ │ └──────────────────────┘                   │ │
 │               │     │ └────────────────────────────────────────────┘ │
-└──────────────┘     └────────────────────────────────────────────────┘
+└───────────────┘     └────────────────────────────────────────────────┘
 ```
 
 #### System Prompt del Agente RAG
@@ -590,7 +590,7 @@ CHECKLIST DE VERIFICACIÓN:
 
 2. PROBAR BÚSQUEDA MANUALMENTE
    ┌──────────────────────────────────────────┐
-   │ En el chat de n8n:                        │
+   │ En el chat de n8n:                       │
    │ → Hacer preguntas sobre contenido        │
    │   que SÍ está en los documentos          │
    │ → Verificar que las respuestas           │
@@ -606,22 +606,17 @@ CHECKLIST DE VERIFICACIÓN:
    └──────────────────────────────────────────┘
 
 4. AJUSTAR SI ES NECESARIO
-   ┌──────────────────────────────────────────┐
+   ┌───────────────────────────────────────────┐
    │ Problemas comunes:                        │
-   │ - Chunks muy grandes → reducir chunk_size│
+   │ - Chunks muy grandes → reducir chunk_size │
    │ - Respuestas vagas → mejorar system prompt│
-   │ - No encuentra info → verificar ingesta  │
-   │ - Alucinaciones → reforzar restricciones │
-   └──────────────────────────────────────────┘
+   │ - No encuentra info → verificar ingesta   │
+   │ - Alucinaciones → reforzar restricciones  │
+   └───────────────────────────────────────────┘
 ```
-
 ---
 
-### --- DESCANSO (15 minutos) ---
-
----
-
-## Bloque 3: Implementación con LangChain en Python (60 minutos)
+## Bloque 3: Implementación con LangChain en Python
 
 ### 5.7 RAG con LangChain
 
@@ -638,7 +633,7 @@ pip install pinecone-client   # Vector store en la nube
 pip install pypdf             # Carga de PDFs
 
 # Configurar API Key (variable de entorno)
-export OPENAI_API_KEY="sk-proj-xxxxxxxxxxxxxxxx"
+export OPENAI_API_KEY="sk-proj-xxxxxxxxxxxxxxxx" # Podéis usar la de OpenRouter (free)
 ```
 
 ```python
@@ -889,7 +884,7 @@ FLUJO DE DATOS EN LA CADENA LCEL:
 
 "¿Cuál es la política de devoluciones?"
            │
-           ├──────────────────────────────────┐
+           ├───────────────────────────────────┐
            │                                   │
            ▼                                   ▼
    RunnablePassthrough()              retriever | format_docs
@@ -899,23 +894,23 @@ FLUJO DE DATOS EN LA CADENA LCEL:
            └──────────────┬────────────────────┘
                           │
                           ▼
-                 ┌────────────────┐
-                 │ ChatPromptTemplate │
+                 ┌───────────────────┐
+                 │ ChatPromptTemplate│
                  │ (combina context  │
                  │  + question)      │
-                 └────────┬─────────┘
+                 └────────┬──────────┘
                           │
                           ▼
-                 ┌────────────────┐
-                 │ ChatOpenAI      │
-                 │ (gpt-4o-mini)  │
-                 └────────┬─────────┘
+                 ┌───────────────────┐
+                 │ ChatOpenAI        │
+                 │ (gpt-4o-mini)     │
+                 └────────┬──────────┘
                           │
                           ▼
-                 ┌────────────────┐
-                 │ StrOutputParser │
-                 │ (extrae texto) │
-                 └────────┬─────────┘
+                 ┌───────────────────┐
+                 │ StrOutputParser   │
+                 │ (extrae texto)    │
+                 └────────┬──────────┘
                           │
                           ▼
                  "Los productos pueden
@@ -1117,11 +1112,7 @@ if __name__ == "__main__":
 
 ---
 
-### --- DESCANSO (15 minutos) ---
-
----
-
-## Bloque 4: Casos Prácticos Completos (30 minutos)
+## Bloque 4: Casos Prácticos Completos
 
 ### 5.8 Casos de Uso Reales
 
@@ -1134,34 +1125,34 @@ Un agente que responde preguntas sobre productos y políticas de una tienda onli
 ```
 ARQUITECTURA: AGENTE E-COMMERCE CON RAG
 
-┌─────────────────────────────────────────────────────────────────┐
-│                                                                  │
+┌────────────────────────────────────────────────────────────────┐
+│                                                                │
 │  ┌──────────┐     ┌────────────────────────────────────────┐   │
-│  │ Cliente   │────►│ AI Agent (n8n)                         │   │
-│  │ (Chat)    │     │                                        │   │
+│  │ Cliente  │────►│ AI Agent (n8n)                         │   │
+│  │ (Chat)   │     │                                        │   │
 │  └──────────┘     │ System Prompt:                         │   │
-│                    │ "Eres un asistente de atención al      │   │
-│                    │  cliente de TiendaXYZ..."              │   │
-│                    │                                        │   │
-│                    │ ┌────────────┐  ┌──────────────────┐  │   │
-│                    │ │ Tool 1:    │  │ Tool 2:           │  │   │
-│                    │ │ Vector     │  │ Google Sheets     │  │   │
-│                    │ │ Store      │  │ (Inventario)      │  │   │
-│                    │ │            │  │                    │  │   │
-│                    │ │ Políticas  │  │ Stock, precios,   │  │   │
-│                    │ │ de compra, │  │ disponibilidad    │  │   │
-│                    │ │ devolución,│  │ en tiempo real    │  │   │
-│                    │ │ envío, FAQ │  │                    │  │   │
-│                    │ └────────────┘  └──────────────────┘  │   │
-│                    └────────────────────────────────────────┘   │
-│                                                                  │
-│  Flujo:                                                         │
+│                   │ "Eres un asistente de atención al      │   │
+│                   │  cliente de TiendaXYZ..."              │   │
+│                   │                                        │   │
+│                   │ ┌────────────┐  ┌───────────────────┐  │   │
+│                   │ │ Tool 1:    │  │ Tool 2:           │  │   │
+│                   │ │ Vector     │  │ Google Sheets     │  │   │
+│                   │ │ Store      │  │ (Inventario)      │  │   │
+│                   │ │            │  │                   │  │   │
+│                   │ │ Políticas  │  │ Stock, precios,   │  │   │
+│                   │ │ de compra, │  │ disponibilidad    │  │   │
+│                   │ │ devolución,│  │ en tiempo real    │  │   │
+│                   │ │ envío, FAQ │  │                   │  │   │
+│                   │ └────────────┘  └───────────────────┘  │   │
+│                   └────────────────────────────────────────┘   │
+│                                                                │
+│  Flujo:                                                        │
 │  1. Cliente pregunta: "¿Tenéis el iPhone 15 en stock?"         │
 │  2. Agente consulta Google Sheets → Stock: 12 unidades         │
 │  3. Cliente: "¿Cuál es la política de devolución?"             │
 │  4. Agente consulta Vector Store → Política en documentos      │
 │  5. Agente combina información y responde                      │
-└─────────────────────────────────────────────────────────────────┘
+└────────────────────────────────────────────────────────────────┘
 ```
 
 **Implementación en n8n**:
@@ -1178,38 +1169,38 @@ Un sistema RAG especializado en documentación técnica (Confluence, Notion, wik
 ARQUITECTURA: ASISTENTE DE DOCUMENTACIÓN TÉCNICA
 
 ┌─────────────────────────────────────────────────────────────────┐
-│                                                                  │
+│                                                                 │
 │  Fuentes de datos:                                              │
-│  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐          │
-│  │Confluence │ │ Notion   │ │ GitHub   │ │ PDFs     │          │
-│  │ (APIs)    │ │ (APIs)   │ │ (Repos)  │ │ (Manuales│          │
-│  └─────┬────┘ └─────┬────┘ └────┬─────┘ └────┬─────┘          │
-│        │            │           │             │                  │
+│  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐            │
+│  │Confluence│ │ Notion   │ │ GitHub   │ │ PDFs     │            │
+│  │ (APIs)   │ │ (APIs)   │ │ (Repos)  │ │ (Manuales│            │
+│  └─────┬────┘ └─────┬────┘ └────┬─────┘ └────┬─────┘            │
+│        │            │           │             │                 │
 │        └────────────┴─────┬─────┴─────────────┘                 │
-│                           │                                      │
-│                           ▼                                      │
+│                           │                                     │
+│                           ▼                                     │
+│              ┌───────────────────────────┐                      │
+│              │ Chunking Especializado    │                      │
+│              │                           │                      │
+│              │ - MarkdownHeaderText      │                      │
+│              │   Splitter (por secciones)│                      │
+│              │ - Preservar bloques de    │                      │
+│              │   código completos        │                      │
+│              │ - Metadatos: título,      │                      │
+│              │   sección, autor, fecha   │                      │
+│              └────────────┬──────────────┘                      │
+│                           │                                     │
+│                           ▼                                     │
 │              ┌─────────────────────────┐                        │
-│              │ Chunking Especializado   │                        │
-│              │                          │                        │
-│              │ - MarkdownHeaderText     │                        │
-│              │   Splitter (por secciones)│                       │
-│              │ - Preservar bloques de   │                        │
-│              │   código completos       │                        │
-│              │ - Metadatos: título,     │                        │
-│              │   sección, autor, fecha  │                        │
-│              └────────────┬────────────┘                         │
-│                           │                                      │
-│                           ▼                                      │
-│              ┌─────────────────────────┐                        │
-│              │ Pinecone                 │                        │
-│              │ Namespace por fuente:    │                        │
-│              │ - "confluence"           │                        │
-│              │ - "notion"              │                         │
-│              │ - "github"              │                         │
+│              │ Pinecone                │                        │
+│              │ Namespace por fuente:   │                        │
+│              │ - "confluence"          │                        │
+│              │ - "notion"              │                        │
+│              │ - "github"              │                        │
 │              └─────────────────────────┘                        │
-│                                                                  │
+│                                                                 │
 │  Consulta con filtros de metadata:                              │
-│  "Buscar solo en documentación de la API v2.3 del módulo auth" │
+│  "Buscar solo en documentación de la API v2.3 del módulo auth"  │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -1230,10 +1221,10 @@ Un chatbot que clasifica la urgencia de las consultas y escala a un agente human
 ARQUITECTURA: SOPORTE CON ESCALADO
 
 ┌─────────────────────────────────────────────────────────────────┐
-│                                                                  │
-│  ┌──────────┐     ┌────────────────────────────────────────┐   │
-│  │ Usuario   │────►│ AI Agent (RAG)                         │   │
-│  └──────────┘     │                                        │   │
+│                                                                 │
+│  ┌──────────┐      ┌────────────────────────────────────────┐   │
+│  │ Usuario  │─────►│ AI Agent (RAG)                         │   │
+│  └──────────┘      │                                        │   │
 │                    │ 1. Busca respuesta en base de          │   │
 │                    │    conocimiento (FAQ + manuales)       │   │
 │                    │                                        │   │
@@ -1252,13 +1243,13 @@ ARQUITECTURA: SOPORTE CON ESCALADO
 │                    └────────────────────┬───────────────────┘   │
 │                                         │                       │
 │                    ┌────────────────────┼───────────────────┐   │
-│                    │                    │                    │   │
-│                    ▼                    ▼                    ▼   │
-│              ┌──────────┐     ┌──────────────┐    ┌──────────┐ │
+│                    │                    │                   │   │
+│                    ▼                    ▼                   ▼   │
+│              ┌───────────┐     ┌──────────────┐    ┌──────────┐ │
 │              │ Respuesta │     │ Crear Ticket │    │ Slack    │ │
 │              │ directa   │     │ (Jira/Linear)│    │ Alerta   │ │
 │              │ al usuario│     │              │    │ @soporte │ │
-│              └──────────┘     └──────────────┘    └──────────┘ │
+│              └───────────┘     └──────────────┘    └──────────┘ │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -1294,34 +1285,34 @@ Un sistema RAG especializado en documentos legales que requiere consideraciones 
 ARQUITECTURA: RAG LEGAL
 
 ┌─────────────────────────────────────────────────────────────────┐
-│                                                                  │
+│                                                                 │
 │  CONSIDERACIONES ESPECIALES:                                    │
-│                                                                  │
-│  1. CHUNKING POR CLÁUSULAS                                     │
+│                                                                 │
+│  1. CHUNKING POR CLÁUSULAS                                      │
 │     ┌─────────────────────────────────────────────┐             │
 │     │ No usar RecursiveCharacterTextSplitter      │             │
 │     │ → Usar separadores por cláusulas:           │             │
-│     │   ["CLÁUSULA", "Artículo", "Sección"]      │             │
+│     │   ["CLÁUSULA", "Artículo", "Sección"]       │             │
 │     │ → Cada chunk = una cláusula completa        │             │
 │     │ → Metadata: número de cláusula, tipo        │             │
 │     └─────────────────────────────────────────────┘             │
-│                                                                  │
-│  2. PRIVACIDAD Y SEGURIDAD                                     │
+│                                                                 │
+│  2. PRIVACIDAD Y SEGURIDAD                                      │
 │     ┌─────────────────────────────────────────────┐             │
 │     │ - Datos sensibles: nombres, DNI, cuentas    │             │
-│     │ - Opción: anonimizar antes de indexar        │             │
-│     │ - Vector store on-premise (no cloud)         │             │
-│     │ - Modelo local (Ollama) para evitar enviar   │             │
-│     │   datos a APIs externas                      │             │
-│     │ - Logs de acceso y auditoría                 │             │
+│     │ - Opción: anonimizar antes de indexar       │             │
+│     │ - Vector store on-premise (no cloud)        │             │
+│     │ - Modelo local (Ollama) para evitar enviar  │             │
+│     │   datos a APIs externas                     │             │
+│     │ - Logs de acceso y auditoría                │             │
 │     └─────────────────────────────────────────────┘             │
-│                                                                  │
+│                                                                 │
 │  3. PROMPT ESPECIALIZADO                                        │
 │     ┌─────────────────────────────────────────────┐             │
-│     │ "Eres un asistente legal. Responde citando   │             │
-│     │  siempre la cláusula exacta. NO proporciones │             │
-│     │  asesoramiento legal. Indica que el usuario  │             │
-│     │  debe consultar con un abogado."             │             │
+│     │ "Eres un asistente legal. Responde citando  │             │
+│     │  siempre la cláusula exacta. NO proporciones│             │
+│     │  asesoramiento legal. Indica que el usuario │             │
+│     │  debe consultar con un abogado."            │             │
 │     └─────────────────────────────────────────────┘             │
 └─────────────────────────────────────────────────────────────────┘
 ```
@@ -1354,7 +1345,7 @@ for i, chunk in enumerate(chunks):
 
 ---
 
-## Bloque 5: Optimización y Mejores Prácticas (30 minutos)
+## Bloque 5: Optimización y Mejores Prácticas
 
 ### 5.9 Técnicas de Optimización del RAG
 
@@ -1386,9 +1377,9 @@ Consulta original: "¿Cómo devuelvo un producto?"
                         │
                         ▼
                ┌──────────────────┐
-               │  Retriever busca  │
-               │  con TODAS las    │  Más chunks
-               │  variaciones      │  relevantes
+               │  Retriever busca │
+               │  con TODAS las   │  Más chunks
+               │  variaciones     │  relevantes
                └──────────────────┘
 ```
 
@@ -1447,8 +1438,8 @@ Pregunta: "¿Cuál es la política de devoluciones?"
                           ▼
                ┌──────────────────┐
                │  LLM genera un   │
-               │  documento        │
-               │  hipotético       │
+               │  documento       │
+               │  hipotético      │
                └────────┬─────────┘
                         │
                         ▼
@@ -1460,9 +1451,9 @@ Pregunta: "¿Cuál es la política de devoluciones?"
                         │
                         ▼
                ┌──────────────────┐
-               │  Embedding del    │  Más similar a los
-               │  documento        │  documentos reales
-               │  hipotético       │  que el embedding
+               │  Embedding del   │  Más similar a los
+               │  documento       │  documentos reales
+               │  hipotético      │  que el embedding
                └────────┬─────────┘  de la pregunta
                         │
                         ▼
@@ -1516,8 +1507,8 @@ Para un sistema RAG en producción, es fundamental monitorizar la calidad contin
 
 ```
 ┌──────────────────────────────────────────────────────────────────┐
-│              MÉTRICAS RAGAS - DETALLE                             │
-│                                                                   │
+│              MÉTRICAS RAGAS - DETALLE                            │
+│                                                                  │
 │  ┌──────────────────────────────────────────────────────────┐    │
 │  │ CONTEXT PRECISION                                        │    │
 │  │                                                          │    │
@@ -1525,15 +1516,15 @@ Para un sistema RAG en producción, es fundamental monitorizar la calidad contin
 │  │                                                          │    │
 │  │ Ejemplo BUENO (precisión alta):                          │    │
 │  │ Pregunta: "Política de devoluciones"                     │    │
-│  │ Chunks: [devoluciones, plazo 30 días, excepciones]      │    │
-│  │ → Todos relevantes ✓                                    │    │
+│  │ Chunks: [devoluciones, plazo 30 días, excepciones]       │    │
+│  │ → Todos relevantes ✓                                     │    │
 │  │                                                          │    │
 │  │ Ejemplo MALO (precisión baja):                           │    │
 │  │ Pregunta: "Política de devoluciones"                     │    │
 │  │ Chunks: [devoluciones, horarios tienda, historia empresa]│    │
-│  │ → 2 de 3 son ruido ✗                                    │    │
+│  │ → 2 de 3 son ruido ✗                                     │    │
 │  └──────────────────────────────────────────────────────────┘    │
-│                                                                   │
+│                                                                  │
 │  ┌──────────────────────────────────────────────────────────┐    │
 │  │ CONTEXT RECALL                                           │    │
 │  │                                                          │    │
@@ -1541,13 +1532,13 @@ Para un sistema RAG en producción, es fundamental monitorizar la calidad contin
 │  │                                                          │    │
 │  │ Ejemplo BUENO (recall alto):                             │    │
 │  │ Para responder se necesitan chunks A, B, C               │    │
-│  │ Recuperados: A, B, C → Recall = 1.0 ✓                  │    │
+│  │ Recuperados: A, B, C → Recall = 1.0 ✓                    │    │
 │  │                                                          │    │
 │  │ Ejemplo MALO (recall bajo):                              │    │
 │  │ Para responder se necesitan chunks A, B, C               │    │
-│  │ Recuperados: A, C → Recall = 0.67 ✗ (falta B)          │    │
+│  │ Recuperados: A, C → Recall = 0.67 ✗ (falta B)            │    │
 │  └──────────────────────────────────────────────────────────┘    │
-│                                                                   │
+│                                                                  │
 │  ┌──────────────────────────────────────────────────────────┐    │
 │  │ FAITHFULNESS (FIDELIDAD)                                 │    │
 │  │                                                          │    │
@@ -1555,14 +1546,14 @@ Para un sistema RAG en producción, es fundamental monitorizar la calidad contin
 │  │                                                          │    │
 │  │ Ejemplo BUENO (fidelidad alta):                          │    │
 │  │ Contexto: "Plazo de 30 días"                             │    │
-│  │ Respuesta: "Tiene 30 días para devolver" ✓              │    │
+│  │ Respuesta: "Tiene 30 días para devolver" ✓               │    │
 │  │                                                          │    │
 │  │ Ejemplo MALO (alucinación):                              │    │
 │  │ Contexto: "Plazo de 30 días"                             │    │
-│  │ Respuesta: "Tiene 30 días y le devolvemos               │    │
-│  │  el doble del dinero" ✗ (inventado)                     │    │
+│  │ Respuesta: "Tiene 30 días y le devolvemos                │    │
+│  │  el doble del dinero" ✗ (inventado)                      │    │
 │  └──────────────────────────────────────────────────────────┘    │
-│                                                                   │
+│                                                                  │
 │  ┌──────────────────────────────────────────────────────────┐    │
 │  │ ANSWER RELEVANCY                                         │    │
 │  │                                                          │    │
@@ -1570,12 +1561,12 @@ Para un sistema RAG en producción, es fundamental monitorizar la calidad contin
 │  │                                                          │    │
 │  │ Ejemplo BUENO:                                           │    │
 │  │ Pregunta: "¿Cuántos días para devolver?"                 │    │
-│  │ Respuesta: "El plazo de devolución es de 30 días" ✓     │    │
+│  │ Respuesta: "El plazo de devolución es de 30 días" ✓      │    │
 │  │                                                          │    │
 │  │ Ejemplo MALO:                                            │    │
 │  │ Pregunta: "¿Cuántos días para devolver?"                 │    │
 │  │ Respuesta: "Nuestra empresa fue fundada en 1995          │    │
-│  │  y tiene 500 empleados" ✗ (no responde)                 │    │
+│  │  y tiene 500 empleados" ✗ (no responde)                  │    │
 │  └──────────────────────────────────────────────────────────┘    │
 └──────────────────────────────────────────────────────────────────┘
 ```
@@ -1630,13 +1621,13 @@ class RAGCache:
 ESTIMACIÓN DE COSTES POR CONSULTA RAG:
 
 ┌────────────────────────────────────────────────────────────┐
-│ Componente          │ Coste aproximado    │ Por consulta    │
-├─────────────────────┼─────────────────────┼─────────────────│
+│ Componente          │ Coste aproximado    │ Por consulta   │
+├─────────────────────┼─────────────────────┼────────────────│
 │ Embedding consulta  │ $0.00002 / 1K tokens│ ~$0.000004     │
 │ Búsqueda Pinecone   │ $0.00 (incluido)    │ $0.00          │
-│ LLM (gpt-4o-mini)  │ $0.15 / 1M input    │ ~$0.0003       │
+│ LLM (gpt-4o-mini)   │ $0.15 / 1M input    │ ~$0.0003       │
 │                     │ $0.60 / 1M output   │ ~$0.0003       │
-├─────────────────────┼─────────────────────┼─────────────────│
+├─────────────────────┼─────────────────────┼────────────────│
 │ TOTAL por consulta  │                     │ ~$0.0006       │
 │ 10.000 consultas/mes│                     │ ~$6.00         │
 └────────────────────────────────────────────────────────────┘
@@ -1652,15 +1643,15 @@ Ingesta (una vez):
 ESTRATEGIAS DE ACTUALIZACIÓN:
 
 ┌─────────────────────────────────────────────────────────────┐
-│                                                              │
+│                                                             │
 │  1. INCREMENTAL (Recomendada)                               │
 │     ┌─────────────────────────────────────────────────────┐ │
 │     │ - Solo procesar documentos nuevos o modificados     │ │
 │     │ - Detectar cambios por fecha de modificación        │ │
-│     │ - Eliminar vectores de docs antiguos y reindexar   │ │
-│     │ - Menor coste y tiempo de procesamiento            │ │
+│     │ - Eliminar vectores de docs antiguos y reindexar    │ │
+│     │ - Menor coste y tiempo de procesamiento             │ │
 │     └─────────────────────────────────────────────────────┘ │
-│                                                              │
+│                                                             │
 │  2. COMPLETA (Para cambios masivos)                         │
 │     ┌─────────────────────────────────────────────────────┐ │
 │     │ - Borrar namespace completo en Pinecone             │ │
@@ -1668,7 +1659,7 @@ ESTRATEGIAS DE ACTUALIZACIÓN:
 │     │ - Usar cuando cambia la estrategia de chunking      │ │
 │     │   o el modelo de embeddings                         │ │
 │     └─────────────────────────────────────────────────────┘ │
-│                                                              │
+│                                                             │
 │  3. PROGRAMADA (n8n Cron Trigger)                           │
 │     ┌─────────────────────────────────────────────────────┐ │
 │     │ - Cron Trigger cada 6h / 24h                        │ │
@@ -1716,21 +1707,21 @@ llm_fallback = ChatOpenAI(model="gpt-4o-mini", temperature=0.5)
 
 ```
 ┌──────────────────────────────────────────────────────────────────┐
-│           CHECKLIST RAG EN PRODUCCIÓN                             │
-│                                                                   │
+│           CHECKLIST RAG EN PRODUCCIÓN                            │
+│                                                                  │
 │  RETRIEVAL                                                       │
-│  □ Chunk size optimizado (testar 200, 500, 1000)                │
-│  □ Overlap configurado (10-20% del chunk size)                  │
-│  □ Número de chunks recuperados (k) ajustado                    │
-│  □ Búsqueda híbrida si hay términos técnicos                   │
-│  □ Filtros de metadata cuando aplique                           │
-│                                                                   │
+│  □ Chunk size optimizado (testar 200, 500, 1000)                 │
+│  □ Overlap configurado (10-20% del chunk size)                   │
+│  □ Número de chunks recuperados (k) ajustado                     │
+│  □ Búsqueda híbrida si hay términos técnicos                     │
+│  □ Filtros de metadata cuando aplique                            │
+│                                                                  │
 │  GENERACIÓN                                                      │
 │  □ System prompt con instrucciones claras y restricciones        │
-│  □ Temperature baja (0.1-0.3) para respuestas factuales         │
-│  □ Instrucción explícita de no alucinar                         │
+│  □ Temperature baja (0.1-0.3) para respuestas factuales          │
+│  □ Instrucción explícita de no alucinar                          │
 │  □ Formato de respuesta definido                                 │
-│                                                                   │
+│                                                                  │
 │  OPERACIONES                                                     │
 │  □ Caché de respuestas frecuentes                                │
 │  □ Monitorización de costes (tokens consumidos)                  │
@@ -1738,13 +1729,13 @@ llm_fallback = ChatOpenAI(model="gpt-4o-mini", temperature=0.5)
 │  □ Estrategia de actualización de índices                        │
 │  □ Manejo de errores con fallbacks                               │
 │  □ Rate limiting para evitar abusos                              │
-│                                                                   │
+│                                                                  │
 │  EVALUACIÓN                                                      │
 │  □ Dataset de evaluación (50-100 preguntas con ground truth)     │
 │  □ RAGAS ejecutado periódicamente                                │
 │  □ Alertas si métricas bajan del umbral                          │
 │  □ A/B testing de cambios en configuración                       │
-│                                                                   │
+│                                                                  │
 │  SEGURIDAD                                                       │
 │  □ API Keys en variables de entorno (nunca en código)            │
 │  □ Datos sensibles anonimizados antes de indexar                 │
