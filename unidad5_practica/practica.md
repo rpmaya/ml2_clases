@@ -676,13 +676,13 @@ Describe al menos 3 mejoras que implementarías en una versión futura:
 
 ## Formato y Proceso de Entrega
 
-### Nombre del Archivo
+### Nombre del directorio en tu repositorio GitHub
 
 ```
-Apellido_Nombre_U5_Practica.zip
+práctica5
 ```
 
-### Contenido del ZIP
+### Contenido
 
 1. **Sistema RAG:**
    - **Opción A (n8n):** Archivos JSON exportados de los workflows (ingesta + agente)
@@ -698,9 +698,8 @@ Apellido_Nombre_U5_Practica.zip
 1. Verifica que el sistema funciona correctamente ejecutando las 5 consultas de prueba
 2. Exporta los workflows (n8n) o verifica que el código se ejecuta en un entorno limpio (Python)
 3. Prepara el documento de arquitectura con capturas y reflexiones
-4. Comprime todo en un archivo ZIP con el nombre indicado
-5. Sube el archivo en Blackboard antes de la fecha límite
-6. Verifica que la entrega se ha realizado correctamente
+4. Sube el enlace a tu directorio de GitHub a Blackboard antes de la fecha límite
+5. Verifica que la entrega se ha realizado correctamente
 
 ---
 
