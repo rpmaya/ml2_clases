@@ -215,33 +215,33 @@ Un sistema RAG en producción necesita métricas objetivas para medir su rendimi
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                    MÉTRICAS RAGAS                                │
-│                                                                  │
+│                    MÉTRICAS RAGAS                               │
+│                                                                 │
 │  ┌───────────────────────────────────────────────────────────┐  │
 │  │ 1. Context Precision (Precisión del contexto)             │  │
 │  │    ¿Los chunks recuperados son relevantes para la         │  │
 │  │    pregunta? ¿Hay ruido innecesario?                      │  │
 │  │    Ideal: > 0.85                                          │  │
 │  └───────────────────────────────────────────────────────────┘  │
-│                                                                  │
+│                                                                 │
 │  ┌───────────────────────────────────────────────────────────┐  │
 │  │ 2. Context Recall (Cobertura del contexto)                │  │
 │  │    ¿Se recuperaron TODOS los chunks necesarios para       │  │
-│  │    responder correctamente?                                │  │
+│  │    responder correctamente?                               │  │
 │  │    Ideal: > 0.80                                          │  │
 │  └───────────────────────────────────────────────────────────┘  │
-│                                                                  │
+│                                                                 │
 │  ┌───────────────────────────────────────────────────────────┐  │
 │  │ 3. Faithfulness (Fidelidad)                               │  │
 │  │    ¿La respuesta se basa SOLO en el contexto              │  │
 │  │    recuperado? ¿Hay alucinaciones?                        │  │
 │  │    Ideal: > 0.90                                          │  │
 │  └───────────────────────────────────────────────────────────┘  │
-│                                                                  │
+│                                                                 │
 │  ┌───────────────────────────────────────────────────────────┐  │
 │  │ 4. Answer Relevancy (Relevancia de la respuesta)          │  │
 │  │    ¿La respuesta es pertinente y directa respecto         │  │
-│  │    a la pregunta formulada?                                │  │
+│  │    a la pregunta formulada?                               │  │
 │  │    Ideal: > 0.85                                          │  │
 │  └───────────────────────────────────────────────────────────┘  │
 └─────────────────────────────────────────────────────────────────┘
@@ -323,24 +323,24 @@ PASO A PASO: CREAR CUENTA Y PRIMER ÍNDICE EN PINECONE
    │ Dashboard → API Keys                       │
    │ → Copiar la API Key generada               │
    │ → Ejemplo: pcsk_xxxxxx...                  │
-   │                                             │
-   │ ⚠ Guardarla de forma segura               │
+   │                                            │
+   │ ⚠ Guardarla de forma segura                │
    │   (no compartir, no subir a Git)           │
    └────────────────────────────────────────────┘
 
 3. CREAR ÍNDICE
    ┌────────────────────────────────────────────┐
    │ Dashboard → Indexes → Create Index         │
-   │                                             │
-   │ Configuración:                              │
+   │                                            │
+   │ Configuración:                             │
    │  - Name: "ml2-knowledge-base"              │
-   │  - Dimensions: 1536                         │
-   │  - Metric: cosine                           │
-   │  - Type: Serverless                         │
-   │  - Cloud: AWS                               │
-   │  - Region: us-east-1                        │
-   │                                             │
-   │ → Create Index                              │
+   │  - Dimensions: 1536                        │
+   │  - Metric: cosine                          │
+   │  - Type: Serverless                        │
+   │  - Cloud: AWS                              │
+   │  - Region: us-east-1                       │
+   │                                            │
+   │ → Create Index                             │
    └────────────────────────────────────────────┘
 ```
 
@@ -350,20 +350,20 @@ PASO A PASO: CREAR CUENTA Y PRIMER ÍNDICE EN PINECONE
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                ESTRUCTURA DE PINECONE                            │
-│                                                                  │
+│                ESTRUCTURA DE PINECONE                           │
+│                                                                 │
 │  ┌───────────────────────────────────────────────────────────┐  │
 │  │ ÍNDICE: "ml2-knowledge-base"                              │  │
 │  │ (Equivalente a una "base de datos")                       │  │
-│  │                                                            │  │
-│  │  ┌─────────────────┐  ┌─────────────────┐                │  │
+│  │                                                           │  │
+│  │  ┌─────────────────┐  ┌─────────────────┐                 │  │
 │  │  │ Namespace:       │  │ Namespace:       │               │  │
 │  │  │ "rrhh"           │  │ "ventas"         │               │  │
-│  │  │                  │  │                  │                │  │
+│  │  │                  │  │                  │               │  │
 │  │  │ ┌──────────────┐ │  │ ┌──────────────┐ │               │  │
 │  │  │ │ Vector 1     │ │  │ │ Vector 1     │ │               │  │
 │  │  │ │ id: "doc1_c1"│ │  │ │ id: "cat_01" │ │               │  │
-│  │  │ │ values: [...] │ │  │ │ values: [...] │ │              │  │
+│  │  │ │ values: [...]│ │  │ │ values: [...]│ │               │  │
 │  │  │ │ metadata: {  │ │  │ │ metadata: {  │ │               │  │
 │  │  │ │  source: ... │ │  │ │  producto: ..│ │               │  │
 │  │  │ │  page: 1     │ │  │ │  precio: ... │ │               │  │
@@ -373,7 +373,7 @@ PASO A PASO: CREAR CUENTA Y PRIMER ÍNDICE EN PINECONE
 │  │  │ │ Vector 2     │ │  │ │ Vector 2     │ │               │  │
 │  │  │ │ ...          │ │  │ │ ...          │ │               │  │
 │  │  │ └──────────────┘ │  │ └──────────────┘ │               │  │
-│  │  └─────────────────┘  └─────────────────┘                │  │
+│  │  └──────────────────┘  └─────────────────┘                │  │
 │  └───────────────────────────────────────────────────────────┘  │
 └─────────────────────────────────────────────────────────────────┘
 
