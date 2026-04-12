@@ -104,22 +104,6 @@ Completa la tabla comparativa:
 | Añadir 1 cliente nuevo requiere... | __________________ | __________________ |
 | ¿Quién mantiene la integración? | __________________ | __________________ |
 
-### Solución Esperada
-
-**Parte A:**
-- Host: Claude Desktop (la aplicación que el usuario ejecuta)
-- LLM: Claude (el modelo que interpreta las peticiones del usuario y decide qué herramientas invocar)
-- Cliente MCP: integrado en Claude Desktop, mantiene una conexión 1:1 con cada servidor
-- Servidor Gmail: traduce peticiones MCP a llamadas a la API de Gmail
-- Servidor Calendar: traduce peticiones MCP a llamadas a la API de Google Calendar
-- Servidor Slack: traduce peticiones MCP a llamadas a la API de Slack
-- Servidor Drive: traduce peticiones MCP a llamadas a la API de Google Drive
-
-**Parte B:**
-- Sin MCP: 3 × 4 = 12 integraciones. Con MCP: 3 + 4 = 7 componentes (3 clientes + 4 servidores)
-- Sin MCP: si Gmail cambia su API, hay que actualizar 3 conectores (uno por cada cliente). Con MCP: solo se actualiza 1 servidor MCP
-- Sin MCP: añadir un servicio requiere 3 nuevas integraciones. Con MCP: 1 nuevo servidor
-- Sin MCP: añadir un cliente requiere 4 nuevas integraciones. Con MCP: 1 nuevo cliente
 
 ### Extensión (Opcional)
 Investiga si existen servidores MCP reales para cada uno de los 4 servicios mencionados. Busca en [mcpservers.org](https://mcpservers.org) o en el [repositorio oficial de Anthropic](https://github.com/modelcontextprotocol/servers). Indica para cada uno: nombre del servidor, autor y si es oficial o comunitario.
@@ -251,26 +235,6 @@ Resultado esperado: Claude invocará `read_file` y mostrará el contenido.
 Busca todos los archivos con extensión .pdf en mi carpeta Documents
 ```
 Resultado esperado: Claude invocará `search_files` y listará los PDFs encontrados.
-
-### Solución Esperada
-
-El archivo `claude_desktop_config.json` correctamente configurado:
-
-```json
-{
-  "mcpServers": {
-    "filesystem": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-filesystem",
-        "/Users/tu_usuario/Documents",
-        "/Users/tu_usuario/Desktop"
-      ]
-    }
-  }
-}
-```
 
 Verificaciones:
 - El icono de herramientas muestra 9 herramientas del servidor filesystem
@@ -701,22 +665,6 @@ Error: __________________
 
 Error: __________________
 
-### Solución Esperada
-
-**Parte A:**
-
-| Mensaje | Dirección | Tipo | Propósito |
-|---------|-----------|------|-----------|
-| 1 | Cliente → Servidor | Petición | Inicialización: el cliente envía su versión de protocolo y capacidades |
-| 2 | Servidor → Cliente | Respuesta | El servidor confirma la inicialización e informa sus capacidades (herramientas) |
-| 3 | Cliente → Servidor | Notificación | Confirma que la inicialización se completó (sin `id`, no espera respuesta) |
-| 4 | Cliente → Servidor | Petición | Solicita la lista de herramientas disponibles |
-| 5 | Servidor → Cliente | Respuesta | Devuelve las herramientas disponibles con sus esquemas de entrada |
-| 6 | Cliente → Servidor | Petición | Invoca la herramienta `read_file` para leer un archivo |
-| 7 | Servidor → Cliente | Respuesta | Devuelve el contenido del archivo leído |
-| 8 | Cliente → Servidor | Petición | Intenta leer un archivo fuera de los directorios permitidos |
-| 9 | Servidor → Cliente | Respuesta (error) | Devuelve un error de acceso denegado |
-
 **Parte C - Errores:**
 - **Mensaje A**: Falta el campo `"jsonrpc": "2.0"` (obligatorio en JSON-RPC 2.0)
 - **Mensaje B**: Falta el campo `"id"`. Sin `id` sería una notificación, pero `tools/call` es una petición que espera respuesta, por lo que necesita un identificador
@@ -888,57 +836,6 @@ Resultado esperado: Claude usará `read_graph` (memory) y luego `write_file` (fi
 ```
 Lee el archivo resumen_mcp.md que acabamos de crear.
 ```
-
-### Solución Esperada
-
-Archivo de configuración final completo y funcional (ejemplo con `fetch`):
-
-```json
-{
-  "mcpServers": {
-    "filesystem": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-filesystem",
-        "/Users/alumno/Documents/mcp_workspace"
-      ]
-    },
-    "memory": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-memory"
-      ]
-    },
-    "fetch": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-fetch"
-      ]
-    }
-  }
-}
-```
-
-Resultados de las pruebas:
-- **Prompt 1**: Claude lee el archivo y crea una entidad "Ejercicio MCP" en el grafo de conocimiento
-- **Prompt 2**: Claude busca información y añade observaciones al grafo
-- **Prompt 3**: Claude recupera el grafo y genera un archivo markdown con el resumen
-- **Prompt 4**: Claude lee y muestra el archivo creado, confirmando que toda la cadena funcionó
-
-**Verificación final**: El archivo `~/Documents/mcp_workspace/resumen_mcp.md` existe y contiene información combinada de las búsquedas web y el grafo de conocimiento.
-
-### Extensión (Opcional)
-Añade un cuarto servidor a tu configuración. Algunas opciones interesantes:
-- **`@modelcontextprotocol/server-github`**: Requiere un token de GitHub. Permite interactuar con repositorios, issues y pull requests.
-- **`@modelcontextprotocol/server-sqlite`**: Permite crear y consultar bases de datos SQLite locales.
-- **`@modelcontextprotocol/server-puppeteer`**: Permite controlar un navegador para hacer web scraping.
-
-Documenta la configuración completa con los 4 servidores y prueba un flujo de trabajo que combine herramientas de al menos 3 de ellos.
-
----
 
 ## Resumen de Ejercicios
 
