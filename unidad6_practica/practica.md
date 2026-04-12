@@ -10,7 +10,7 @@
 | **Unidad** | 6 - Model Context Protocol (MCP) |
 | **Tipo** | Práctica individual |
 | **Duración estimada** | 120-150 minutos |
-| **Entrega** | Archivo ZIP con código + capturas + documentación |
+| **Entrega** | Enlace Github a directorio con código + capturas + documentación |
 | **Fecha límite** | Según calendario del curso |
 
 ---
