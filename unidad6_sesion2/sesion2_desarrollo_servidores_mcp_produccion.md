@@ -1300,50 +1300,30 @@ Cuando los servidores MCP se exponen en red (transporte HTTP), aparecen riesgos 
 
 ### 4.4 Generación de Claves RSA
 
-El par de claves RSA (pública + privada) es la base de la seguridad JWT asimétrica. La clave privada firma los tokens; la clave pública los verifica.
+El par de claves RSA (pública + privada) es la base de la seguridad JWT asimétrica. FastMCP incluye una clase `RSAKeyPair` que simplifica todo el ciclo de vida: generación, serialización, carga y emisión de tokens.
 
 > **Código completo**: [clavesRSA.py](https://github.com/rpmaya/ml2_code/blob/main/MCP/seguridad/clavesRSA.py)
 
 ```python
-from cryptography.hazmat.primitives.asymmetric import rsa
-from cryptography.hazmat.primitives import serialization
+from fastmcp.server.auth.providers.jwt import RSAKeyPair
 
-def generar_claves_rsa():
-    """Genera un par de claves RSA (privada + pública) para JWT."""
+# 1. Generar par de claves RSA (una sola vez, guardar el resultado)
+keypair = RSAKeyPair.generate()
+keypair.save("mcp_keypair.json")   # Guarda ambas claves en un JSON
 
-    # Generar clave privada RSA de 2048 bits
-    clave_privada = rsa.generate_private_key(
-        public_exponent=65537,
-        key_size=2048
-    )
+# 2. En sesiones posteriores, cargar desde archivo
+keypair = RSAKeyPair.load("mcp_keypair.json")
 
-    # Serializar clave privada en formato PEM
-    pem_privada = clave_privada.private_bytes(
-        encoding=serialization.Encoding.PEM,
-        format=serialization.PrivateFormat.PKCS8,
-        encryption_algorithm=serialization.NoEncryption()
-    )
+# 3. Emitir un token JWT para un cliente
+token = keypair.create_token(
+    subject="cliente-dashboard",   # Identificador del cliente
+    issuer="mi-mcp-server",        # Quién emite el token
+    audience="mi-mcp",             # Para quién es el token
+    expiration_hours=24            # Validez del token
+)
 
-    # Extraer y serializar clave pública
-    clave_publica = clave_privada.public_key()
-    pem_publica = clave_publica.public_bytes(
-        encoding=serialization.Encoding.PEM,
-        format=serialization.PublicFormat.SubjectPublicKeyInfo
-    )
-
-    # Guardar las claves en archivos
-    with open("private_key.pem", "wb") as f:
-        f.write(pem_privada)
-
-    with open("public_key.pem", "wb") as f:
-        f.write(pem_publica)
-
-    print("Claves RSA generadas:")
-    print(f"  - private_key.pem (SECRETA, nunca compartir)")
-    print(f"  - public_key.pem  (se comparte con servidores)")
-
-if __name__ == "__main__":
-    generar_claves_rsa()
+print(f"Token para el cliente: {token}")
+# → Guardar en client_token.txt o pasarlo de forma segura al cliente
 ```
 
 ```
@@ -1373,68 +1353,47 @@ if __name__ == "__main__":
 
 ### 4.5 Servidor MCP con Verificación JWT (Patrón Correcto)
 
-> ⚠️ **Anti-patrón a evitar**: Pasar el token JWT como parámetro de una herramienta (`token: str`) expone el token al historial de la conversación del LLM. El LLM lo ve, lo almacena en contexto y puede repetirlo en respuestas. **La autenticación debe ocurrir a nivel de transporte HTTP (middleware), no dentro de las tools.**
+> ⚠️ **Anti-patrón a evitar**: Pasar el token JWT como parámetro de una herramienta (`token: str`) expone el token al historial de la conversación del LLM. **La autenticación debe ocurrir a nivel de transporte HTTP, no dentro de las tools.**
 
-```
-ANTI-PATRÓN (incorrecto):                PATRÓN CORRECTO:
-──────────────────────────               ──────────────────────────────
-LLM invoca:                              Cliente envía cabecera HTTP:
-  call_tool("operacion", {               Authorization: Bearer <jwt>
-    "token": "eyJhbGci...",  ← Expuesto       ↓
-    "dato": "informe"        al LLM      Middleware verifica ANTES
-  })                                     de llegar a cualquier tool
-```
-
-El servidor MCP correcto valida el JWT en un **middleware HTTP** que intercepta todas las peticiones antes de que lleguen a las herramientas:
+FastMCP 2.x incluye soporte nativo para JWT: basta con pasar un `JWTVerifier` al constructor del servidor. FastMCP gestiona automáticamente la verificación en cada petición HTTP antes de que llegue a cualquier herramienta.
 
 > **Código completo**: [server_mcp_jwt.py](https://github.com/rpmaya/ml2_code/blob/main/MCP/seguridad/server_mcp_jwt.py)
 
 ```python
-import jwt
 from fastmcp import FastMCP
-from starlette.middleware.base import BaseHTTPMiddleware
-from starlette.requests import Request
-from starlette.responses import JSONResponse
+from fastmcp.server.auth.providers.jwt import JWTVerifier, RSAKeyPair
+import os
 
-# Cargar clave pública para verificar tokens
-with open("public_key.pem", "rb") as f:
-    PUBLIC_KEY = f.read()
+KEYPAIR_FILE = "mcp_keypair.json"
 
-class JWTMiddleware(BaseHTTPMiddleware):
-    """Middleware que verifica el JWT en la cabecera Authorization."""
+# Cargar claves (o generar si no existen)
+if os.path.exists(KEYPAIR_FILE):
+    keypair = RSAKeyPair.load(KEYPAIR_FILE)
+else:
+    keypair = RSAKeyPair.generate()
+    keypair.save(KEYPAIR_FILE)
+    # Emitir token inicial para el cliente
+    token = keypair.create_token(
+        subject="cliente-autorizado",
+        issuer="mi-mcp-server",
+        audience="mi-mcp"
+    )
+    with open("client_token.txt", "w") as f:
+        f.write(token)
 
-    async def dispatch(self, request: Request, call_next):
-        auth_header = request.headers.get("Authorization", "")
+# Configurar verificador JWT
+auth = JWTVerifier(
+    public_key=keypair.public_key,
+    issuer="mi-mcp-server",   # Debe coincidir con el campo 'issuer' del token
+    audience="mi-mcp"          # Debe coincidir con el campo 'audience' del token
+)
 
-        if not auth_header.startswith("Bearer "):
-            return JSONResponse(
-                {"error": "Se requiere Authorization: Bearer <token>"},
-                status_code=401
-            )
-
-        token = auth_header[len("Bearer "):]
-        try:
-            payload = jwt.decode(token, PUBLIC_KEY, algorithms=["RS256"])
-            # El payload queda disponible para las tools via request.state
-            request.state.usuario = payload.get("sub", "desconocido")
-            request.state.rol = payload.get("role", "user")
-        except jwt.ExpiredSignatureError:
-            return JSONResponse({"error": "Token expirado"}, status_code=401)
-        except jwt.InvalidTokenError:
-            return JSONResponse({"error": "Token inválido"}, status_code=401)
-
-        return await call_next(request)
-
-
-mcp = FastMCP("servidor-seguro")
-
-# Añadir el middleware al servidor HTTP subyacente
-app = mcp.get_asgi_app()
-app.add_middleware(JWTMiddleware)
+# FastMCP verifica el token en cada petición HTTP automáticamente
+mcp = FastMCP("servidor-seguro", auth=auth)
 
 @mcp.tool()
 def operacion_segura(dato: str) -> str:
-    """Ejecuta una operación de negocio.
+    """Ejecuta una operación de negocio (solo accesible con token válido).
 
     Args:
         dato: Dato a procesar
@@ -1442,58 +1401,72 @@ def operacion_segura(dato: str) -> str:
     Returns:
         Resultado de la operación
     """
-    # El token ya fue validado por el middleware antes de llegar aquí.
+    # El token ya fue verificado por FastMCP antes de llegar aquí.
     # No hay ningún parámetro 'token' — el LLM nunca lo ve.
-    return f"Operación procesada: {dato}"
+    return f"Operación procesada: {dato.upper()}"
 
 if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8080)
+    mcp.run(transport="http", host="0.0.0.0", port=8080, path="/mcp")
+```
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│  FLUJO DE AUTH NATIVO EN FASTMCP                              │
+│                                                               │
+│  Cliente  ──Authorization: Bearer <token>──►  FastMCP        │
+│                                               │               │
+│                                          JWTVerifier         │
+│                                          verifica firma,     │
+│                                          issuer, audience,   │
+│                                          expiración          │
+│                                               │               │
+│                                    ┌──────────▼──────────┐   │
+│                                    │  tool(dato=...)     │   │
+│                                    │  El LLM NUNCA       │   │
+│                                    │  ve el token        │   │
+│                                    └─────────────────────┘   │
+└──────────────────────────────────────────────────────────────┘
 ```
 
 ### 4.6 Cliente MCP con Autenticación
 
-El cliente genera tokens JWT firmados con la clave privada y los envía en la **cabecera HTTP**, no como parámetro de herramienta.
+El cliente carga el token desde archivo y lo envía en la **cabecera HTTP `Authorization`**.
 
 > **Código completo**: [client_auth.py](https://github.com/rpmaya/ml2_code/blob/main/MCP/seguridad/client_auth.py)
 
 ```python
-import jwt
-import datetime
-from mcp.client.http import http_client
-from mcp import ClientSession
+import requests
 
-# Cargar clave privada para firmar tokens
-with open("private_key.pem", "rb") as f:
-    PRIVATE_KEY = f.read()
+class MCPClientAuthenticated:
+    """Cliente MCP que envía el token JWT en la cabecera HTTP."""
 
-def generar_token(usuario: str, rol: str = "user", duracion_min: int = 30) -> str:
-    """Genera un token JWT firmado con la clave privada RSA."""
-    ahora = datetime.datetime.now(datetime.timezone.utc)
-    payload = {
-        "sub": usuario,
-        "role": rol,
-        "iat": ahora,
-        "exp": ahora + datetime.timedelta(minutes=duracion_min),
-        "iss": "mi-auth-server"
-    }
-    return jwt.encode(payload, PRIVATE_KEY, algorithm="RS256")
+    def __init__(self, server_url: str, token: str):
+        self.server_url = server_url
+        self.token = token
+
+    def send_request(self, method: str, params: dict = None) -> dict:
+        """Envía una petición autenticada al servidor MCP."""
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {self.token}"  # ← Token en cabecera HTTP
+        }
+        payload = {
+            "jsonrpc": "2.0",
+            "id": 1,
+            "method": method,
+            "params": params or {}
+        }
+        response = requests.post(self.server_url, json=payload, headers=headers)
+        return response.json()
 
 
-async def conectar_servidor_seguro():
-    """Conecta a un servidor MCP con autenticación JWT."""
-    token = generar_token("ana_garcia", rol="admin", duracion_min=60)
+# Uso: cargar token desde archivo (generado por el servidor en el primer arranque)
+with open("client_token.txt") as f:
+    token = f.read().strip()
 
-    # El token va en la cabecera HTTP Authorization, nunca como parámetro
-    headers = {"Authorization": f"Bearer {token}"}
-
-    async with http_client("https://mi-servidor.com/mcp", headers=headers) as (read, write):
-        async with ClientSession(read, write) as session:
-            await session.initialize()
-
-            # Todas las llamadas a tools ya van autenticadas vía cabecera
-            resultado = await session.call_tool("operacion_segura", {"dato": "informe Q4"})
-            print(resultado.content[0].text)
+client = MCPClientAuthenticated("http://localhost:8080/mcp", token)
+result = client.send_request("tools/call", {"name": "operacion_segura", "arguments": {"dato": "informe"}})
+print(result)
 ```
 
 ### 4.7 Mejores Prácticas de Seguridad
