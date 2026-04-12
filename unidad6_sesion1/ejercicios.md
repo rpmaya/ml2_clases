@@ -59,7 +59,7 @@ Esquema de referencia para tu diagrama:
 │         │        │        │        │        │
 └─────────┼────────┼────────┼────────┼────────┘
           │JSON-RPC│        │        │
-     ┌────▼───┐┌───▼───┐ ┌──▼─────┐┌─▼──────┐
+     ┌────▼───┐┌───▼────┐┌──▼─────┐┌─▼──────┐
      │Servidor││Servidor││Servidor││Servidor│
      │ Gmail  ││Calendar││ Slack  ││ Drive  │
      └───┬────┘└───┬────┘└──┬─────┘└─┬──────┘
