@@ -13,7 +13,7 @@ Al finalizar esta sesión, el estudiante será capaz de:
 
 ---
 
-## Bloque 1: Introducción a MCP
+## Bloque 1: Introducción a MCP (50 minutos)
 
 ### 1.1 ¿Qué es MCP y por qué surge?
 
@@ -76,20 +76,20 @@ Sin MCP, las herramientas se implementaban **dentro** de cada aplicación (User 
 ```
 SIN MCP (ACOPLAMIENTO):
 ┌──────────────────────────────────────────┐
-│              USER APP (Claude Desktop)   │
-│                                          │
+│              USER APP (Claude Desktop)    │
+│                                           │
 │   ┌──────────┐  ┌──────────┐             │
 │   │ Tool:    │  │ Tool:    │             │
 │   │ Gmail    │  │ Slack    │   ...más    │
 │   │ (código  │  │ (código  │   tools     │
 │   │  propio) │  │  propio) │   acopladas │
 │   └──────────┘  └──────────┘             │
-│                                          │
-│   Problemas:                             │
-│   - Complejidad creciente                │
-│   - Duplicación (cada app reimplementa)  │
-│   - Difícil actualizar (cambio en API    │
-│     = cambio en cada app)                │
+│                                           │
+│   Problemas:                              │
+│   - Complejidad creciente                 │
+│   - Duplicación (cada app reimplementa)   │
+│   - Difícil actualizar (cambio en API     │
+│     = cambio en cada app)                 │
 └──────────────────────────────────────────┘
 
 
@@ -165,24 +165,24 @@ La arquitectura MCP se compone de tres actores que colaboran para ejecutar una p
 ┌──────────────────────────────────────────────────────────────────────────┐
 │                      ARQUITECTURA MCP                                    │
 │                                                                          │
-│   ┌─────────────┐     ┌──────────────────┐     ┌─────────────────────┐   │
-│   │             │     │                  │     │                     │   │
-│   │     LLM     │◄───►│   CLIENTE MCP    │◄───►│   SERVIDOR MCP      │   │
-│   │  (Cerebro)  │     │   (MCP Host)     │     │   (Herramientas)    │   │
-│   │             │     │                  │     │                     │   │
-│   └─────────────┘     └──────────────────┘     └─────────────────────┘   │
+│   ┌─────────────┐     ┌──────────────────┐     ┌─────────────────────┐  │
+│   │             │     │                  │     │                     │  │
+│   │     LLM     │◄───►│   CLIENTE MCP    │◄───►│   SERVIDOR MCP     │  │
+│   │  (Cerebro)  │     │   (MCP Host)     │     │   (Herramientas)   │  │
+│   │             │     │                  │     │                     │  │
+│   └─────────────┘     └──────────────────┘     └─────────────────────┘  │
 │                                                                          │
-│   Determina qué       Orquesta la               Implementa las           │
-│   herramienta usar    comunicación              integraciones            │
+│   Determina qué       Orquesta la              Implementa las            │
+│   herramienta usar    comunicación              integraciones             │
 │   y genera la         entre LLM y               y ejecuta las            │
-│   respuesta final     servidores                acciones                 │
+│   respuesta final     servidores                acciones                  │
 │                                                                          │
-│   Ejemplos:           Ejemplos:                 Ejemplos:                │
-│   - GPT.              - Claude Desktop          - filesystem             │
-│   - Claude            - ChatGPT                 - memory                 │
-│   - Gemini            - n8n                     - gmail                  │
-│   - Modelos locales   - Apps propias            - slack                  │
-│                                                 - github                 │
+│   Ejemplos:           Ejemplos:                 Ejemplos:                 │
+│   - GPT-4             - Claude Desktop          - filesystem             │
+│   - Claude            - Claude Code (CLI)       - memory                 │
+│   - Gemini            - ChatGPT                 - gmail                  │
+│   - Modelos locales   - n8n                     - slack                  │
+│                       - Apps propias            - github                 │
 └──────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -235,8 +235,8 @@ FLUJO COMPLETO DE UNA PETICIÓN MCP (9 PASOS):
     │   hay en mi proyecto?" │                       │                  │
     │───────────────────────►│                       │                  │
     │                        │  2. Conecta con       │                  │
-    │                        │     servidor y        │                  │
-    │                        │     obtiene tools     │                  │
+    │                        │     servidor y         │                  │
+    │                        │     obtiene tools      │                  │
     │                        │──────────────────────►│                  │
     │                        │                       │                  │
     │                        │  3. Lista de tools:   │                  │
@@ -246,12 +246,12 @@ FLUJO COMPLETO DE UNA PETICIÓN MCP (9 PASOS):
     │                        │                       │                  │
     │                        │  4. Envía pregunta    │                  │
     │                        │     + tools al LLM    │                  │
-    │                        │─────────────────────────────────────────►│
+    │                        │──────────────────────────────────────────►│
     │                        │                       │                  │
     │                        │  5. LLM decide:       │                  │
     │                        │     usar              │                  │
-    │                        │     list_directory    │                  │
-    │                        │◄─────────────────────────────────────────│
+    │                        │     list_directory     │                  │
+    │                        │◄──────────────────────────────────────────│
     │                        │                       │                  │
     │                        │  6. Transforma a      │                  │
     │                        │     JSON-RPC y        │                  │
@@ -267,10 +267,10 @@ FLUJO COMPLETO DE UNA PETICIÓN MCP (9 PASOS):
     │                        │  9. Envía resultado   │                  │
     │                        │     al LLM para       │                  │
     │                        │     formular respuesta│                  │
-    │                        │─────────────────────────────────────────►│
+    │                        │──────────────────────────────────────────►│
     │                        │                       │                  │
     │                        │  Respuesta formateada │                  │
-    │                        │◄─────────────────────────────────────────│
+    │                        │◄──────────────────────────────────────────│
     │                        │                       │                  │
     │  "Tu proyecto tiene    │                       │                  │
     │   2 archivos:          │                       │                  │
@@ -353,9 +353,11 @@ MCP utiliza **JSON-RPC 2.0** como formato de comunicación entre clientes y serv
 - **Flexible**: soporta peticiones, respuestas, notificaciones y errores
 - **Ligero**: overhead mínimo comparado con otros protocolos RPC
 
+> **Vídeo recomendado**: *Introducción a MCP* (3:18 min) - Disponible en los recursos del curso.
+
 ---
 
-## Bloque 2: Configuración de Servidores MCP Locales
+## Bloque 2: Configuración de Servidores MCP Locales (50 minutos)
 
 ### 2.1 Claude Desktop como Cliente MCP
 
@@ -431,6 +433,12 @@ El servidor **Filesystem** (`@modelcontextprotocol/server-filesystem`) es uno de
 - `@modelcontextprotocol/server-filesystem`: Paquete del servidor oficial
 - Las rutas al final son los **directorios permitidos** (el servidor solo puede acceder a estos)
 
+> **Alternativa con `uvx`**: Para servidores MCP escritos en Python, se usa `uvx` (del gestor `uv`) en lugar de `npx`. Verás esta sintaxis en muchos servidores de terceros y en la documentación oficial:
+> ```json
+> { "command": "uvx", "args": ["mcp-server-git"] }
+> ```
+> `uvx` descarga y ejecuta paquetes Python de PyPI de forma aislada, igual que `npx` hace con npm.
+
 #### Herramientas que Expone
 
 | Herramienta | Descripción |
@@ -468,7 +476,7 @@ Claude Desktop:
 
 ### 2.4 Servidor Memory: Persistencia entre Sesiones
 
-El servidor **Memory** (`@modelcontextprotocol/server-memory`) permite que Claude Desktop **recuerde información** entre sesiones. Utiliza una base de datos SQLite local para almacenar y recuperar datos.
+El servidor **Memory** (`@modelcontextprotocol/server-memory`) permite que Claude Desktop **recuerde información** entre sesiones. En sus versiones actuales utiliza un **grafo de conocimiento** (entidades, observaciones y relaciones) para almacenar y recuperar datos de forma estructurada, sin necesidad de configurar ninguna base de datos externa.
 
 #### Configuración
 
@@ -488,19 +496,16 @@ El servidor **Memory** (`@modelcontextprotocol/server-memory`) permite que Claud
       "args": [
         "-y",
         "@modelcontextprotocol/server-memory"
-      ],
-      "env": {
-        "MEMORY_DB_PATH": "/Users/alumno/.claude/memory.db"
-      }
+      ]
     }
   }
 }
 ```
 
 **Notas:**
-- La variable de entorno `MEMORY_DB_PATH` indica dónde se almacena la base de datos SQLite
-- Si no se especifica, usa una ubicación por defecto
+- No requiere configuración adicional; el grafo de conocimiento se almacena automáticamente
 - La memoria persiste entre reinicios de Claude Desktop
+- El servidor estructura la información como entidades (personas, proyectos, conceptos) con observaciones y relaciones entre ellas
 - Se pueden almacenar preferencias del usuario, notas, hechos importantes, etc.
 
 #### Ejemplo de Uso
@@ -508,11 +513,12 @@ El servidor **Memory** (`@modelcontextprotocol/server-memory`) permite que Claud
 ```
 Sesión 1:
 Usuario: "Recuerda que mi proyecto se llama 'MiApp' y uso Python 3.11"
-Claude: (almacena en memoria) "Entendido, he guardado esa información."
+Claude: (almacena entidad 'MiApp' con observaciones en el grafo) "Entendido."
 
 Sesión 2 (días después):
 Usuario: "¿Qué sabes sobre mi proyecto?"
-Claude: (consulta memoria) "Tu proyecto se llama 'MiApp' y utilizas Python 3.11."
+Claude: (consulta el grafo de conocimiento) "Tu proyecto se llama 'MiApp'
+         y utilizas Python 3.11."
 ```
 
 ### 2.5 Configuración Completa: Múltiples Servidores
@@ -600,6 +606,32 @@ DEBUGGING DE SERVIDORES MCP:
 ```
 
 > **Vídeo recomendado**: *Configuración de servidores MCP* (3:27 min) - Disponible en los recursos del curso.
+
+### 2.7 Herramienta de Depuración: MCP Inspector
+
+**MCP Inspector** es la herramienta oficial de Anthropic para inspeccionar y probar servidores MCP de forma interactiva, sin necesidad de un cliente LLM. Se cubre en detalle en la Sesión 2, pero conviene conocerla desde el primer servidor que configuréis.
+
+```bash
+# Lanzar Inspector contra el servidor filesystem
+npx @modelcontextprotocol/inspector npx @modelcontextprotocol/server-filesystem /ruta/proyecto
+```
+
+Abre una interfaz web en `http://localhost:6274` donde podéis ver las tools disponibles, ejecutarlas con parámetros y revisar las respuestas JSON-RPC en tiempo real.
+
+### 2.8 Instalación Simplificada: Desktop Extensions (.dxt)
+
+Anthropic introdujo en 2025 los **Desktop Extensions** (archivos `.dxt`) para Claude Desktop. Son paquetes que instalan un servidor MCP con un **doble clic**, sin necesidad de editar el archivo JSON de configuración manualmente.
+
+```
+Instalación tradicional (JSON):          Instalación con .dxt:
+──────────────────────────────           ────────────────────
+1. Localizar el archivo config           1. Descargar archivo .dxt
+2. Editar JSON manualmente               2. Doble clic → Claude Desktop
+3. Reiniciar Claude Desktop                 instala y configura solo
+4. Verificar que arranca                 3. Listo
+```
+
+Los servidores `.dxt` se pueden encontrar en el directorio oficial de Anthropic y en repositorios de la comunidad. Para desarrolladores, es posible empaquetar un servidor propio como `.dxt`.
 
 ---
 
