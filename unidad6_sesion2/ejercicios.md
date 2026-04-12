@@ -202,15 +202,6 @@ Observa en el Inspector cómo FastMCP ha generado automáticamente:
 - El esquema JSON de parámetros a partir de los type hints
 - Los valores por defecto cuando están definidos
 
-### Solución Esperada
-
-El alumno debe entregar:
-- Un archivo `server.py` funcional que se ejecute sin errores
-- Las tres herramientas deben aparecer correctamente en MCP Inspector
-- Capturas o notas de las pruebas realizadas en el Inspector mostrando:
-  - `calculadora("raiz", 144)` devuelve `raiz(144.0, 0.0) = 12.0`
-  - `conversor_unidades(100, "km", "mi")` devuelve `100 km = 62.1373 mi`
-  - `generar_contrasena(20, true)` devuelve una contraseña de 20 caracteres con evaluación de fortaleza
 
 ### Extensión (Opcional)
 
@@ -363,15 +354,6 @@ Presenta el informe de forma profesional y estructurada."""
    - Al seleccionar un prompt, se muestran sus parámetros
    - Rellena los parámetros de `analizar_conversion` (ej: valor=5, unidad_origen="km", contexto="viaje") y observa el texto generado
 
-### Solución Esperada
-
-El alumno debe demostrar:
-- El servidor arranca sin errores con tools, resources y prompts
-- En MCP Inspector se ven las tres pestañas (Tools, Resources, Prompts) con contenido
-- Los resources devuelven JSON válido con información coherente
-- Los prompts generan texto parametrizado que referencia las herramientas disponibles
-- El alumno puede explicar verbalmente la diferencia: tools ejecutan acciones, resources proporcionan datos de lectura, prompts son plantillas de interacción
-
 ### Extensión (Opcional)
 
 - Añade un resource dinámico con URI parametrizada: `@mcp.resource("conversion://{de}/{a}")` que devuelva la tabla de factores de conversión entre dos tipos de unidades
@@ -485,24 +467,6 @@ Propón al menos 5 medidas concretas que implementarías, ordenadas por priorida
 | 4 (Media) | __________________ | __________________ |
 | 5 (Media) | __________________ | __________________ |
 
-### Solución Esperada
-
-**Riesgos clave** que el alumno debe identificar:
-- **Acceso no autenticado a tools**: cualquiera puede invocar `consultar_cliente` y obtener datos personales (violación RGPD). Severidad: Alta
-- **Envío de emails no autorizado**: un atacante puede usar `enviar_email` para phishing o spam desde la infraestructura de la empresa. Severidad: Alta
-- **Exposición de credenciales SMTP**: el resource `config://email` expone configuración sensible sin protección. Severidad: Alta
-- **Interceptación de datos (sin HTTPS)**: todo el tráfico viaja en texto plano, incluyendo datos de clientes. Severidad: Alta
-- **Tool poisoning / Prompt injection**: un atacante podría manipular las descripciones de herramientas o inyectar instrucciones maliciosas. Severidad: Media
-- **Denegación de servicio**: sin rate limiting, se pueden hacer miles de peticiones por segundo. Severidad: Media
-- **Sin trazabilidad**: sin logs de auditoría, no se puede detectar ni investigar un incidente. Severidad: Media
-
-**Flujo JWT**: el alumno debe completar que el Auth Server devuelve un JWT firmado, el cliente lo envía en el header `Authorization: Bearer <token>`, el servidor MCP lo valida verificando firma y expiración, y si es válido, procesa la petición.
-
-**Claims JWT**: deben incluir al menos `sub` (identificador del cliente), `exp` (expiración), `permissions` (lectura, escritura) y `allowed_tools` (qué herramientas puede invocar ese cliente).
-
-**Medidas de mitigación** (en orden de prioridad): 1) HTTPS obligatorio, 2) Autenticación JWT, 3) Autorización granular por herramienta, 4) Rate limiting y throttling, 5) Logging y auditoría, 6) Validación y sanitización de inputs.
-
----
 
 ## Ejercicio 4: Cliente MCP con Streamlit
 
@@ -871,16 +835,6 @@ Cada equipo presenta su diseño al resto de la clase (5 minutos de presentación
 4. Decisiones de seguridad y justificación
 5. Estrategia de despliegue elegida
 
-### Solución Esperada
-
-El alumno/equipo debe demostrar:
-- **Completitud**: el diseño cubre tools, resources y prompts de forma coherente
-- **Granularidad adecuada**: las herramientas no son ni demasiado genéricas (una tool que "hace todo") ni demasiado atómicas (20 tools para tareas triviales)
-- **Descripciones orientadas al LLM**: las descripciones de las tools son claras y explican cuándo usarlas, no solo qué hacen
-- **Seguridad consciente**: identifican datos sensibles, aplican principio de mínimo privilegio (no todos los roles acceden a todas las tools) y justifican sus decisiones
-- **Despliegue realista**: eligen una estrategia de despliegue coherente con el caso de uso (ej: stdio para uso local, HTTP para acceso remoto) y consideran escalabilidad
-- **Prompts útiles**: los prompt templates combinan múltiples herramientas y aportan valor real al usuario
-
 ### Extensión (Opcional)
 
 - Implementar el esqueleto del servidor en Python con FastMCP: solo las definiciones de tools, resources y prompts con docstrings completos, sin la lógica interna (que puede devolver datos de ejemplo)
@@ -899,4 +853,3 @@ El alumno/equipo debe demostrar:
 | 5. Diseño de Servidor MCP para Caso Real | 25 min | Diseño | Intermedia |
 | **Total** | **150 min** | | |
 
-> **Nota para el profesor**: Los ejercicios 1 y 2 son secuenciales (el 2 amplía el servidor del 1). El ejercicio 3 puede realizarse en paralelo con los ejercicios de programación. El ejercicio 4 requiere tener el servidor del ejercicio 1 funcionando. El ejercicio 5 es ideal como actividad de cierre para consolidar todos los conceptos de la sesión.
