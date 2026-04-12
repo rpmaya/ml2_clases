@@ -353,11 +353,9 @@ MCP utiliza **JSON-RPC 2.0** como formato de comunicación entre clientes y serv
 - **Flexible**: soporta peticiones, respuestas, notificaciones y errores
 - **Ligero**: overhead mínimo comparado con otros protocolos RPC
 
-> **Vídeo recomendado**: *Introducción a MCP* (3:18 min) - Disponible en los recursos del curso.
-
 ---
 
-## Bloque 2: Configuración de Servidores MCP Locales (50 minutos)
+## Bloque 2: Configuración de Servidores MCP Locales
 
 ### 2.1 Claude Desktop como Cliente MCP
 
