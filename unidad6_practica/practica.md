@@ -517,13 +517,13 @@ Para cada prueba, captura:
 
 ## Formato y Proceso de Entrega
 
-### Nombre del Archivo
+### Enlace al directorio de tu repositorio GitHub
 
 ```
-Apellido_Nombre_U6_Practica.zip
+https://github.com/rpmaya/ml2_clases/practica6
 ```
 
-### Contenido del ZIP
+### Contenido del directorio
 
 1. **Código del servidor:** `gmail_mcp_server.py` con la implementación completa
 2. **Dependencias:** `requirements.txt` con las librerías necesarias
@@ -534,15 +534,15 @@ Apellido_Nombre_U6_Practica.zip
    - Dificultades encontradas durante el desarrollo
    - Posibles mejoras o extensiones del servidor
 
-> **ADVERTENCIA DE SEGURIDAD:** **NO incluyas** los archivos `credentials.json` ni `token.json` en la entrega. Estos archivos contienen credenciales sensibles que no deben compartirse. El evaluador configurará sus propias credenciales para probar el servidor.
+> **ADVERTENCIA DE SEGURIDAD:** **NO incluyas** los archivos `credentials.json` ni `token.json` en la entrega. Estos archivos contienen credenciales sensibles que no deben compartirse (añade estas entradas a .gitignore). Configuraré mis propias credenciales para probar el servidor.
 
 ### Proceso de Entrega
 
 1. Verifica que el servidor funciona correctamente en tu entorno
 2. Prepara las capturas de pantalla de todas las pruebas realizadas
 3. Redacta el documento explicativo (1-2 páginas)
-4. Comprime los archivos en un ZIP con el nombre indicado (excluyendo `credentials.json` y `token.json`)
-5. Sube el archivo en Blackboard antes de la fecha límite
+4. Sube los archivos a tu directorio de github (excluyendo en .gitignore `credentials.json` y `token.json`)
+5. Sube el enlace a tu directorio de GitHub antes de la fecha límite
 6. Verifica que la entrega se ha realizado correctamente
 
 ---
