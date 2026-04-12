@@ -76,20 +76,20 @@ Sin MCP, las herramientas se implementaban **dentro** de cada aplicación (User 
 ```
 SIN MCP (ACOPLAMIENTO):
 ┌──────────────────────────────────────────┐
-│              USER APP (Claude Desktop)    │
-│                                           │
+│              USER APP (Claude Desktop)   │
+│                                          │
 │   ┌──────────┐  ┌──────────┐             │
 │   │ Tool:    │  │ Tool:    │             │
 │   │ Gmail    │  │ Slack    │   ...más    │
 │   │ (código  │  │ (código  │   tools     │
 │   │  propio) │  │  propio) │   acopladas │
 │   └──────────┘  └──────────┘             │
-│                                           │
-│   Problemas:                              │
-│   - Complejidad creciente                 │
-│   - Duplicación (cada app reimplementa)   │
-│   - Difícil actualizar (cambio en API     │
-│     = cambio en cada app)                 │
+│                                          │
+│   Problemas:                             │
+│   - Complejidad creciente                │
+│   - Duplicación (cada app reimplementa)  │
+│   - Difícil actualizar (cambio en API    │
+│     = cambio en cada app)                │
 └──────────────────────────────────────────┘
 
 
@@ -165,19 +165,19 @@ La arquitectura MCP se compone de tres actores que colaboran para ejecutar una p
 ┌──────────────────────────────────────────────────────────────────────────┐
 │                      ARQUITECTURA MCP                                    │
 │                                                                          │
-│   ┌─────────────┐     ┌──────────────────┐     ┌─────────────────────┐  │
-│   │             │     │                  │     │                     │  │
-│   │     LLM     │◄───►│   CLIENTE MCP    │◄───►│   SERVIDOR MCP     │  │
-│   │  (Cerebro)  │     │   (MCP Host)     │     │   (Herramientas)   │  │
-│   │             │     │                  │     │                     │  │
-│   └─────────────┘     └──────────────────┘     └─────────────────────┘  │
+│   ┌─────────────┐     ┌──────────────────┐     ┌─────────────────────┐   │
+│   │             │     │                  │     │                     │   │
+│   │     LLM     │◄───►│   CLIENTE MCP    │◄───►│   SERVIDOR MCP      │   │
+│   │  (Cerebro)  │     │   (MCP Host)     │     │   (Herramientas)    │   │
+│   │             │     │                  │     │                     │   │
+│   └─────────────┘     └──────────────────┘     └─────────────────────┘   │
 │                                                                          │
-│   Determina qué       Orquesta la              Implementa las            │
-│   herramienta usar    comunicación              integraciones             │
+│   Determina qué       Orquesta la               Implementa las           │
+│   herramienta usar    comunicación              integraciones            │
 │   y genera la         entre LLM y               y ejecuta las            │
-│   respuesta final     servidores                acciones                  │
+│   respuesta final     servidores                acciones                 │
 │                                                                          │
-│   Ejemplos:           Ejemplos:                 Ejemplos:                 │
+│   Ejemplos:           Ejemplos:                 Ejemplos:                │
 │   - GPT-4             - Claude Desktop          - filesystem             │
 │   - Claude            - Claude Code (CLI)       - memory                 │
 │   - Gemini            - ChatGPT                 - gmail                  │
@@ -235,8 +235,8 @@ FLUJO COMPLETO DE UNA PETICIÓN MCP (9 PASOS):
     │   hay en mi proyecto?" │                       │                  │
     │───────────────────────►│                       │                  │
     │                        │  2. Conecta con       │                  │
-    │                        │     servidor y         │                  │
-    │                        │     obtiene tools      │                  │
+    │                        │     servidor y        │                  │
+    │                        │     obtiene tools     │                  │
     │                        │──────────────────────►│                  │
     │                        │                       │                  │
     │                        │  3. Lista de tools:   │                  │
@@ -246,12 +246,12 @@ FLUJO COMPLETO DE UNA PETICIÓN MCP (9 PASOS):
     │                        │                       │                  │
     │                        │  4. Envía pregunta    │                  │
     │                        │     + tools al LLM    │                  │
-    │                        │──────────────────────────────────────────►│
+    │                        │─────────────────────────────────────────►│
     │                        │                       │                  │
     │                        │  5. LLM decide:       │                  │
     │                        │     usar              │                  │
-    │                        │     list_directory     │                  │
-    │                        │◄──────────────────────────────────────────│
+    │                        │     list_directory    │                  │
+    │                        │◄─────────────────────────────────────────│
     │                        │                       │                  │
     │                        │  6. Transforma a      │                  │
     │                        │     JSON-RPC y        │                  │
@@ -267,10 +267,10 @@ FLUJO COMPLETO DE UNA PETICIÓN MCP (9 PASOS):
     │                        │  9. Envía resultado   │                  │
     │                        │     al LLM para       │                  │
     │                        │     formular respuesta│                  │
-    │                        │──────────────────────────────────────────►│
+    │                        │─────────────────────────────────────────►│
     │                        │                       │                  │
     │                        │  Respuesta formateada │                  │
-    │                        │◄──────────────────────────────────────────│
+    │                        │◄─────────────────────────────────────────│
     │                        │                       │                  │
     │  "Tu proyecto tiene    │                       │                  │
     │   2 archivos:          │                       │                  │
@@ -647,15 +647,15 @@ La **capa de transporte** define **cómo** viajan los mensajes JSON-RPC entre el
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
-│                    CAPAS DE TRANSPORTE EN MCP                             │
+│                    CAPAS DE TRANSPORTE EN MCP                            │
 │                                                                          │
 │   ┌─────────────────────────────┐   ┌─────────────────────────────────┐  │
 │   │         STDIO               │   │       HTTP (Streamable)         │  │
 │   │                             │   │                                 │  │
-│   │   Cliente ◄──stdin──► Srv   │   │   Cliente ◄──HTTP──► Servidor  │  │
+│   │   Cliente ◄──stdin──► Srv   │   │   Cliente ◄──HTTP──► Servidor   │  │
 │   │           ◄─stdout──►       │   │            (red/internet)       │  │
 │   │                             │   │                                 │  │
-│   │   Local, proceso hijo       │   │   Local o remoto               │  │
+│   │   Local, proceso hijo       │   │   Local o remoto                │  │
 │   │   Sin red                   │   │   Vía red/internet              │  │
 │   │   Máximo aislamiento        │   │   Compartible                   │  │
 │   └─────────────────────────────┘   └─────────────────────────────────┘  │
@@ -855,9 +855,9 @@ PASOS PARA CONFIGURAR MCP EN CHATGPT:
 
 5. Rellenar:
    ┌─────────────────────────────────────────────┐
-   │  Nombre: Mi Servidor MCP                     │
-   │  URL:    https://mi-servidor.com/mcp          │
-   │  Auth:   API Key / OAuth / Sin auth           │
+   │  Nombre: Mi Servidor MCP                    │
+   │  URL:    https://mi-servidor.com/mcp        │
+   │  Auth:   API Key / OAuth / Sin auth         │
    └─────────────────────────────────────────────┘
 
 6. Guardar y probar
@@ -954,18 +954,18 @@ AGENTE n8n CON MCP:
 ═══════════════════
 
 ┌──────────────────────────────────────────────────────────┐
-│                    WORKFLOW n8n                            │
-│                                                           │
+│                    WORKFLOW n8n                          │
+│                                                          │
 │   [Chat Trigger] ──► [AI Agent] ──► [Respuesta]          │
-│                          │                                │
-│                    ┌─────┴─────┐                          │
-│                    │  Tools:   │                          │
-│                    ├───────────┤                          │
-│                    │ MCP Client│──► Servidor MCP externo  │
-│                    │ Tool      │   (filesystem, gmail...) │
-│                    ├───────────┤                          │
-│                    │ Calculator│   (tool nativa de n8n)   │
-│                    └───────────┘                          │
+│                          │                               │
+│                    ┌─────┴─────┐                         │
+│                    │  Tools:   │                         │
+│                    ├───────────┤                         │
+│                    │ MCP Client│──► Servidor MCP externo │
+│                    │ Tool      │   (filesystem, gmail...)│
+│                    ├───────────┤                         │
+│                    │ Calculator│   (tool nativa de n8n)  │
+│                    └───────────┘                         │
 └──────────────────────────────────────────────────────────┘
 ```
 
@@ -1119,12 +1119,12 @@ CHECKLIST DE VERIFICACIÓN:
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
-│                    RESUMEN - SESIÓN 1: MCP                                │
+│                    RESUMEN - SESIÓN 1: MCP                               │
 │                                                                          │
 │   1. MCP = Model Context Protocol                                        │
 │      - Estándar abierto de Anthropic (2024)                              │
 │      - "El USB de la IA": estandariza la conexión LLM ↔ herramientas     │
-│      - Resuelve el acoplamiento: servidores independientes y reutilizables│
+│      - Resuelve el acoplamiento: servers independientes y reutilizables  │
 │                                                                          │
 │   2. ARQUITECTURA MCP (3 componentes)                                    │
 │      - LLM: decide qué herramienta usar                                  │
@@ -1191,10 +1191,10 @@ En la próxima sesión abordaremos la **creación de servidores MCP personalizad
 │        │  n8n se conecta a servidores MCP vía nodo dedicado              │
 │        ▼                                                                 │
 │   Unidad 5: RAG                                                          │
-│        │  Un servidor MCP puede exponer una base de datos vectorial       │
-│        │  como herramienta, integrando RAG en cualquier cliente MCP       │
+│        │  Un servidor MCP puede exponer una base de datos vectorial      │
+│        │  como herramienta, integrando RAG en cualquier cliente MCP      │
 │        ▼                                                                 │
-│   Unidad 6: MCP  ← ESTAMOS AQUÍ                                         │
+│   Unidad 6: MCP  ← ESTAMOS AQUÍ                                          │
 │        Protocolo estándar que UNIFICA todo lo anterior                   │
 │        Function Calling + Agentes + RAG = accesibles vía MCP             │
 └──────────────────────────────────────────────────────────────────────────┘
@@ -1213,10 +1213,6 @@ Completa los ejercicios prácticos disponibles en [ejercicios.md](./ejercicios.m
 3. **Análisis de JSON-RPC** - Analizar y construir mensajes JSON-RPC 2.0 para diferentes operaciones MCP
 4. **Comparativa de transportes** - Diseñar la arquitectura de transporte para diferentes escenarios (local, equipo, producción)
 5. **Explorar el ecosistema** - Investigar servidores MCP disponibles en mcpservers.org y evaluar uno con los criterios aprendidos
-
-### Práctica Evaluable de la Unidad
-
-Al finalizar ambas sesiones, completa la [práctica evaluable](../practica.md) de la Unidad 6.
 
 ---
 
