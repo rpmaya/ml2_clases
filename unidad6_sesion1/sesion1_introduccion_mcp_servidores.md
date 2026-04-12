@@ -235,8 +235,8 @@ FLUJO COMPLETO DE UNA PETICIÓN MCP (9 PASOS):
     │   hay en mi proyecto?" │                       │                  │
     │───────────────────────►│                       │                  │
     │                        │  2. Conecta con       │                  │
-    │                        │     servidor y         │                  │
-    │                        │     obtiene tools      │                  │
+    │                        │     servidor y        │                  │
+    │                        │     obtiene tools     │                  │
     │                        │──────────────────────►│                  │
     │                        │                       │                  │
     │                        │  3. Lista de tools:   │                  │
@@ -246,12 +246,12 @@ FLUJO COMPLETO DE UNA PETICIÓN MCP (9 PASOS):
     │                        │                       │                  │
     │                        │  4. Envía pregunta    │                  │
     │                        │     + tools al LLM    │                  │
-    │                        │──────────────────────────────────────────►│
+    │                        │─────────────────────────────────────────►│
     │                        │                       │                  │
     │                        │  5. LLM decide:       │                  │
     │                        │     usar              │                  │
-    │                        │     list_directory     │                  │
-    │                        │◄──────────────────────────────────────────│
+    │                        │     list_directory    │                  │
+    │                        │◄─────────────────────────────────────────│
     │                        │                       │                  │
     │                        │  6. Transforma a      │                  │
     │                        │     JSON-RPC y        │                  │
@@ -267,10 +267,10 @@ FLUJO COMPLETO DE UNA PETICIÓN MCP (9 PASOS):
     │                        │  9. Envía resultado   │                  │
     │                        │     al LLM para       │                  │
     │                        │     formular respuesta│                  │
-    │                        │──────────────────────────────────────────►│
+    │                        │─────────────────────────────────────────►│
     │                        │                       │                  │
     │                        │  Respuesta formateada │                  │
-    │                        │◄──────────────────────────────────────────│
+    │                        │◄─────────────────────────────────────────│
     │                        │                       │                  │
     │  "Tu proyecto tiene    │                       │                  │
     │   2 archivos:          │                       │                  │
