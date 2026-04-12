@@ -33,12 +33,12 @@ Crea un servidor MCP que exponga tres herramientas útiles: una calculadora cien
 # Crear directorio del proyecto
 mkdir mcp-server-basico && cd mcp-server-basico
 
-# Crear entorno virtual
-python -m venv venv
-source venv/bin/activate  # En Windows: venv\Scripts\activate
+# Crear entorno virtual con uv (recomendado) o venv
+uv venv && source .venv/bin/activate   # Recomendado
+# python -m venv venv && source venv/bin/activate  # Alternativa
 
 # Instalar dependencias
-pip install fastmcp
+pip install "fastmcp>=2.0.0" "mcp[cli]>=1.0.0"
 ```
 
 #### Paso 2: Crear el servidor con herramientas (15 min)
