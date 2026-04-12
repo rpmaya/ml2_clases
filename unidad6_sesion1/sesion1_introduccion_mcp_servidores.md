@@ -13,7 +13,7 @@ Al finalizar esta sesión, el estudiante será capaz de:
 
 ---
 
-## Bloque 1: Introducción a MCP (50 minutos)
+## Bloque 1: Introducción a MCP
 
 ### 1.1 ¿Qué es MCP y por qué surge?
 
@@ -76,20 +76,20 @@ Sin MCP, las herramientas se implementaban **dentro** de cada aplicación (User 
 ```
 SIN MCP (ACOPLAMIENTO):
 ┌──────────────────────────────────────────┐
-│              USER APP (Claude Desktop)    │
-│                                           │
+│              USER APP (Claude Desktop)   │
+│                                          │
 │   ┌──────────┐  ┌──────────┐             │
 │   │ Tool:    │  │ Tool:    │             │
 │   │ Gmail    │  │ Slack    │   ...más    │
 │   │ (código  │  │ (código  │   tools     │
 │   │  propio) │  │  propio) │   acopladas │
 │   └──────────┘  └──────────┘             │
-│                                           │
-│   Problemas:                              │
-│   - Complejidad creciente                 │
-│   - Duplicación (cada app reimplementa)   │
-│   - Difícil actualizar (cambio en API     │
-│     = cambio en cada app)                 │
+│                                          │
+│   Problemas:                             │
+│   - Complejidad creciente                │
+│   - Duplicación (cada app reimplementa)  │
+│   - Difícil actualizar (cambio en API    │
+│     = cambio en cada app)                │
 └──────────────────────────────────────────┘
 
 
@@ -165,20 +165,20 @@ La arquitectura MCP se compone de tres actores que colaboran para ejecutar una p
 ┌──────────────────────────────────────────────────────────────────────────┐
 │                      ARQUITECTURA MCP                                    │
 │                                                                          │
-│   ┌─────────────┐     ┌──────────────────┐     ┌─────────────────────┐  │
-│   │             │     │                  │     │                     │  │
-│   │     LLM     │◄───►│   CLIENTE MCP    │◄───►│   SERVIDOR MCP     │  │
-│   │  (Cerebro)  │     │   (MCP Host)     │     │   (Herramientas)   │  │
-│   │             │     │                  │     │                     │  │
-│   └─────────────┘     └──────────────────┘     └─────────────────────┘  │
+│   ┌─────────────┐     ┌──────────────────┐     ┌─────────────────────┐   │
+│   │             │     │                  │     │                     │   │
+│   │     LLM     │◄───►│   CLIENTE MCP    │◄───►│   SERVIDOR MCP      │   │
+│   │  (Cerebro)  │     │   (MCP Host)     │     │   (Herramientas)    │   │
+│   │             │     │                  │     │                     │   │
+│   └─────────────┘     └──────────────────┘     └─────────────────────┘   │
 │                                                                          │
-│   Determina qué       Orquesta la              Implementa las            │
-│   herramienta usar    comunicación              integraciones             │
+│   Determina qué       Orquesta la               Implementa las           │
+│   herramienta usar    comunicación              integraciones            │
 │   y genera la         entre LLM y               y ejecuta las            │
-│   respuesta final     servidores                acciones                  │
+│   respuesta final     servidores                acciones                 │
 │                                                                          │
-│   Ejemplos:           Ejemplos:                 Ejemplos:                 │
-│   - GPT-4             - Claude Desktop          - filesystem             │
+│   Ejemplos:           Ejemplos:                 Ejemplos:                │
+│   - GPT.              - Claude Desktop          - filesystem             │
 │   - Claude            - ChatGPT                 - memory                 │
 │   - Gemini            - n8n                     - gmail                  │
 │   - Modelos locales   - Apps propias            - slack                  │
